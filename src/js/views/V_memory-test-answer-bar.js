@@ -1,15 +1,27 @@
+import V_memoryTestCorrection from "Js/views/V_memory-test-correction.js";
 
 /**
  * Manage the answer bar view (answer bar, flag, submit button...)
  */
-export default class V_MemoryTestAnswerBar {
+export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
   constructor() {
 
+    super();
+    
     // Get the answer input
     this.answerInput = document.getElementById("answer-input");
+
+    // Prevent draging and past in answer bar
+    document.addEventListener('dragstart', event => { event.preventDefault(); });
+    this.answerInput.addEventListener('paste', event => { event.preventDefault(); });
+
+    // True when the content editable is disabled (but focus is keep for mobile devices)
+    this.answerInputDisable = false;
+
+    // Event when the answer input has changed
     this.onInputCallback = () => { };
-    this.answerInput.addEventListener("input", () => { this.onInputCallback(this.getAnswerText()); });
+    this.answerInput.addEventListener("input", (event) => { this.onInputCallback(this.getAnswerText());  });
 
     // Get the correction bar
     this.correction = document.getElementById("correction");
@@ -17,6 +29,13 @@ export default class V_MemoryTestAnswerBar {
     // Callback function and event when the user press Enter key
     this.onEnterCallback = () => { };
     this.answerInput.addEventListener("keypress", (event) => {
+
+      // If the input is disabled, prevent adding characters in the input field
+      if (this.answerInputDisable) {
+        event.preventDefault();
+        return;
+      }
+
 
       // If the user presses the "Enter" key on the keyboard
       if (event.key === "Enter") {
@@ -91,16 +110,17 @@ export default class V_MemoryTestAnswerBar {
    * Disable the answer input
    */
   disableInput() {
-    this.answerInput.setAttribute("readonly", "readonly");
-    this.answerInput.setAttribute("contenteditable", "false");
+    this.answerInputDisable = true;
+    this.answerInput.classList.add("disable");
+    
   }
 
   /**
    * Enable the answer input
    */
   enableInput() {
-    this.answerInput.setAttribute("readonly", "");
-    this.answerInput.setAttribute("contenteditable", "true");
+    this.answerInputDisable = false;
+    this.answerInput.classList.remove("disable");
   }
 
   /**
@@ -108,9 +128,7 @@ export default class V_MemoryTestAnswerBar {
    * @param {string} imageSrc Path or URL to the flag image
    */
   setLanguageFlag(imageSrc) {
-    this.flagEl.src = imageSrc;
-
-    //document.querySelector(':root').style.setProperty("--main-background-image", `url(${imageSrc})`);
+    this.flagEl.src = imageSrc;    
   }
 
 

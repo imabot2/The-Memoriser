@@ -121,7 +121,14 @@
     <!-- Answer bar -->
     <div id="answer-bar">
       <img id="characters-btn" src="/static/icons/special-characters.png">
-      <div contenteditable="true" tabindex="0" class="form-control" id="answer-input" placeholder="&nbsp;"></div>
+      <div contenteditable="true" tabindex="0" class="form-control" id="answer-input" placeholder="&nbsp;" 
+      spellcheck="false" 
+      autocomplete="off" 
+      autocorrect="off" 
+      data-gram="false" 
+      data-gramm_editor="false" 
+      data-enable-grammarly="false"></div>
+
       <img id="language-flag" data-bs-toggle="tooltip" data-bs-title="Language of the answer">
       <img id="answer-submit-btn" src="/static/icons/send.png">
       <div id="correction" class="d-flex justify-content-center align-items-center text-truncate"></div>

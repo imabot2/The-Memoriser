@@ -11,10 +11,10 @@ let run = () => {
   // Promise containing the typing tests
   let promises = [];
 
-  
+
   // Load the typing test according to the client language
   switch (clientLanguage) {
-    case "fr" : promises.push(memoryTest.addQuiz('/fr/geographie/europe/')); break;
+    case "fr": promises.push(memoryTest.addQuiz('/fr/geographie/europe/')); break;
     default: promises.push(memoryTest.addQuiz('/en/geography/europe/'));
   }
 
@@ -26,7 +26,7 @@ let run = () => {
     memoryTest.reset();
 
     // Hide the loader overlay
-    view.hideLoader(500);
+    view.hideLoader(300);
 
     // If user is not on mobile device, set focus to the answer input
     // On mobile device, do not focus to prevent soft keyboard from opening

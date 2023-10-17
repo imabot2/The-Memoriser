@@ -42,6 +42,11 @@ class M_Auth {
     });
   }
 
+
+  /**
+   * Return the current user data
+   * @returns The current user data
+   */
   refreshUserStatus() {
     return reload(this.auth.currentUser);
   }

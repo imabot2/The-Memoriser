@@ -66,11 +66,11 @@ class C_LogIn {
    */
   onEmailNotVerified() {
     // Close the sign in / sign up forms
-    view.hideLogInForm();    
+    view.hideLogInForm();
     signUpView.hideSignUpForm();
     // Show the email verificatiojn message
     view.showVerificationEmailMessage(model.getUserEmail());
-    
+
     // Check for email verification
     this.checkForEmailVerified();
   }
@@ -83,13 +83,16 @@ class C_LogIn {
 
     // Every 3 seconds, check for email verification
     setTimeout(() => {
-      model.refreshUserStatus().then(() => {
+      model.refreshUserStatus()
+      .then(() => {
         if (model.isEmailVerified()) {
           notifications.success("Email verified", "Your email has been successfully verified.");
           view.hideVerificationEmailMessage();
         }
         else this.checkForEmailVerified();
       })
+      .catch((error) => {});
+        
     }, 3000)
   }
 
@@ -112,25 +115,25 @@ class C_LogIn {
    * @param {*} password password of the user
    */
   logIn(email, password) {
-    
+
     // Disable the login submit button
     view.disableLoginButton()
-    
+
     // Sign-in
     model.signIn(email, password)
-    .then(() => { 
-      view.enableLoginButton();
-      view.hideLogInForm(); 
-    })
-    .catch((errorCode) => {
-      view.enableLoginButton();
-      console.log (errorCode);
-      switch (errorCode) {
-        case "auth/invalid-login-credentials": notifications.error("Wrong Credentials", `Invalid email and/or password.`); break;
-        default:
-          notifications.error("Login failed", `An unexpected error occured. Please retry later.`);
-      }
-    });
+      .then(() => {
+        view.enableLoginButton();
+        view.hideLogInForm();
+      })
+      .catch((errorCode) => {
+        view.enableLoginButton();
+        console.log(errorCode);
+        switch (errorCode) {
+          case "auth/invalid-login-credentials": notifications.error("Wrong Credentials", `Invalid email and/or password.`); break;
+          default:
+            notifications.error("Login failed", `An unexpected error occured. Please retry later.`);
+        }
+      });
 
   }
 
@@ -143,13 +146,13 @@ class C_LogIn {
     view.disableLoginForm();
     view.disableLoginButton();
     model.signInWithGoogle()
-    .catch((errorMsg) => {
-      console.log (errorMsg);
-    })
-    .finally(() => {
-      view.enableLoginForm();
-      view.enableLoginButton();
-    });
+      .catch((errorMsg) => {
+        console.log(errorMsg);
+      })
+      .finally(() => {
+        view.enableLoginForm();
+        view.enableLoginButton();
+      });
   }
 
 
@@ -183,21 +186,21 @@ class C_LogIn {
     view.disableLoginForm();
     view.disableLoginButton();
     model.sendPasswordResetEmail(email)
-    .then(() => {
-      view.hideLogInForm();
-      notifications.success("Reset Password", `We've sent an email to <b>${email}</b> (if this email address is correct).<br> Click on the link in the email to reset your password.`, 8000);
+      .then(() => {
+        view.hideLogInForm();
+        notifications.success("Reset Password", `We've sent an email to <b>${email}</b> (if this email address is correct).<br> Click on the link in the email to reset your password.`, 8000);
 
-    })
-    .catch((errorCode) => {
-      console.error (errorCode);
-      view.enableLoginForm();
-      view.enableLoginButton();
-            
-      switch (errorCode) {
-        case "auth/too-many-requests": notifications.error("Too many request", `Reset password email has not been sent. Please retry later.`); break;
-        default: notifications.error("Reset Password Failed", "An error occured while sending reset password email");
-      }
-    })
+      })
+      .catch((errorCode) => {
+        console.error(errorCode);
+        view.enableLoginForm();
+        view.enableLoginButton();
+
+        switch (errorCode) {
+          case "auth/too-many-requests": notifications.error("Too many request", `Reset password email has not been sent. Please retry later.`); break;
+          default: notifications.error("Reset Password Failed", "An error occured while sending reset password email");
+        }
+      })
   }
 
 }

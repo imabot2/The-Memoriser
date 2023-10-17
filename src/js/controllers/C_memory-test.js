@@ -97,21 +97,22 @@ class C_MemoryTest {
     }
     else {
 
-      // This is not the right answer, update the correction      
-      //view.setCorrectionHTML(this.levenshtein.getHTML());
-      view.setCorrectionHTML(`<span class="expectedAnswer">${this.current.answer}</span>`);
-      //view.disableInput();
-
+      // This is not the right answer, update the correction and disable input 
+      view.showAnswer(this.current.answer);
+      view.disableInput();
+      
+      // Hide the answer after a delay
       setTimeout(() => {
         view.hideCorrection();
       }, 700)
 
+      // Go to next question when the expected answer is hidden
       setTimeout(() => {
         view.setCorrectionHTML("");
         view.showCorrection();
         this.nextQuestion();
         view.clearInput();
-        //view.enableInput();
+        view.enableInput();
       }, 1100)
     }
   }

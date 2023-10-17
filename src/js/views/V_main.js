@@ -47,13 +47,17 @@ class V_Main {
    * @param {integer} ms Fade out duration in milliseconds
    */
   hideLoader(ms) {
+
+    // Set deflaut time is ms is not provided
     ms = ms ?? 250;
-    this.loaderEl.style.transition = `opacity ${ms}ms ease-in-out`;
+    // Set transition time and start transition
+    this.loaderEl.style.transition = `opacity ${ms}ms ease-in-out`;    
     this.loaderEl.style.opacity = 0;
+
+    // Start a timer to hide the overlay (prevent keeping the overlay over page content)
     setTimeout(() => {
       this.loaderEl.classList.add("d-none");
-    }, ms)
-
+    }, ms);
   }
 
 }
