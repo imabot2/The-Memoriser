@@ -53,9 +53,14 @@ body {
   opacity: 0.5;
 }
 
-/*
-#burger:hover {
+
+#burger:not(.disable):hover {
   opacity: 1;
   transform: scale(1.1);  
 }
-*/
+
+
+#burger.disable {  
+  opacity: 0.5;
+  cursor: not-allowed;
+}

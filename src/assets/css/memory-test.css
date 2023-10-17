@@ -60,10 +60,15 @@
 
 
 
-#characters-btn:hover {
+#characters-btn:not(.disable):hover {
   cursor: pointer; 
   transform: translate(0%, -50%) scale(1.1);
   opacity: 1;
+}
+
+#characters-btn.disable {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 #answer-submit-btn {
