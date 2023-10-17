@@ -1,0 +1,61 @@
+:root {
+  --main-background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: lightgrey;
+  background-image: linear-gradient(rgba(211, 211, 211, 1), rgba(120, 120, 120, 1));
+  height: 100%;
+  overflow: hidden;
+}
+
+
+#main {
+  background-color: lightgray;
+  position: relative;
+  /*display: flex;
+  justify-content: center;
+  align-items: center; */
+  transition: height 0.15s ease-out;
+
+  background-image: linear-gradient(rgba(220, 220, 220, 1), rgba(190, 190, 190, 1));
+
+  /*
+
+  background-image: linear-gradient(rgba(211, 211, 211, 0.9), rgba(211, 211, 211, 0.9)),
+   var(--main-background-image); 
+  */
+
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+#burger {
+  position: fixed;
+  left: 2vmin;
+  top: 2vmin;
+  opacity: 0.9;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 5vmin;
+  height: 5vmin;
+  min-width: 50px;
+  min-height: 50px;
+  z-index: 2;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+  opacity: 0.5;
+}
+
+/*
+#burger:hover {
+  opacity: 1;
+  transform: scale(1.1);  
+}
+*/

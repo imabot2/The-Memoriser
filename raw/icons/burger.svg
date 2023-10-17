@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   role="img"
+   width="1000mm"
+   height="1000mm"
+   viewBox="0 0 1000 1000"
+   style="max-width:1.6em; height: auto;"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="burger.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.22330833"
+     inkscape:cx="447.81133"
+     inkscape:cy="1887.5248"
+     inkscape:window-width="1866"
+     inkscape:window-height="1016"
+     inkscape:window-x="1974"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <circle
+     style="fill:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stop-color:#000000"
+     id="path843"
+     cx="489.15109"
+     cy="498.14612"
+     r="383.36819"
+     inkscape:export-filename="/home/philippe/uabox/2023-2024/projects/thememoryzer/raw/icons/burger.png"
+     inkscape:export-xdpi="6.3499999"
+     inkscape:export-ydpi="6.3499999" />
+  <path
+     id="path"
+     style="opacity:1;vector-effect:none;fill:#3454d1;fill-opacity:1;stroke-width:3.77953"
+     d="M 1889.7637 0 C 846.61407 0 0 846.61407 0 1889.7637 C 0 2932.9133 846.61407 3779.5273 1889.7637 3779.5273 C 2932.9133 3779.5273 3779.5273 2932.9133 3779.5273 1889.7637 C 3779.5273 846.61407 2932.9133 0 1889.7637 0 z M 970.83789 947.43359 C 975.12595 947.32006 979.44399 947.35617 983.78516 947.54492 L 2795.7422 947.54492 C 2865.2006 944.52497 2928.6206 980.76387 2961.8398 1038.1426 C 2995.0591 1098.5412 2995.0591 1171.0193 2961.8398 1231.418 C 2928.6206 1288.7967 2865.2006 1325.0375 2795.7422 1322.0176 L 983.78516 1322.0176 C 914.3267 1325.0375 850.90675 1288.7967 817.6875 1231.418 C 784.46825 1171.0193 784.46825 1098.5412 817.6875 1038.1426 C 848.83054 984.35004 906.51687 949.13672 970.83789 947.43359 z M 983.78516 1699.5078 L 2795.7422 1699.5078 C 2865.2006 1699.5078 2928.6206 1735.7463 2961.8398 1793.125 C 2995.0591 1853.5236 2995.0591 1926.0037 2961.8398 1986.4023 C 2928.6206 2043.7811 2865.2006 2080.0195 2795.7422 2080.0195 L 983.78516 2080.0195 C 914.3267 2080.0195 850.90675 2043.7811 817.6875 1986.4023 C 784.46825 1926.0037 784.46825 1853.5236 817.6875 1793.125 C 850.90675 1735.7463 914.3267 1699.5078 983.78516 1699.5078 z M 970.83789 2457.4004 C 975.12595 2457.2869 979.44399 2457.3209 983.78516 2457.5098 L 2795.7422 2457.5098 C 2865.2006 2454.4898 2928.6206 2490.7306 2961.8398 2548.1094 C 2995.0591 2608.508 2995.0591 2680.9862 2961.8398 2741.3848 C 2928.6206 2798.7635 2865.2006 2835.0023 2795.7422 2831.9824 L 983.78516 2831.9824 C 914.3267 2835.0023 850.90675 2798.7635 817.6875 2741.3848 C 784.46825 2680.9862 784.46825 2608.508 817.6875 2548.1094 C 848.83054 2494.3168 906.51687 2459.1035 970.83789 2457.4004 z "
+     transform="scale(0.26458333)"
+     inkscape:export-filename="/home/philippe/uabox/2023-2024/projects/thememoriser/src/assets/static/icons/burger.png"
+     inkscape:export-xdpi="6.3499999"
+     inkscape:export-ydpi="6.3499999" />
+</svg>

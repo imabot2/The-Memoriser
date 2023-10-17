@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/static/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>The Memoriser</title>
+  <meta itemprop="image" content="http://memoriser.com/static/logo/logo.png">
+  <link rel="canonical" href="https://memoriser.com" />
+
+
+  <meta name="description"
+    content="Flashcard application using active recall testing and spaced repetition. Improve your memory while learning lots of interesting things.">
+
+  <meta property="og:title" content="The memoriser">
+  <meta property="og:site_name" content="The Memoriser">
+  <meta property="og:url" content="https://memoriser.com">
+  <meta property="og:description"
+    content="Flashcard application using active recall testing and spaced repetition. Improve your memory while learning lots of interesting things.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://memoriser.com/static/logo/logo.png">
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@TheMemoriser" />
+  <meta name="twitter:title" content="The Memoriser" />
+  <meta name="twitter:description"
+    content="Flashcard application using active recall testing and spaced repetition. Improve your memory while learning lots of interesting things." />
+  <meta name="twitter:image" content="https://memoriser.com/static/logo/logo.png" />
+  <meta name="twitter:url" content="https://memoriser.com" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(rgba(145, 145, 145, 1), rgba(120, 120, 120, 1));
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #loader>img {
+      height: 70vmin;
+      max-height: 600px;
+      margin-left: 3%
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!--#region Main overlay -->
+  <div id="loader">
+      <img src="/static/loader/loader.png">
+  </div>
+  <!--#endregion Main overlay -->
+
+  <!--#region toasts -->
+  <div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div id="toast-container" class="toast-container top-0 start-50 translate-middle-x pt-3">
+
+      <div class="toast" id="toast-template" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto toast-title">Template</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
+      </div>
+
+    </div>
+  </div>
+  <!--#endregion toasts -->
+
+
+  <!--#region Top buttons -->
+  <!-- Burger icon that open the main menu -->
+  <img id="burger" src="/static/icons/burger.png">
+
+
+  <!-- Login icon that open the authentification menu -->
+  <span id="auth-top-icon">
+    <img id="auth-top-image" src="#" data-bs-toggle="tooltip" data-bs-title="Loading ...">
+  </span>
+
+
+  <!--#endregion Top buttons -->
+
+
+  <!--#region Main container-->
+  <div id="main" class="d-flex flex-column">
+
+
+    <div id="timer-container" class="rounded-3">
+      <span>00 : 00</span>
+    </div>
+
+    <!-- Two pages questions to perform fade effect transition between questions -->
+    <div id="question-0" class="question" style="opacity:0;"><img src="#"></div>
+    <div id="question-1" class="question" style="opacity:0;"><img src="#"></div>
+
+    <!-- Answer bar -->
+    <div id="answer-bar">
+      <img id="characters-btn" src="/static/icons/special-characters.png">
+      <div contenteditable="true" tabindex="0" class="form-control" id="answer-input" placeholder="&nbsp;"></div>
+      <img id="language-flag" data-bs-toggle="tooltip" data-bs-title="Language of the answer">
+      <img id="answer-submit-btn" src="/static/icons/send.png">
+      <div id="correction" class="d-flex justify-content-center align-items-center text-truncate"></div>
+    </div>
+  </div>
+  <!--#endregion Main container-->
+
+
+  <!--#region Login modal -->
+  <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+
+        <div class="modal-header flex-column">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="bi bi-person-circle display-1 text-secondary"></i>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-grid gap-2">
+
+            <button type="button" id="google-login-button"
+              class="btn btn-lg btn-primary d-flex justify-content-center align-items-center">
+              <i class="bi bi-google me-2"></i>
+              Sign In With Google
+            </button>
+
+            <div class="d-flex align-items-center">
+              <div class="p-2 flex-grow-1">
+                <hr>
+              </div>
+              <div class="p-2">OR</div>
+              <div class="p-2  flex-grow-1">
+                <hr>
+              </div>
+            </div>
+
+            <form class="d-grid">
+              <input type="email" id="login-email" class="form-control form-control-lg mb-3" placeholder="Email address"
+                autocomplete="username">
+              <input type="password" id="login-password" class="form-control form-control-lg" placeholder="Password"
+                autocomplete="current-password">
+              <div id="reset-password-button" class="form-text mt-0 pt-0 mb-3">
+                <a href="#" class="link-underline-light small">Forgot Password?</a>
+              </div>
+              <button type="button" id="login-submit" class="btn btn-lg btn-dark">Login</button>
+
+            </form>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="m-auto">
+            Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#sign-up-modal">Sign up</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--#endregion Login modal -->
+
+  <!--#region Sign up modal -->
+  <div class="modal fade" id="sign-up-modal" tabindex="-1" aria-labelledby="sign-up-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+
+        <div class="modal-header flex-column">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="bi bi-person-circle display-1 text-secondary"></i>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-grid gap-2">
+
+            <form class="d-grid">
+              <input type="email" id="sign-up-email" class="form-control form-control-lg mb-3"
+                placeholder="Email address" autocomplete="username" required>
+              <input id="sign-up-password" type="password" class="form-control form-control-lg" placeholder="Password"
+                autocomplete="current-password" required>
+              <div id="sign-up-password-feedback" class="form-text mb-3 text-danger"></div>
+              <button type="button" id="sign-up-submit" class="btn btn-lg btn-dark">Create Account</button>
+            </form>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="m-auto">
+            Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#login-modal">Log In</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--#endregion Sign up modal -->
+
+
+  <!--#region Verify email modal -->
+  <div class="modal fade" id="verify-email-modal" tabindex="-1" aria-labelledby="verify-email-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+
+        <div class="modal-header flex-column">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="bi bi-envelope-exclamation-fill display-1 text-secondary"></i>
+          <h3 class="modal-title">Verify your email</h3>
+        </div>
+
+        <div class="modal-body">
+          <p>We've sent you a verification email at <span id="verify-email-address"
+              class="fw-bold">example@domain.com</span>. You may need to check your spam folder.</p>
+          <p>Clicking the confirmation link in that email lets us know the email address is both valid and yours.</p>
+          <p>The email may take a few minutes to arrive. If you did not received an email, click the button below to
+            send a new mail.</p>
+          <div class="d-flex small">
+            <button id="resend-verification-email" type="button" class="btn btn-sm btn-primary">Resend Verification
+              Email</button>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--#endregion Verify email modal -->
+
+</body>
+
+</html>

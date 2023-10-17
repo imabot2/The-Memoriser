@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   role="img"
+   width="1000mm"
+   height="1000mm"
+   viewBox="0 0 1000 1000"
+   style="max-width:1.6em; height: auto;"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="send.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.22330833"
+     inkscape:cx="1889.7638"
+     inkscape:cy="1771.0938"
+     inkscape:window-width="1866"
+     inkscape:window-height="1016"
+     inkscape:window-x="1974"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <path
+     style="opacity:1;vector-effect:none;fill:#3454d1;fill-opacity:1"
+     d="M 500,0 C 224,0 0,224 0,500 0,776 224,1000 500,1000 776,1000 1000,776 1000,500 1000,224 776,0 500,0 500,0 500,0 500,0"
+     id="path"
+     inkscape:export-filename="/home/philippe/uabox/2023-2024/projects/thememoriser/src/assets/static/icons/send.png"
+     inkscape:export-xdpi="6.3499999"
+     inkscape:export-ydpi="6.3499999" />
+  <path
+     style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke-width:1.21855"
+     d="M 124.22405,521.48975 C 124.22405,521.48975 124.22405,521.48975 124.22405,521.48975 196.11844,481.27763 275.32412,448.37681 349.65561,415.47598 478.8218,361.85983 606.76944,308.24367 737.15418,258.28317 762.74371,249.75332 807.83003,242.44203 812.70422,278.9985 810.26712,332.61465 800.51873,385.01226 793.20744,438.62842 776.14775,554.39057 755.43242,670.15272 735.93564,785.91488 728.62434,824.90844 681.10093,844.40523 649.41866,820.03425 575.08717,770.07374 500.75568,720.11323 427.64274,668.93417 403.27176,644.56319 425.20565,609.22527 447.13953,592.16559 508.06698,531.23814 572.65007,480.05908 631.14042,416.69453 646.98156,378.91951 600.6767,410.60179 584.83556,420.35018 501.97423,478.84053 420.33145,539.76798 331.37737,589.72849 286.29106,615.31802 233.89346,593.38414 188.80714,579.9801 148.59503,562.92041 88.886126,547.07927 124.22405,521.48975 124.22405,521.48975 124.22405,521.48975 124.22405,521.48975"
+     id="path844" />
+</svg>

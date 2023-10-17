@@ -1,0 +1,12 @@
+
+class M_Settings {
+
+  constructor() {
+
+  }
+
+
+
+}
+
+export default new M_Settings();

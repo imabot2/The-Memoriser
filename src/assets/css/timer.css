@@ -1,0 +1,47 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@700&display=swap');
+#timer-container {
+  position: fixed;
+  background-color: #2f363e;
+  
+  color: #ddd;
+  z-index:3;
+  top: -15vmin;
+  
+  left: 50%;
+  padding-top: 10px;
+  transform: translateX(-50%);
+
+  transition: top 500ms ease-in-out 0s;
+
+  opacity: 0.84; 
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+#timer-container>span {
+  
+  font-size: calc(0.8em + 1.2vmin);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: .1rem;
+  font-family: 'Chivo Mono', monospace;
+  padding-left: 1ch;
+  padding-right: 1ch;
+  
+}
+
+
+.blink {
+  animation: keyframeBlink 1s infinite;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes keyframeBlink {
+  0% {opacity: 0.2; }
+  10% {opacity: 0.2; }
+  30% {opacity: 1; }
+  70% {opacity: 1; }
+  90% {opacity: 0.2; }
+  100% { opacity: 0.2; }
+}
