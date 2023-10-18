@@ -14,9 +14,14 @@ let run = () => {
 
   // Load the typing test according to the client language
   switch (clientLanguage) {
-    case "fr": promises.push(memoryTest.addQuiz('/fr/geographie/europe/')); break;
+    case "fr":
+      //promises.push(memoryTest.addQuiz('/fr/geographie/europe/'));
+      promises.push(memoryTest.addQuiz('/en/geography/africa/'));
+      break;
     default: promises.push(memoryTest.addQuiz('/en/geography/europe/'));
+
   }
+
 
 
   // When the quizzes are all loaded
@@ -33,6 +38,8 @@ let run = () => {
     if (!isMobile()) document.getElementById('answer-input').focus();
 
   })
+
+
 
 
 }

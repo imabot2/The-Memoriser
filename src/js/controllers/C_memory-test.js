@@ -101,6 +101,7 @@ class C_MemoryTest {
       view.setCorrectionHTML("");
       view.setExpectedAnswer(this.current.answer);
       view.disableInput();
+      
       // Hide the answer after a delay
       setTimeout(() => {
         view.hideExpectedAnswer();
