@@ -37,24 +37,24 @@ class C_MemoryTest {
    * Callback function called when the answer input changes
    */
   onInputChange(input) {
-    
+
     // If the timer is on pause, start and display the timer
     if (this.status === "pause") {
       this.status = "running";
       timer.start();
       timer.show();
     }
-    
+
     // Sanitize input (Remove extra spaces)
     let sanitized = input
       .trim()                   // Trim
       .replace(/\s*-\s*/, "-")  // Remove spaces around hyphens
       .replace(/\s+/g, " ");    // Remove extra spaces
 
-    
+
     // Compute the Levenshtein distance
     let distance = this.levenshtein.distance(sanitized, this.current.answer);
-    
+
     // Check the answer (user pressed space at the end of the right answer)
     if (input[input.length - 1] === " " && !distance) {
       //alert(distance + " "+ sanitized+" "+ this.current.answer)
@@ -88,7 +88,7 @@ class C_MemoryTest {
     view.focus();
     // Compute the Levenshtein distance
     let distance = this.levenshtein.distance(text, this.current.answer);
-    
+
     if (distance == 0) {
 
       // This is the right answer
@@ -98,24 +98,24 @@ class C_MemoryTest {
     else {
 
       // This is not the right answer, update the correction and disable input 
-      view.showAnswer(this.current.answer);
+      view.setCorrectionHTML("");
+      view.setExpectedAnswer(this.current.answer);
       view.disableInput();
-      
       // Hide the answer after a delay
       setTimeout(() => {
-        view.hideCorrection();
-      }, 700)
+        view.hideExpectedAnswer();
+      }, 800)
 
       // Go to next question when the expected answer is hidden
       setTimeout(() => {
-        view.setCorrectionHTML("");
-        view.showCorrection();
         this.nextQuestion();
         view.clearInput();
         view.enableInput();
-      }, 1100)
+      }, 1000)
     }
   }
+
+
 
   /**
    * Callback function called when the test is over
@@ -140,9 +140,6 @@ class C_MemoryTest {
     view.setPrompt(this.current.prompt);
     view.setLanguageFlag(this.current.flag);
     view.shownNextQuestion();
-
-
-
 
     // Get and prepare the next question
     this.next = model.getNextQuestion();
@@ -174,8 +171,6 @@ class C_MemoryTest {
     view.setPrompt(this.current.prompt);
     view.setCorrectionHTML("");
     view.setLanguageFlag(this.current.flag);
-
-
 
     // Prepare the next question
     this.prepareNextQuestion();
