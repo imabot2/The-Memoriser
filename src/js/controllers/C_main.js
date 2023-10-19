@@ -15,8 +15,13 @@ let run = () => {
   // Load the typing test according to the client language
   switch (clientLanguage) {
     case "fr":
-      //promises.push(memoryTest.addQuiz('/fr/geographie/europe/'));
-      promises.push(memoryTest.addQuiz('/en/geography/africa/'));
+        if (process.env.NODE_ENV == "production") {
+          promises.push(memoryTest.addQuiz('/fr/geographie/europe/'));
+        }
+        if (process.env.NODE_ENV == "development") {
+          promises.push(memoryTest.addQuiz('/en/geography/europe/'));
+          promises.push(memoryTest.addQuiz('/en/geography/africa/'));
+        }
       break;
     default: promises.push(memoryTest.addQuiz('/en/geography/europe/'));
 

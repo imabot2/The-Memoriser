@@ -10,6 +10,9 @@ import cameroon from "Quizzes/en/geography/africa/img/cameroon.png";
 import capeVerde from "Quizzes/en/geography/africa/img/cape-verde.png";
 import centralAfricanRepublic from "Quizzes/en/geography/africa/img/central-african-republic.png";
 import chad from "Quizzes/en/geography/africa/img/chad.png";
+import comoros from "Quizzes/en/geography/africa/img/comoros.png";
+import democraticRepublicOfTheCongo from "Quizzes/en/geography/africa/img/democratic-republic-of-the-congo.png";
+import djibouti from "Quizzes/en/geography/africa/img/djibouti.png";
 
 /*
 import zimbabwe from "Quizzes/en/geography/africa/img/zimbabwe.png"
@@ -53,9 +56,9 @@ import eswatini from "Quizzes/en/geography/africa/img/eswatini.png"
 import eritrea from "Quizzes/en/geography/africa/img/eritrea.png"
 import equatorialGuinea from "Quizzes/en/geography/africa/img/equatorial-guinea.png"
 import egypt from "Quizzes/en/geography/africa/img/egypt.png"
-import djibouti from "Quizzes/en/geography/africa/img/djibouti.png"
-import democraticRepublicOfTheCongo from "Quizzes/en/geography/africa/img/democratic-republic-of-the-congo.png"
-import comoros from "Quizzes/en/geography/africa/img/comoros.png"
+
+
+
 
 
 
@@ -139,29 +142,29 @@ export var questions = [
     prompt: "What country is this?",
     answer: "Chad"
   },
+  {
+    uid: "km",
+    image: comoros,
+    prompt: "What country is this?",
+    answer: "Comoros"
+  },
+  {
+    uid: "cd",
+    image: democraticRepublicOfTheCongo,
+    prompt: "What country is this?",
+    answer: "Democratic Republic of the Congo"
+  },
+  {
+    uid: "dj",
+    image: djibouti,
+    prompt: "What country is this?",
+    answer: "Bjibouti"
+  },
+  
 /*
 
 
-    {
-      image: chad,
-      text: "Chad ",
-      mask: "xxxx "
-    },
-    {
-      image: comoros,
-      text: "Comoros ",
-      mask: "xxxxxxx "
-    },
-    {
-      image: democraticRepublicOfTheCongo,
-      text: "Democratic Republic of the Congo ",
-      mask: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "
-    },
-    {
-      image: djibouti,
-      text: "Djibouti ",
-      mask: "xxxxxxxx "
-    },
+
     {
       image: egypt,
       text: "Egypt ",
