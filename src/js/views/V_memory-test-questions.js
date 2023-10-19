@@ -21,7 +21,12 @@ export default class V_MemoryTestQuestions extends V_MemoryTestAnswerBar {
     this.question[1] = {};
     this.question[1].div = document.getElementById('question-1');
     this.question[1].img = document.querySelector('#question-1>img');
+
+    this.question[1].img
   }
+
+
+
 
 
   /**
@@ -30,11 +35,19 @@ export default class V_MemoryTestQuestions extends V_MemoryTestAnswerBar {
    * @param {*} delay Delay before setting the image 
    */
   setNextImage(imageSrc, delay) {
-    // Store the ID of the next image to prevent ID change in the meantime
-    let id = 1 - this.currentQuestionID;
-    setTimeout(() => {
-      this.question[id].img.src = imageSrc;
-    }, delay ?? this.transitionDelay);
+    return new Promise((resolve) => {
+      // Store the ID of the next image to prevent ID change in the meantime
+      let id = 1 - this.currentQuestionID;
+      setTimeout(() => {
+        this.question[id].img.src = imageSrc;
+
+        // Resolve the promise when the image is loaded
+        this.question[id].img.addEventListener("load", (event) => {
+          resolve();
+        }, { once: true });
+
+      }, delay ?? this.transitionDelay);
+    })
   }
 
 

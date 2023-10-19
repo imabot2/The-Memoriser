@@ -124,16 +124,25 @@ class C_MemoryTest {
    * Reset the memory test
   */
   reset() {
-    // Get and display the first question
-    this.current = model.getNextQuestion();
-    view.setNextImage(this.current.image, 0);
-    view.setPrompt(this.current.prompt);
-    view.setLanguageFlag(this.current.flag);
-    view.shownNextQuestion();
+    return new Promise((resolve) => {
+      // Get and display the first question
+      this.current = model.getNextQuestion();
+      let imageOnePromise = view.setNextImage(this.current.image, 0);
+      view.setPrompt(this.current.prompt);
+      view.setLanguageFlag(this.current.flag);
+      view.shownNextQuestion();
 
-    // Get and prepare the next question
-    this.next = model.getNextQuestion();
-    view.setNextImage(this.next.image, 0);
+      // Get and prepare the next question
+      this.next = model.getNextQuestion();
+      let imageTwoPromise = view.setNextImage(this.next.image, 0);
+
+      // When all image are loaded, resolve the promise
+      Promise.all([imageOnePromise, imageTwoPromise]).finally(() => {
+        resolve();
+      })
+
+
+    })
   }
 
 
