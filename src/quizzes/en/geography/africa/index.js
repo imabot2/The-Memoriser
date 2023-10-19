@@ -158,7 +158,7 @@ export var questions = [
     uid: "dj",
     image: djibouti,
     prompt: "What country is this?",
-    answer: "Bjibouti"
+    answer: "Djibouti"
   },
   
 /*

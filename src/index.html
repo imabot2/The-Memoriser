@@ -63,7 +63,6 @@
       max-height: 600px;
       margin-left: 3%
     }
-
   </style>
 </head>
 
@@ -71,7 +70,7 @@
 
   <!--#region Main overlay -->
   <div id="loader">
-      <img src="/static/loader/loader.png">
+    <img src="/static/loader/loader.png">
   </div>
   <!--#endregion Main overlay -->
 
@@ -118,21 +117,39 @@
     <div id="question-0" class="question" style="opacity:0;"><img src="#"></div>
     <div id="question-1" class="question" style="opacity:0;"><img src="#"></div>
 
+    <div id="success-card">
+      <img src="/static/icons/success.png" class="card-img-top">
+      <div class="content">
+        <div class="score"><span>100</span>%</div>
+        <div class="time"><span>00:00</span>s</div>
+        <div class="wpm"><span>100</span>wpm</div>
+      </div>
+    </div>
+
+    <div id="failed-card">
+      <img src="/static/icons/error.png" class="card-img-top">
+      <div class="content">
+        <div class="score"><span>100</span>%</div>
+        <div class="time"><span>00:00</span>s</div>
+        <div class="wpm"><span>100</span>wpm</div>
+      </div>
+    </div>
+
     <!-- Answer bar -->
     <div id="answer-bar">
       <img id="characters-btn" src="/static/icons/special-characters.png" class="disable">
-      <div contenteditable="true" tabindex="0" class="form-control" id="answer-input" placeholder="&nbsp;" 
-      spellcheck="false" 
-      autocomplete="off" 
-      autocorrect="off" 
-      data-gram="false" 
-      data-gramm_editor="false" 
-      data-enable-grammarly="false"></div>
+      <div contenteditable="true" tabindex="0" class="form-control" id="answer-input" placeholder="&nbsp;"
+        spellcheck="false" autocomplete="off" autocorrect="off" data-gram="false" data-gramm_editor="false"
+        data-enable-grammarly="false"></div>
 
       <img id="language-flag" data-bs-toggle="tooltip" data-bs-title="Language of the answer">
       <img id="answer-submit-btn" src="/static/icons/send.png">
-      <div id="correction-container"><div id="correction" class="ps-4 pe-4"></div></div>
-      <div id="expected-answer-container"><div id="expected-answer" class="ps-4 pe-4 hide d-none"></div></div>
+      <div id="correction-container">
+        <div id="correction" class="ps-4 pe-4"></div>
+      </div>
+      <div id="expected-answer-container">
+        <div id="expected-answer" class="ps-4 pe-4 hide d-none"></div>
+      </div>
     </div>
   </div>
   <!--#endregion Main container-->

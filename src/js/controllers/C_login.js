@@ -22,9 +22,6 @@ class C_LogIn {
     model.onSignIn(() => { this.onSignIn(); });
     model.onSignOut(() => { this.onSignOut(); });
     model.onEmailNotVerified(() => { this.onEmailNotVerified(); });
-
-
-
   }
 
   /**

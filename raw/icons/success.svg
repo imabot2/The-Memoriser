@@ -7,7 +7,7 @@
    style="max-width:1.6em; height: auto;"
    version="1.1"
    id="svg3"
-   sodipodi:docname="user.svg"
+   sodipodi:docname="success.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -22,12 +22,12 @@
      borderopacity="1.0"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
+     inkscape:pagecheckerboard="true"
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.22330833"
      inkscape:cx="1889.7638"
-     inkscape:cy="1892.0029"
+     inkscape:cy="1887.5247"
      inkscape:window-width="1866"
      inkscape:window-height="1016"
      inkscape:window-x="1974"
@@ -35,18 +35,14 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg3" />
   <path
-     style="opacity:1;vector-effect:none;fill:#3454d1;fill-opacity:1"
+     style="opacity:1;vector-effect:none;fill:#198754;fill-opacity:1"
      d="M 500,0 C 224,0 0,224 0,500 0,776 224,1000 500,1000 776,1000 1000,776 1000,500 1000,224 776,0 500,0 500,0 500,0 500,0"
      id="path"
-     inkscape:export-filename="/home/philippe/uabox/2023-2024/projects/thememoriser/src/assets/static/icons/user.png"
+     inkscape:export-filename="/home/philippe/uabox/2023-2024/projects/thememoriser/src/assets/static/icons/success.png"
      inkscape:export-xdpi="6.3499999"
      inkscape:export-ydpi="6.3499999" />
   <path
      style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1"
-     d="M 350,625 C 449,650 451,649 501,649 550,649 555,650 654,625 757,625 792,647 831,725 736,858 607,902 500,900 368,901 239,831 173,730 212,652 247,625 350,625"
-     id="path825" />
-  <path
-     style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1"
-     d="M 501,129 C 624,129 724,229 724,352 724,475 624,575 501,575 378,575 278,475 278,352 278,229 378,129 501,129 501,129 501,129 501,129"
-     id="path823" />
+     d="M 250,475 C 279,504 359,586 390,615 400,625 410,615 410,615 410,615 625,400 750,275 765,260 785,260 800,275 816,292 837,313 850,325 865,340 865,360 850,375 700,525 583,642 425,800 410,815 390,815 375,800 292,717 150,575 150,575 135,560 135,540 150,525 150,525 200,475 200,475 215,461 235,460 250,475 250,475 250,475 250,475"
+     id="path921" />
 </svg>

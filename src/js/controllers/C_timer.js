@@ -22,6 +22,7 @@ class C_Timer {
     // Callback function when the timer is over
     this.onOverCallback = () => { }
     model.onTimerOver(() => { this.onOverCallback(); });
+   
   }
 
   /*

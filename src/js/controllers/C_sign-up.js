@@ -16,6 +16,7 @@ class C_SignUp {
    * Constructor, initialize the Firebase authentification
    */
   constructor() {
+
   }
 
 

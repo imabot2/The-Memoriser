@@ -1,0 +1,89 @@
+#success-card {
+  --success-card-width: 200px;
+  position: absolute;
+  opacity: 0.8;
+  left: calc(var(--success-card-width)*-1.5);
+  top: 45%;
+  padding-left: var(--bs-border-radius);
+  background-color: white;
+  border-radius: var(--bs-border-radius);
+  transform: translateY(-50%);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.4);
+  transition: left 1000ms ease-in;
+}
+
+
+#failed-card {
+  --failed-card-width: 200px;
+  position: absolute;
+  opacity: 0.8;
+  right: calc(var(--failed-card-width)*-1.5);
+  top: 45%;
+  padding-left: var(--bs-border-radius);
+  background-color: white;
+  border-radius: var(--bs-border-radius);
+  transform: translateY(-50%);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.4);
+  transition: right 1000ms ease-in;
+}
+
+
+#success-card.show {
+  left: calc(var(--bs-border-radius)*-1);
+  transition: left 250ms ease-out;
+}
+
+#failed-card.show {
+  right: calc(var(--bs-border-radius)*-1);
+  transition: right 250ms ease-out;
+}
+
+#failed-card>img,
+#success-card>img {
+  max-width: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(5px 5px 5px #222);
+
+}
+
+#failed-card .content,
+#success-card .content {
+  padding: 1em;
+  padding-top: 2.4em;
+  font-size: calc(0.6rem + 1vmin);
+  text-align: center;
+  font-family: 'Luckiest Guy', cursive;
+  line-height: 1em;
+}
+
+#failed-card .content>div
+#success-card .content>div {
+  padding-top: 0.5em;
+}
+
+#failed-card .score,
+#success-card .score {
+  font-size: 1em;
+}
+
+#failed-card .score span,
+#success-card .score span {
+  font-size: 2rem;
+}
+
+#failed-card .time span,
+#success-card .time span {
+  font-size: 1.5rem;
+}
+
+#failed-card .wpm,
+#success-card .wpm {
+  font-size: 0.8em;
+}
+
+#failed-card .wpm span,
+#success-card .wpm span {
+  font-size: 1.5rem;
+}

@@ -8,6 +8,7 @@ import { clientLanguage } from "../lib/client";
 
 let run = () => {
 
+
   // Promise containing the typing tests
   let promises = [];
 
@@ -35,12 +36,15 @@ let run = () => {
     // Initialize the memory test (promise is resolved if the questions images are loaded)
     memoryTest.reset().then(() => {
 
-      // Hide the loader overlay
-      view.hideLoader(300);
+      setTimeout(() => {
+        // Hide the loader overlay
+        view.hideLoader(300);
 
-      // If user is not on mobile device, set focus to the answer input
-      // On mobile device, do not focus to prevent soft keyboard from opening
-      if (!isMobile()) document.getElementById('answer-input').focus();
+        // If user is not on mobile device, set focus to the answer input
+        // On mobile device, do not focus to prevent soft keyboard from opening
+        if (!isMobile()) document.getElementById('answer-input').focus();
+
+      }, 100);
     });
   })
 

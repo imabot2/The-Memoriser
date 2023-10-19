@@ -52,6 +52,7 @@ export default class Timer {
 
     // Stop current timeout
     clearTimeout(this.timeout);
+    this.isRunning = false;
 
     // Keep the timer direction
     this.countDown = (direction !== "up");
@@ -73,7 +74,7 @@ export default class Timer {
 
 
   /**
-   * 
+   * Split the time to minutes, seconds and dozen
    * @param {integer} ms Raw time (remaining or elapsed) in milliseconds
    * @returns  {object} An object with { min : minutes, sec : seconds, doz: dozen of ms, countDown: count down mode (bool) }
    */
@@ -95,6 +96,10 @@ export default class Timer {
     return time;
   }
 
+  /**
+   * Get the current time splitted in minutes, seconds dozens
+   * @returns  {object} An object with { min : minutes, sec : seconds, doz: dozen of ms, countDown: count down mode (bool) }
+   */
   getTime() {
     let time;
 

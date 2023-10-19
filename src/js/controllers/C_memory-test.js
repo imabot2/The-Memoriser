@@ -2,6 +2,8 @@ import model from "Js/models/M_memory-test.js";
 import view from "Js/views/V_memory-test.js";
 import timer from "Js/controllers/C_timer.js";
 import Levenshtein from "Js/lib/levenshtein.js";
+import statistics from "Js/controllers/C_statistics.js";
+import Timer from "Js/lib/timer.js"
 
 
 class C_MemoryTest {
@@ -11,6 +13,9 @@ class C_MemoryTest {
     view.onInput((text) => this.onInputChange(text));
     view.onEnter((text) => this.onEnterPressed(text));
 
+    // Initialize stats for the current question
+    this.currentStats = {};
+    this.currentStats.maxDistance = 0;
 
     // Set the callback function when the time is over
     timer.onOver(() => { this.onTimeOver(); });
@@ -29,7 +34,8 @@ class C_MemoryTest {
       appendSpaces: true,
     });
 
-
+    // Initialize the timer used for each question
+    this.questionTimer = new Timer();
 
   }
 
@@ -40,11 +46,14 @@ class C_MemoryTest {
    */
   onInputChange(input) {
 
-    // If the timer is on pause, start and display the timer
+    // If the timer is on pause, start and display the timers
     if (this.status === "pause") {
+
       this.status = "running";
       timer.start();
       timer.show();
+      this.questionTimer.init(0, "up");
+      this.questionTimer.start();
     }
 
     // Sanitize input (Remove extra spaces)
@@ -59,7 +68,11 @@ class C_MemoryTest {
 
     // Check the answer (user pressed space at the end of the right answer)
     if (input[input.length - 1] === " " && !distance) {
-      //alert(distance + " "+ sanitized+" "+ this.current.answer)
+      
+      // Process the current question for statistics
+      this.processQuestionOver(0);
+
+      // Switch to the next question
       this.nextQuestion();
       view.clearInput();
       return;
@@ -68,6 +81,10 @@ class C_MemoryTest {
     // Compute the Levenshtein distance    
     let len = Math.min(sanitized.length, this.current.answer.length);
     distance = this.levenshtein.distance(sanitized, this.current.answer.slice(0, len));
+
+    // Store the max distance
+    this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
+    
 
     // Set the correction if the distance is higher than zero
     if (distance) {
@@ -85,12 +102,19 @@ class C_MemoryTest {
   /**
   * Callback function called when Enter key is pressed
   */
-  onEnterPressed(text) {
+  onEnterPressed(input) {
 
     view.focus();
     // Compute the Levenshtein distance
-    let distance = this.levenshtein.distance(text, this.current.answer);
+    let distance = this.levenshtein.distance(input, this.current.answer);
 
+    // Store the max distance
+    this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
+
+    // Process the current question for statistics
+    this.processQuestionOver(distance);
+
+    
     if (distance == 0) {
 
       // This is the right answer
@@ -103,6 +127,23 @@ class C_MemoryTest {
       view.setExpectedAnswer(this.current.answer)
         .then(() => { this.nextQuestion(); });
     }
+  }
+
+  /**
+   * Process the current question statistics
+   */
+  processQuestionOver(distance) {
+    
+    // Prepare the statistics
+    this.currentStats.time = this.questionTimer.getTime().raw;
+    this.currentStats.expected = this.current.answer;
+    this.currentStats.answered = view.getAnswerText();
+    this.currentStats.path = this.current.path;
+    this.currentStats.uid = this.current.uid;
+    this.currentStats.distance = distance;
+
+    // Push the statistics
+    statistics.push({...this.currentStats});
   }
 
 
@@ -163,16 +204,25 @@ class C_MemoryTest {
     // Pick the next question
     this.current = this.next;
 
+    // Hide the correction
+    view.setCorrectionHTML("");
+
+    // Reset maxDistance
+    this.currentStats.maxDistance = 0;
+
     // Show the next question
     view.shownNextQuestion();
 
     // Prepare prompt and remove correction
     view.setPrompt(this.current.prompt);
-    view.setCorrectionHTML("");
     view.setLanguageFlag(this.current.flag);
 
     // Prepare the next question
     this.prepareNextQuestion();
+
+    // Start the timer
+    this.questionTimer.init(0, "up");
+    this.questionTimer.start();
   }
 
 
