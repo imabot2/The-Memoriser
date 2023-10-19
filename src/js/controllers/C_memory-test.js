@@ -27,8 +27,8 @@ class C_MemoryTest {
       caseSensitive: false,
       ignoreAccents: true,
       appendSpaces: true,
-    })
-
+    });
+   
   }
 
 

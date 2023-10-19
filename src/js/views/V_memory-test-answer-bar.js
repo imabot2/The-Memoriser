@@ -90,21 +90,6 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
     return this.answerInput.innerText;
   }
 
-  hideCorrection() {
-    this.correction.style.opacity = "0";
-  }
-
-  showCorrection() {
-    this.correction.style.removeProperty("opacity");
-  }
-
-  /**
-   * Set new HTML content in the answer input
-   * @param {string} html HTML code to place in the input bar
-   */
-  setCorrectionHTML(html) {
-    this.correction.innerHTML = html;
-  }
 
   /**
    * Disable the answer input

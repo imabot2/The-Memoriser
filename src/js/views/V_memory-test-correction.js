@@ -37,7 +37,8 @@ export default class V_memoryTestCorrection {
    * @param {string} html HTML code to place in the input bar
    */
   setCorrectionHTML(html) {
-    this.correction.innerHTML = html;
+    // Set the correction and replace space with non breakable space    
+    this.correction.innerHTML = html;    
   }
 
 
@@ -54,7 +55,8 @@ export default class V_memoryTestCorrection {
    * @param {string} html The HTML content of the answer bar
    */
   setExpectedAnswer(html) {
-    this.expectedAnswer.innerHTML = html;
+    // Set the expected answer and replace space with non breakable space
+    this.expectedAnswer.innerHTML = html.replace(" ", "&nbsp;");
     this.expectedAnswer.classList.remove("hide");
   }
 
