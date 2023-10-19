@@ -118,7 +118,12 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   opacity: 0.9;
 }
-#answer-submit-btn:hover {
+
+#answer-submit-btn.disable {
+  opacity: 0.5;
+}
+
+#answer-submit-btn:not(.disable):hover {
   cursor: pointer; 
   transform: translate(0%, -50%) scale(1.1);
   opacity: 1;

@@ -125,7 +125,7 @@ export var questions = [
     uid: "cv",
     image: capeVerde,
     prompt: "What country is this?",
-    answer: "Cape verde"
+    answer: "Cape Verde"
   },
   {
     uid: "cf",

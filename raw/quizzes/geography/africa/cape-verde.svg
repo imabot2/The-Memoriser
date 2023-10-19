@@ -38,9 +38,9 @@
      inkscape:pageopacity="0"
      inkscape:pagecheckerboard="true"
      showgrid="false"
-     inkscape:zoom="7.0160178"
-     inkscape:cx="380.55776"
-     inkscape:cy="392.31656"
+     inkscape:zoom="1.5935256"
+     inkscape:cx="335.73356"
+     inkscape:cy="391.27079"
      inkscape:window-width="1866"
      inkscape:window-height="1016"
      inkscape:window-x="1974"
@@ -1321,12 +1321,12 @@
      id="ZW"
      style="fill:#91908d;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none" />
   <rect
-     style="opacity:0.731886;fill:none;fill-opacity:0.395325;stroke:none;stroke-width:1.55726;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+     style="opacity:0.731886;fill:none;fill-opacity:0.395325;stroke:none;stroke-width:1.72245;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
      id="rect3397"
-     width="399.98276"
-     height="224.99077"
-     x="208.00581"
-     y="303.41916"
+     width="442.41153"
+     height="248.85699"
+     x="186.86258"
+     y="277.18271"
      inkscape:export-filename="/home/philippe/uabox/2023-2024/projects/thememoriser/src/quizzes/en/geography/africa/img/cape-verde.png"
      inkscape:export-xdpi="460.82001"
      inkscape:export-ydpi="460.82001" />
@@ -1339,7 +1339,7 @@
      transform="matrix(4.1058936e-4,0,0,4.1058936e-4,509.49612,333.55597)" />
   <g
      id="g1089"
-     transform="matrix(1.6703417,0,0,1.6703417,-419.74817,-123.60014)"
+     transform="matrix(2.3175472,0,0,2.3175472,-740.64126,-350.64996)"
      style="opacity:0.8">
     <path
        id="path1202"
@@ -1359,7 +1359,7 @@
      id="CV"
      style="fill:#e83c4b;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none" />
   <g
-     transform="matrix(0.00194115,0,0,-0.00194115,398.79608,404.82309)"
+     transform="matrix(0.00265089,0,0,-0.00265089,395.26174,381.88185)"
      stroke="none"
      id="g6993"
      style="fill:#e83c4b;fill-opacity:1;stroke:#000000;stroke-width:151.739;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
@@ -1412,4 +1412,10 @@
        id="path6991"
        style="fill:#e83c4b;fill-opacity:1;stroke:#000000;stroke-width:151.739;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
+  <circle
+     style="opacity:0.8;fill:none;stroke:#4866d6;stroke-width:1.99028;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.639216;stop-color:#000000"
+     id="path1118"
+     cx="407.23038"
+     cy="417.71854"
+     r="7.4166312" />
 </svg>

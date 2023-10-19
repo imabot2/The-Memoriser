@@ -28,7 +28,7 @@ class C_MemoryTest {
       ignoreAccents: true,
       appendSpaces: true,
     });
-   
+
   }
 
 
@@ -97,22 +97,9 @@ class C_MemoryTest {
     }
     else {
 
-      // This is not the right answer, update the correction and disable input 
-      view.setCorrectionHTML("");
-      view.setExpectedAnswer(this.current.answer);
-      view.disableInput();
-      
-      // Hide the answer after a delay
-      setTimeout(() => {
-        view.hideExpectedAnswer();
-      }, 800)
-
-      // Go to next question when the expected answer is hidden
-      setTimeout(() => {
-        this.nextQuestion();
-        view.clearInput();
-        view.enableInput();
-      }, 1000)
+      // This is not the right answer, show the expected answer      
+      view.setExpectedAnswer(this.current.answer)
+        .then(() => { this.nextQuestion(); });
     }
   }
 

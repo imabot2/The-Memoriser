@@ -65,7 +65,7 @@
 
 #expected-answer {
   position: absolute;
-  top: -170%;
+  top: -180%;
   left: 50%;
   transform: translate(-50%, 0);
   opacity: 0;

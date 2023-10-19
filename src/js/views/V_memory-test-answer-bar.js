@@ -21,7 +21,7 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
     // Event when the answer input has changed
     this.onInputCallback = () => { };
-    this.answerInput.addEventListener("input", (event) => { this.onInputCallback(this.getAnswerText());  });
+    this.answerInput.addEventListener("input", (event) => { this.onInputCallback(this.getAnswerText()); });
 
     // Get the correction bar
     this.correction = document.getElementById("correction");
@@ -50,7 +50,12 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
     // When the submit button is clicked, run the callback function as if the user pressed Enter
     this.submitBtn = document.getElementById("answer-submit-btn");
-    this.submitBtn.addEventListener("click", () => {
+    this.submitBtn.addEventListener("click", (event) => {
+      // If the answer bar is disable, do not run callback
+      if (this.answerInputDisable) {
+        event.preventDefault();
+        return;
+      }
       this.onEnterCallback(this.answerInput.innerText);
     })
 
@@ -92,21 +97,24 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
 
   /**
-   * Disable the answer input
+   * Disable the answer input (and the submit button)
    */
   disableInput() {
     this.answerInputDisable = true;
     this.answerInput.classList.add("disable");
+    this.submitBtn.classList.add("disable");
     
   }
 
   /**
-   * Enable the answer input
+   * Enable the answer input (and the submit button)
    */
   enableInput() {
     this.answerInputDisable = false;
     this.answerInput.classList.remove("disable");
+    this.submitBtn.classList.remove("disable");
   }
+
 
   /**
    * Set the image in the language flag
