@@ -67,7 +67,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    */
   computeProbabilities() {
     // Get and scale beta coefficient
-    let beta = settings.get("beta");
+    let beta = (5-settings.get("beta"))/5;
     beta = (beta >= 0) ? (1 + beta) ** 3.5 : 1 + beta;
 
     // Normalize the score z(i) = 1-(score-min(score(i)))

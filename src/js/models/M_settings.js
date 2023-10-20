@@ -6,7 +6,12 @@ class M_Settings {
    */
   constructor() {
     this.data = {
-      beta : 1,
+      // Beta belongs to [0 10]
+      // 0 = random questions
+      // 10 = questions least well answered very frequently
+      beta : 8,
+
+      
     }
   }
 
