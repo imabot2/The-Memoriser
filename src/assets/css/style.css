@@ -22,6 +22,8 @@ body {
   align-items: center; */
   transition: height 0.15s ease-out;
 
+  overflow: hidden;
+
   background-image: linear-gradient(rgba(220, 220, 220, 1), rgba(190, 190, 190, 1));
 
   /*
