@@ -8,7 +8,7 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
   constructor() {
 
     super();
-    
+
     // Get the answer input
     this.answerInput = document.getElementById("answer-input");
 
@@ -21,10 +21,20 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
     // Event when the answer input has changed
     this.onInputCallback = () => { };
-    this.answerInput.addEventListener("input", (event) => { this.onInputCallback(this.getAnswerText()); });
+    this.answerInput.addEventListener("input", (event) => {
+
+      // Do not process if this is a composition
+      if (event.isComposing) return;
+
+      // Run the callback function
+      this.onInputCallback(this.getAnswerText());
+    });
 
     // Get the correction bar
     this.correction = document.getElementById("correction");
+
+    // On composition end, run the callback event
+    this.answerInput.addEventListener("compositionend", () => { this.onInputCallback(this.getAnswerText()); });
 
     // Callback function and event when the user press Enter key
     this.onEnterCallback = () => { };
@@ -35,7 +45,6 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
         event.preventDefault();
         return;
       }
-
 
       // If the user presses the "Enter" key on the keyboard
       if (event.key === "Enter") {
@@ -48,6 +57,9 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
       }
     });
 
+
+
+
     // When the submit button is clicked, run the callback function as if the user pressed Enter
     this.submitBtn = document.getElementById("answer-submit-btn");
     this.submitBtn.addEventListener("click", (event) => {
@@ -56,12 +68,15 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
         event.preventDefault();
         return;
       }
+
       this.onEnterCallback(this.answerInput.innerText);
     })
 
 
     // Get the language flag
     this.flagEl = document.getElementById("language-flag");
+
+
   }
 
 
@@ -103,7 +118,7 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
     this.answerInputDisable = true;
     this.answerInput.classList.add("disable");
     this.submitBtn.classList.add("disable");
-    
+
   }
 
   /**
@@ -121,7 +136,7 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
    * @param {string} imageSrc Path or URL to the flag image
    */
   setLanguageFlag(imageSrc) {
-    this.flagEl.src = imageSrc;    
+    this.flagEl.src = imageSrc;
   }
 
 
