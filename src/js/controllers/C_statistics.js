@@ -4,8 +4,11 @@ import view from "Js/views/V_statistics.js";
 
 class C_Statistics {
 
+  // Constructor, perform initializations
   constructor() {
-    this.stats = [];
+    
+    // Statisticss of the current memory test
+    this.data = [];
   }
 
 
@@ -25,8 +28,8 @@ class C_Statistics {
     qStat.ratioDistance = Math.max(1 - (qStat.distance / qStat.expected.length), 0);
     qStat.ratioWpm = 1 - Math.exp(-0.1 * qStat.wpm);
 
-    // Compute the global score
-    qStat.score = qStat.ratioDistance * qStat.ratioMaxDistance * qStat.ratioWpm;
+    // Compute the weighted global score
+    qStat.score = 0.45*qStat.ratioDistance + 0.45*qStat.ratioMaxDistance + 0.1*qStat.ratioWpm;
 
     // Display the success or failed card according to the final distance
     if (qStat.distance)
@@ -35,8 +38,10 @@ class C_Statistics {
       view.showSuccessCard(qStat.score * 100, qStat.time, qStat.wpm);
 
     // Append questions statistics to the global stats
-    this.stats.push(qStat);
-    console.log (this.stats);
+    this.data.push(qStat);
+    
+    // Return the upgrading question statistics
+    return qStat;
   }
 
 

@@ -142,8 +142,9 @@ class C_MemoryTest {
     this.currentStats.uid = this.current.uid;
     this.currentStats.distance = distance;
 
-    // Push the statistics
-    statistics.push({...this.currentStats});
+    // Push and update the statistics
+    this.currentStats = statistics.push({...this.currentStats});
+    model.update({...this.currentStats});
   }
 
 
