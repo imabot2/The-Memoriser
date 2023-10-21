@@ -48,8 +48,8 @@
 
     #loader {
       position: fixed;
-      top:0;
-      left:0;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
       background-image: linear-gradient(rgba(145, 145, 145, 1), rgba(120, 120, 120, 1));
@@ -57,14 +57,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;      
+      flex-direction: column;
     }
 
     #loader>img {
       height: 70vmin;
       max-height: 600px;
       margin-left: 3%;
-      
+
     }
   </style>
 </head>
@@ -157,8 +157,12 @@
       <div contenteditable="true" tabindex="0" class="form-control" id="answer-input" placeholder="&nbsp;"
         spellcheck="false" autocomplete="off" autocorrect="off" data-gram="false" data-gramm_editor="false"
         data-enable-grammarly="false"></div>
-
-      <img id="language-flag" data-bs-toggle="tooltip" data-bs-title="Language of the answer">
+      <div id="flip-flag">
+        <div id="flip-flag-inner">
+          <img id="language-flag-front" data-bs-toggle="tooltip" data-bs-title="Language expected of the answer">
+          <img id="language-flag-back" data-bs-toggle="tooltip" data-bs-title="Language expected of the answer">
+        </div>
+      </div>
       <img id="answer-submit-btn" src="/static/icons/send.png">
       <div id="correction-container">
         <div id="correction" class="ps-4 pe-4"></div>

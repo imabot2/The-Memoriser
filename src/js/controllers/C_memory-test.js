@@ -21,7 +21,7 @@ class C_MemoryTest {
     timer.onOver(() => { this.onTimeOver(); });
 
     // Current status of the memory test is in pause
-    this.status = "pause";
+    this.status = "ready";
 
     // Prepare the Levenshtein library options
     this.levenshtein = new Levenshtein();
@@ -40,6 +40,10 @@ class C_MemoryTest {
   }
 
 
+  start() {
+    view.showLanguageCard();
+  }
+
 
   /**
    * Callback function called when the answer input changes
@@ -47,7 +51,7 @@ class C_MemoryTest {
   onInputChange(input) {
 
     // If the timer is on pause, start and display the timers
-    if (this.status === "pause") {
+    if (this.status === "ready") {
 
       this.status = "running";
       timer.start();
@@ -105,6 +109,19 @@ class C_MemoryTest {
   onEnterPressed(input) {
 
     view.focus();
+
+    // If the timer is on pause, start and display the timers
+    if (this.status === "ready") {
+
+      this.status = "running";
+      timer.start();
+      timer.show();
+      this.questionTimer.init(0, "up");
+      this.questionTimer.start();
+      return;
+    }
+
+
     // Compute the Levenshtein distance
     let distance = this.levenshtein.distance(input, this.current.answer);
 
@@ -171,7 +188,8 @@ class C_MemoryTest {
       this.current = model.getNextQuestion();
       let imageOnePromise = view.setNextImage(this.current.image, 0);
       view.setPrompt(this.current.prompt);
-      view.setLanguageFlag(this.current.flag);
+      view.setLanguageCard(this.current.metaData.card);
+      view.setLanguageFlag(this.current.metaData.card.flag)
       view.shownNextQuestion();
 
       // Get and prepare the next question
@@ -216,7 +234,10 @@ class C_MemoryTest {
 
     // Prepare prompt and remove correction
     view.setPrompt(this.current.prompt);
-    view.setLanguageFlag(this.current.flag);
+
+    // Update the card and show if changes occured
+    if (view.setLanguageCard(this.current.metaData.card)) view.showLanguageCard();
+    view.setLanguageFlag(this.current.metaData.card.flag);
 
     // Prepare the next question
     this.prepareNextQuestion();

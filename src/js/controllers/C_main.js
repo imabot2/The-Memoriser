@@ -21,6 +21,7 @@ let run = () => {
       }
       if (process.env.NODE_ENV == "development") {
         //promises.push(memoryTest.addQuiz('/en/geography/europe/'));
+        promises.push(memoryTest.addQuiz('/fr/geographie/europe/'));
         promises.push(memoryTest.addQuiz('/en/geography/africa/'));
       }
       break;
@@ -37,8 +38,10 @@ let run = () => {
     memoryTest.reset().then(() => {
 
       setTimeout(() => {
+        
         // Hide the loader overlay
         view.hideLoader(300);
+        memoryTest.start(1500);
 
         // If user is not on mobile device, set focus to the answer input
         // On mobile device, do not focus to prevent soft keyboard from opening

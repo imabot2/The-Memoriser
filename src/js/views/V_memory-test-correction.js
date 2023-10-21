@@ -1,15 +1,18 @@
 import "Assets/css/memory-test-correction.css";
-
+import V_memoryTestLanguage from "Js/views/V_memory-test-language.js";
 
 /**
  * Manage the answer bar view (answer bar, flag, submit button...)
  */
-export default class V_memoryTestCorrection {
+export default class V_memoryTestCorrection extends V_memoryTestLanguage {
 
   /**
    * Constructor, initialize the correction and the expected answer bar
    */
   constructor() {
+
+    // Call the parent constructor
+    super();
 
     // Get the correction bar
     this.correction = document.getElementById("correction");

@@ -53,8 +53,11 @@ import ukraine from "Quizzes/en/geography/europe/img/ukraine.png";
 // Target language of the test
 export var metaData = {
 
-  // Flag of the quizz answers language
-  flag: flagFrench,
+  // Flag and message for the language card
+  card: {
+    flag: "/static/circle-flags/fr.svg",
+    message: "Les pays en français",
+  },
 
   // Special characters for this test
   specialCharacters: [

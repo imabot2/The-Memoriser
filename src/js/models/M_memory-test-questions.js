@@ -11,21 +11,23 @@ class M_MemoryTestQuestions {
     this.questions = [];
   }
 
+
+  /**
+   * Return a reference to a question given by its path/uid
+   * @param {integer} path path of the question
+   * @param {string} uid Unique identifier of the question
+   * @returns {object} the requested question if exist
+   */
   getQuestionByID(path, uid) {
-    let question = this.questions.find (q => (q.path===path && q.uid===uid));
-    question.flag = this.metaData[path].flag;
+    let question = this.questions.find(q => (q.path === path && q.uid === uid));
+
+    // Get question meta data associated to this question
+    question.metaData = this.metaData[question.path];
+
+    // Return the aggregated data
     return question;
   }
 
-
-
-  getNextQuestion() {
-    
-    let index = Math.floor(Math.random() * this.questions.length);
-    let nextQuestion = this.questions[index];
-    nextQuestion.flag = this.metaData[nextQuestion.path].flag;
-    return nextQuestion;
-  }
 
 
 
@@ -41,7 +43,7 @@ class M_MemoryTestQuestions {
     return new Promise((resolve, reject) => {
 
       // Check of the quiz already exists, if so do not load the quiz twice
-      if (this.metaData[quizPath] !== undefined) { resolve(); return;}
+      if (this.metaData[quizPath] !== undefined) { resolve(); return; }
 
       // This is a new quiz, add entry in meta data
       this.metaData[quizPath] = {};
@@ -51,14 +53,14 @@ class M_MemoryTestQuestions {
         .then((quiz) => {
 
           // Check of the quiz has not been deleted in the meantime
-          if (this.metaData[quizPath] === undefined) { resolve(); return;}
+          if (this.metaData[quizPath] === undefined) { resolve(); return; }
 
           // Update the quiz meta data 
           this.metaData[quizPath] = quiz.metaData;
 
           // Add the path to each question (path is also the reference to the meta data index)
-          quiz.questions.map((q) => { 
-            q.path = quizPath; 
+          quiz.questions.map((q) => {
+            q.path = quizPath;
             q.rawAnswer = q.answer;
           });
 
@@ -91,7 +93,7 @@ class M_MemoryTestQuestions {
     delete this.metaData[quizPath];
 
     // Remove the questions
-    this.questions = this.questions.filter(q => q.path !== quizPath);    
+    this.questions = this.questions.filter(q => q.path !== quizPath);
   }
 
 }

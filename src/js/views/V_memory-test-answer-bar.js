@@ -1,7 +1,7 @@
 import V_memoryTestCorrection from "Js/views/V_memory-test-correction.js";
 
 /**
- * Manage the answer bar view (answer bar, flag, submit button...)
+ * Manage the answer bar view (answer bar, submit button...)
  */
 export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
@@ -71,12 +71,6 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
       this.onEnterCallback(this.answerInput.innerText);
     })
-
-
-    // Get the language flag
-    this.flagEl = document.getElementById("language-flag");
-
-
   }
 
 
@@ -128,15 +122,6 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
     this.answerInputDisable = false;
     this.answerInput.classList.remove("disable");
     this.submitBtn.classList.remove("disable");
-  }
-
-
-  /**
-   * Set the image in the language flag
-   * @param {string} imageSrc Path or URL to the flag image
-   */
-  setLanguageFlag(imageSrc) {
-    this.flagEl.src = imageSrc;
   }
 
 
