@@ -30,7 +30,7 @@ class V_MemoryTestLanguage {
     });
 
 
-
+/*
     let i=0;
     setInterval(() => {      
       switch (i++%6) {
@@ -44,7 +44,7 @@ class V_MemoryTestLanguage {
       this.showNextFlag();
     }, 2000)
 
-
+*/
   }
 
   /**
