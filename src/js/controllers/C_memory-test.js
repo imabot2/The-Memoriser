@@ -40,9 +40,31 @@ class C_MemoryTest {
   }
 
 
-  start() {
-    view.showLanguageCard();
+  /**
+   * Reset the memory test
+  */
+  reset() {
+    return new Promise((resolve) => {
+      // Get and display the first question
+      this.current = model.getNextQuestion();
+      let imageOnePromise = view.setNextImage(this.current.image, 0);
+      view.setPrompt(this.current.prompt);
+      view.setCurrentFlag(this.current.metaData.card.flag)
+      view.shownNextQuestion();
+
+      // Get and prepare the next question
+      this.next = model.getNextQuestion();
+      let imageTwoPromise = view.setNextImage(this.next.image, 0);
+      view.setNextFlag(this.next.metaData.card.flag)
+
+
+      // When all image are loaded, resolve the promise
+      Promise.all([imageOnePromise, imageTwoPromise]).finally(() => {
+        resolve();
+      })
+    })
   }
+
 
 
   /**
@@ -72,7 +94,7 @@ class C_MemoryTest {
 
     // Check the answer (user pressed space at the end of the right answer)
     if (input[input.length - 1] === " " && !distance) {
-      
+
       // Process the current question for statistics
       this.processQuestionOver(0);
 
@@ -88,7 +110,7 @@ class C_MemoryTest {
 
     // Store the max distance
     this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
-    
+
 
     // Set the correction if the distance is higher than zero
     if (distance) {
@@ -131,7 +153,7 @@ class C_MemoryTest {
     // Process the current question for statistics
     this.processQuestionOver(distance);
 
-    
+
     if (distance == 0) {
 
       // This is the right answer
@@ -150,7 +172,7 @@ class C_MemoryTest {
    * Process the current question statistics
    */
   processQuestionOver(distance) {
-    
+
     // Prepare the statistics
     this.currentStats.time = this.questionTimer.getTime().raw;
     this.currentStats.expected = this.current.answer;
@@ -160,8 +182,8 @@ class C_MemoryTest {
     this.currentStats.distance = distance;
 
     // Push and update the statistics
-    this.currentStats = statistics.push({...this.currentStats});
-    model.update({...this.currentStats});
+    this.currentStats = statistics.push({ ...this.currentStats });
+    model.update({ ...this.currentStats });
   }
 
 
@@ -179,31 +201,7 @@ class C_MemoryTest {
 
 
 
-  /**
-   * Reset the memory test
-  */
-  reset() {
-    return new Promise((resolve) => {
-      // Get and display the first question
-      this.current = model.getNextQuestion();
-      let imageOnePromise = view.setNextImage(this.current.image, 0);
-      view.setPrompt(this.current.prompt);
-      view.setLanguageCard(this.current.metaData.card);
-      view.setLanguageFlag(this.current.metaData.card.flag)
-      view.shownNextQuestion();
 
-      // Get and prepare the next question
-      this.next = model.getNextQuestion();
-      let imageTwoPromise = view.setNextImage(this.next.image, 0);
-
-      // When all image are loaded, resolve the promise
-      Promise.all([imageOnePromise, imageTwoPromise]).finally(() => {
-        resolve();
-      })
-
-
-    })
-  }
 
 
   /**
@@ -213,6 +211,7 @@ class C_MemoryTest {
     // Get and prepare the next question
     this.next = model.getNextQuestion();
     view.setNextImage(this.next.image);
+    view.setNextFlag(this.next.metaData.card.flag);
   }
 
 
@@ -232,12 +231,11 @@ class C_MemoryTest {
     // Show the next question
     view.shownNextQuestion();
 
-    // Prepare prompt and remove correction
+    // Prepare prompt (and remove correction)
     view.setPrompt(this.current.prompt);
 
     // Update the card and show if changes occured
-    if (view.setLanguageCard(this.current.metaData.card)) view.showLanguageCard();
-    view.setLanguageFlag(this.current.metaData.card.flag);
+    view.showNextFlag();
 
     // Prepare the next question
     this.prepareNextQuestion();

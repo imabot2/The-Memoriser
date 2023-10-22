@@ -9,94 +9,88 @@ class V_MemoryTestLanguage {
    */
   constructor() {
 
-    // Get the card element
-    this.flagCardEl = document.getElementById("flag-category");
+    this.flagAnimationEl = document.getElementById("flip-flag-animation");
 
-    // Get the flag image
-    this.flagImageEl = this.flagCardEl.querySelector("img");
-
-    // Get the card content
-    this.flagContentEl = this.flagCardEl.querySelector(".content");
-
-    this.flagCardEl.style.setProperty("--language-card-fadeout-delay", "500ms");
-
-    // Previous data of the card (to prevent showing the card several times)
-    this.previousFlag = { flag: undefined, message: undefined };
-
-
-    // Get the language flag
+    // Get the language flags
     this.flagFrontEl = document.getElementById("language-flag-front");
     this.flagBackEl = document.getElementById("language-flag-back");
+
+    // Keep track of the front and back image sources
+    this.backImageSrc = "#";
+    this.frontImageSrc = "#";
+
+
+
+    // Event when the animation is over
+    this.flagAnimationEl.addEventListener("animationend", (event) => {
+      
+      // Set the new front flag
+      this.flagFrontEl.src = this.frontImageSrc;
+
+      // Remove the animation
+      this.flagAnimationEl.classList.remove("animate");
+    });
+
+
+  }
+
+  /**
+   * Set the next flag to display
+   * @param {string} imageSrc Path or URL of the next flag
+   */
+  setNextFlag(imageSrc) {
+    this.backImageSrc = imageSrc;
   }
 
 
   /**
-   * Set the language card flag and message
-   * @param {object} data Data to update
-   * @returns True if a change occured, false otherwise
+   * Set and display the current flag
+   * @param {string} imageSrc Path or URL of the current flag
    */
-  setLanguageCard(data) {
-    // Check if the message has changed
-    if (data.flag === this.previousFlag.flag && data.message === this.previousFlag.message) return false;
-    this.previousFlag = data;
+  setCurrentFlag(imageSrc) {
+    this.frontImageSrc = imageSrc;
+    this.flagFrontEl.src = imageSrc;
+  }
 
-    // Set the flag and message
-    this.setLanguageCardFlag(data.flag);
-    this.setLanguageCardMessage(data.message);
 
+  /**
+   * Switch the flags (run the animation)
+   * Do not run the animation if the flags are identical
+   * @returns True if the flag has changed, false otherwier
+   */
+  showNextFlag() {
+
+    // Do not run the animation if the image is the same (no changes)
+    if (this.backImageSrc === this.frontImageSrc) return false;
+
+    // Set the next image
+    this.flagBackEl.src = this.backImageSrc;
+
+    // Start the animation
+    this.flagAnimationEl.classList.add("animate");
+
+    // The next image becomes the new from image
+    this.frontImageSrc = this.backImageSrc;
+
+    // The flag has changed, return true
     return true;
   }
 
-
-  /**
-   * Set the image flag
-   * @param {integer} imageSrc URL or path to the image
-   */
-  setLanguageCardFlag(imageSrc) {
-    this.flagImageEl.src = imageSrc;
-  }
-
-
-  /**
-   * Set the card content
-   * @param {string} html The HTML to place in the card content
-   */
-  setLanguageCardMessage(html) {
-    this.flagContentEl.innerHTML = html;
-  }
-
-
-  /**
-   * Show the language card and hide the card after ms milliseconds (with a default value of 1000ms)
-   * @param {integer} ms Delay before the card is hidden
-   */
-  showLanguageCard(ms = 1500) {
-    this.flagCardEl.classList.add("show");
-
-    if (ms !== 0) {
-      setTimeout(() => {
-        this.hideLanguageCard();
-      }, ms);
-    }
-  }
-
-
-  /**
-   * Hide the language card
-   */
-  hideLanguageCard() {
-    this.flagCardEl.classList.remove("show");
-  }
 
 
   /**
  * Set the image in the language flag
  * @param {string} imageSrc Path or URL to the flag image
  */
+/*
   setLanguageFlag(imageSrc) {
     this.flagFrontEl.src = imageSrc;
     this.flagBackEl.src = "/static/circle-flags/de.svg";
   }
+*/
+
+
+
 
 
 }
