@@ -2,9 +2,9 @@
   --success-card-width: 200px;
   position: absolute;
   opacity: 0.8;
-  left: calc(var(--success-card-width)*-1.5);
+  right: calc(var(--success-card-width)*-1.5);
   top: 45%;
-  padding-left: var(--bs-border-radius);
+  padding-right: var(--bs-border-radius);
   background-color: white;
   border-radius: var(--bs-border-radius);
   transform: translateY(-50%);
@@ -17,9 +17,9 @@
   --failed-card-width: 200px;
   position: absolute;
   opacity: 0.8;
-  right: calc(var(--failed-card-width)*-1.5);
+  left: calc(var(--failed-card-width)*-1.5);
   top: 45%;
-  padding-right: var(--bs-border-radius);
+  padding-left: var(--bs-border-radius);
   background-color: white;
   border-radius: var(--bs-border-radius);
   transform: translateY(-50%);
@@ -28,12 +28,12 @@
 }
 
 
-#success-card.show {
+#failed-card.show {
   left: calc(var(--bs-border-radius)*-1);
   transition: left 250ms ease-out;
 }
 
-#failed-card.show {
+#success-card.show {
   right: calc(var(--bs-border-radius)*-1);
   transition: right 250ms ease-out;
 }
