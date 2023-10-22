@@ -12,17 +12,20 @@ import comoros from "Quizzes/en/geography/africa/img/comoros.png";
 import democraticRepublicOfTheCongo from "Quizzes/en/geography/africa/img/democratic-republic-of-the-congo.png";
 import djibouti from "Quizzes/en/geography/africa/img/djibouti.png";
 
+import somalia from "Quizzes/en/geography/africa/img/somalia.png";
+import southAfrica from "Quizzes/en/geography/africa/img/south-africa.png";
+import southSudan from "Quizzes/en/geography/africa/img/south-sudan.png";
+import sudan from "Quizzes/en/geography/africa/img/sudan.png";
+import tanzania from "Quizzes/en/geography/africa/img/tanzania.png";
+import togo from "Quizzes/en/geography/africa/img/togo.png";
+import tunisia from "Quizzes/en/geography/africa/img/tunisia.png";
+import uganda from "Quizzes/en/geography/africa/img/uganda.png";
+import zambia from "Quizzes/en/geography/africa/img/zambia.png";
+import zimbabwe from "Quizzes/en/geography/africa/img/zimbabwe.png";
+
+
+
 /*
-import zimbabwe from "Quizzes/en/geography/africa/img/zimbabwe.png"
-import zambia from "Quizzes/en/geography/africa/img/zambia.png"
-import uganda from "Quizzes/en/geography/africa/img/uganda.png"
-import tunisia from "Quizzes/en/geography/africa/img/tunisia.png"
-import togo from "Quizzes/en/geography/africa/img/togo.png"
-import tanzania from "Quizzes/en/geography/africa/img/tanzania.png"
-import sudan from "Quizzes/en/geography/africa/img/sudan.png"
-import southSudan from "Quizzes/en/geography/africa/img/south-sudan.png"
-import southAfrica from "Quizzes/en/geography/africa/img/south-africa.png"
-import somalia from "Quizzes/en/geography/africa/img/somalia.png"
 import sierraLeone from "Quizzes/en/geography/africa/img/sierra-leone.png"
 import seychelles from "Quizzes/en/geography/africa/img/seychelles.png"
 import senegal from "Quizzes/en/geography/africa/img/senegal.png"
@@ -71,7 +74,7 @@ export var metaData = {
 
   // Quiz flag
   flag: "/static/circle-flags/gb.svg",
-  
+
 
   // Special characters for this test
   specialCharacters: [
@@ -159,6 +162,71 @@ export var questions = [
     prompt: "What country is this?",
     answer: "Djibouti"
   },
+
+
+
+
+  {
+    uid: "so",
+    image: somalia,
+    prompt: "What country is this?",
+    answer: "Somalia"
+  },
+  {
+    uid: "za",
+    image: southAfrica,
+    prompt: "What country is this?",
+    answer: "South AFrica"
+  },
+  {
+    uid: "ss",
+    image: southSudan,
+    prompt: "What country is this?",
+    answer: "South Sudan"
+  },
+  {
+    uid: "sd",
+    image: sudan,
+    prompt: "What country is this?",
+    answer: "Sudan"
+  },
+  {
+    uid: "tz",
+    image: tanzania,
+    prompt: "What country is this?",
+    answer: "Tanzania"
+  },
+  {
+    uid: "tg",
+    image: togo,
+    prompt: "What country is this?",
+    answer: "Togo"
+  },
+  {
+    uid: "tn",
+    image: tunisia,
+    prompt: "What country is this?",
+    answer: "Tunisia"
+  },
+  {
+    uid: "ug",
+    image: uganda,
+    prompt: "What country is this?",
+    answer: "Uganda"
+  },
+  {
+    uid: "zm",
+    image: zambia,
+    prompt: "What country is this?",
+    answer: "Zambia"
+  },
+  {
+    uid: "zw",
+    image: zimbabwe,
+    prompt: "What country is this?",
+    answer: "Zimbabwe"
+  },
+
 
   /*
   

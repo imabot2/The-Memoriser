@@ -58,7 +58,7 @@ class C_MemoryTest {
       view.setNextFlag(this.next.metaData.flag)
 
 
-      // When all image are loaded, resolve the promise
+      // When all images are loaded, resolve the promise
       Promise.all([imageOnePromise, imageTwoPromise]).finally(() => {
         resolve();
       })
