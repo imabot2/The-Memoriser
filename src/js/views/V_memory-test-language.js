@@ -19,8 +19,6 @@ class V_MemoryTestLanguage {
     this.backImageSrc = "#";
     this.frontImageSrc = "#";
 
-
-
     // Event when the animation is over
     this.flagAnimationEl.addEventListener("animationend", (event) => {
       
@@ -30,6 +28,21 @@ class V_MemoryTestLanguage {
       // Remove the animation
       this.flagAnimationEl.classList.remove("animate");
     });
+
+
+
+    let i=0;
+    setInterval(() => {      
+      switch (i++%6) {
+        case 0: this.setNextFlag("/static/circle-flags/de.svg"); break;
+        case 1: this.setNextFlag("/static/circle-flags/fr.svg"); break;
+        case 2: this.setNextFlag("/static/circle-flags/gb.svg"); break;
+        case 3: this.setNextFlag("/static/circle-flags/de.svg"); break;
+        case 4: this.setNextFlag("/static/circle-flags/gb.svg"); break;
+        case 5: this.setNextFlag("/static/circle-flags/fr.svg"); break;
+      }
+      this.showNextFlag();
+    }, 2000)
 
 
   }
@@ -75,22 +88,6 @@ class V_MemoryTestLanguage {
     // The flag has changed, return true
     return true;
   }
-
-
-
-  /**
- * Set the image in the language flag
- * @param {string} imageSrc Path or URL to the flag image
- */
-/*
-  setLanguageFlag(imageSrc) {
-    this.flagFrontEl.src = imageSrc;
-    this.flagBackEl.src = "/static/circle-flags/de.svg";
-  }
-*/
-
-
-
 
 
 }
