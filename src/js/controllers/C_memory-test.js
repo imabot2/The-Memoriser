@@ -49,13 +49,13 @@ class C_MemoryTest {
       this.current = model.getNextQuestion();
       let imageOnePromise = view.setNextImage(this.current.image, 0);
       view.setPrompt(this.current.prompt);
-      view.setCurrentFlag(this.current.metaData.card.flag)
+      view.setCurrentFlag(this.current.metaData.flag)
       view.shownNextQuestion();
 
       // Get and prepare the next question
       this.next = model.getNextQuestion();
       let imageTwoPromise = view.setNextImage(this.next.image, 0);
-      view.setNextFlag(this.next.metaData.card.flag)
+      view.setNextFlag(this.next.metaData.flag)
 
 
       // When all image are loaded, resolve the promise
@@ -211,7 +211,7 @@ class C_MemoryTest {
     // Get and prepare the next question
     this.next = model.getNextQuestion();
     view.setNextImage(this.next.image);
-    view.setNextFlag(this.next.metaData.card.flag);
+    view.setNextFlag(this.next.metaData.flag);
   }
 
 

@@ -17,15 +17,16 @@ let run = () => {
   switch (clientLanguage) {
     case "fr":
       if (process.env.NODE_ENV == "production") {
-        promises.push(memoryTest.addQuiz('/fr/geographie/europe/'));
+        promises.push(memoryTest.addQuiz("/fr/geographie/europe/"));
       }
       if (process.env.NODE_ENV == "development") {
-        promises.push(memoryTest.addQuiz('/en/geography/europe/'));
-        promises.push(memoryTest.addQuiz('/fr/geographie/europe/'));
-        //promises.push(memoryTest.addQuiz('/en/geography/africa/'));
+        //promises.push(memoryTest.addQuiz("/en/geography/europe/""));
+        //promises.push(memoryTest.addQuiz("/fr/geographie/europe/""));
+        //promises.push(memoryTest.addQuiz("/en/geography/africa/""));
+        promises.push(memoryTest.addQuiz("/iso/country-code/europe/"));
       }
       break;
-    default: promises.push(memoryTest.addQuiz('/en/geography/europe/'));
+    default: promises.push(memoryTest.addQuiz("/en/geography/europe/"));
 
   }
 

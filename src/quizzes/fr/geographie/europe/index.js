@@ -1,6 +1,3 @@
-import flagFrench from "Assets/images/circle-flags/language/fr.svg";
-
-
 import albania from "Quizzes/en/geography/europe/img/albania.png";
 import andorra from "Quizzes/en/geography/europe/img/andorra.png";
 import austria from "Quizzes/en/geography/europe/img/austria.png"
@@ -53,11 +50,9 @@ import ukraine from "Quizzes/en/geography/europe/img/ukraine.png";
 // Target language of the test
 export var metaData = {
 
-  // Flag and message for the language card
-  card: {
-    flag: "/static/circle-flags/fr.svg",
-    message: "Les pays en français",
-  },
+  // Quiz flag
+  flag: "/static/circle-flags/fr.svg",
+
 
   // Special characters for this test
   specialCharacters: [
@@ -120,7 +115,7 @@ export var questions = [
     answer: "Bulgarie"
   },
   {
-    uid: "fr",
+    uid: "hr",
     image: croatia,
     prompt: "Quel est ce pays ?",
     answer: "Croatie"
