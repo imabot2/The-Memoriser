@@ -4,7 +4,8 @@ import timer from "Js/controllers/C_timer.js";
 import Levenshtein from "Js/lib/levenshtein.js";
 import statistics from "Js/controllers/C_statistics.js";
 import Timer from "Js/lib/timer.js"
-
+import auth from "Js/models/M_auth.js";
+import notifications from "Js/views/V_notifications";
 
 class C_MemoryTest {
 
@@ -192,13 +193,34 @@ class C_MemoryTest {
    * Callback function called when the test is over
    */
   onTimeOver() {
+
+    // Update status and disable input bar
     this.status = "over";
     view.disableInput();
+
+    // If the user is logged, save statistics in database
+    if (auth.isLogged()) this.saveStatistics();
   }
 
 
+  /**
+   * Save the current statistics in the database
+   */
+  saveStatistics() {
+    // Get paths list
+    let paths = model.getPaths()
 
+    // For each quiz
+    paths.forEach(path => {
 
+      // Save the quiz
+      model.saveQuizStats(path)
+        .catch((error) => {
+          console.error(path, error);
+          notifications.error("DB Error", "Error while saving statistics");
+        })
+    });
+  }
 
 
 
@@ -250,7 +272,9 @@ class C_MemoryTest {
    * Add a new quiz in the list
    * @param {string} path Path to the new quiz
    */
-  addQuiz(path) { return model.addQuiz(path); }
+  addQuiz(path) {
+    return model.addQuiz(path);
+  }
 
 
   /**

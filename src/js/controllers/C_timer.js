@@ -1,6 +1,6 @@
 import view from "Js/views/V_timer.js";
 import model from "Js/models/M_timer.js";
-
+import settings from "Js/controllers/C_settings.js";
 
 /**
  * Class Controller SignUp, manage authentification (login, logout ...)
@@ -13,8 +13,9 @@ class C_Timer {
   constructor() {
 
     // Set default timer parameters
-    this.seconds = 0;
-    this.direction = "up";
+    this.seconds = settings.get("timerValue");
+    this.direction = settings.get("timerMode");
+   
 
     // Set the callback function to update the timer
     model.onUpdate((time) => this.onUpdate(time));
@@ -22,6 +23,9 @@ class C_Timer {
     // Callback function when the timer is over
     this.onOverCallback = () => { }
     model.onTimerOver(() => { this.onOverCallback(); });
+
+    // Reset the timer
+    this.reset();
    
   }
 
@@ -32,8 +36,11 @@ class C_Timer {
    */
   init(seconds, direction) {
 
+    // Set the parameters
     this.seconds = seconds;
-    this.direction = direction ?? "down";
+    this.direction = direction ?? "down";    
+
+    // Restart the timer
     this.reset();
   }
 
@@ -42,7 +49,7 @@ class C_Timer {
    * Reset the timer to the inital value
    */
   reset() {
-    model.init(this.seconds, this.direction);
+    model.init(this.seconds, this.direction);    
     this.refresh();
   }
 

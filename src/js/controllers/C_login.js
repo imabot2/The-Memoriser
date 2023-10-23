@@ -18,6 +18,8 @@ class C_LogIn {
     // At start up, the user is not logged in
     this.isLoggedIn = false;
 
+    // Delay before the user can ask for resending the verification email
+    this.resendEmailTimeout = 30;
 
     model.onSignIn(() => { this.onSignIn(); });
     model.onSignOut(() => { this.onSignOut(); });
@@ -55,6 +57,9 @@ class C_LogIn {
     if (this.isLoggedIn) notifications.info("Logged out", "You've been logged out");
     this.isLoggedIn = false;
     view.showLogInButton();
+    
+    // Reset the delay between verification email
+    this.resendEmailTimeout = 30;
   }
 
 
@@ -174,7 +179,10 @@ class C_LogIn {
             notifications.error("Account creation failed", `An unexpected error occured. Please retry later.`);
         }
         // Enable the button after 30 seconds
-        setTimeout(() => { view.enableResendEmailVerificationButton(); }, 30000);
+        setTimeout(() => { view.enableResendEmailVerificationButton(); }, this.resendEmailTimeout);
+
+        // Double the delay before resending verification email
+        this.resendEmailTimeout *= 2;
       })
   }
 

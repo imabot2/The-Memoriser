@@ -11,6 +11,10 @@ class M_Settings {
       // 10 = questions least well answered very frequently
       beta : 8,
 
+      // Timer mode [up | down]
+      timerMode: "down",
+      timerValue: 10,
+
       
     }
   }

@@ -5,4 +5,5 @@ Visit the app on [The Memoriser](https://memoriser.com)
 
 ## TODO
 
-Switch success and failed card
+* Improve the page loader
+* Check if verification email is sent

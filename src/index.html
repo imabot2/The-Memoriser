@@ -64,7 +64,16 @@
       height: 70vmin;
       max-height: 600px;
       margin-left: 3%;
+    }
 
+    #loader>div {
+      position: fixed;
+      bottom:0;
+      width: 100vw;
+      text-align: center;
+      color: lightgray;
+      font-size: 0.8rem;
+      font-family: monospace;
     }
   </style>
 </head>
@@ -74,6 +83,7 @@
   <!--#region Loader overlay -->
   <div id="loader">
     <img src="/static/loader/loader.png">
+    <div id="loader-status"></div>
   </div>
   <!--#endregion Loader overlay -->
 

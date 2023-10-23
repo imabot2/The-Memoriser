@@ -11,7 +11,16 @@ class M_MemoryTestQuestions {
     this.questions = [];
   }
 
+  /**
+   * Get the list of memory test currently loaded (paths)
+   * @returns An array containing the paths
+   */
+  getPaths() {    
+    return Object.keys(this.metaData);
+  }
 
+
+  
   /**
    * Return a reference to a question given by its path/uid
    * @param {integer} path path of the question

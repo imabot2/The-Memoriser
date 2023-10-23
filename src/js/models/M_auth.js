@@ -25,7 +25,6 @@ class M_Auth {
     // Event listener on authentification changed
     onAuthStateChanged(this.auth, (user) => {
 
-
       // A user is logged
       if (user) {
 
@@ -40,6 +39,17 @@ class M_Auth {
         this.onSignOutCallback();
       }
     });
+  }
+
+  
+  /**
+   * Return a promise when the user status changed
+   * @returns {promise} A promise with the user credentials
+   */
+  onUserStateChanged() {
+    return new Promise((resolve) => {      
+      onAuthStateChanged(this.auth, (user) => { resolve(user); })
+    })
   }
 
 
@@ -60,7 +70,7 @@ class M_Auth {
     // If the user is not logged, return false
     if (this.auth.currentUser === null) return false;
     // If the user email has not been verified, return false
-    if (this.auth.currentUser.emailVerified) return false;
+    if (!this.auth.currentUser.emailVerified) return false;
     // The user is logged, return true
     return true;
   }
@@ -97,6 +107,16 @@ class M_Auth {
   onSignOut(callback) {
     this.onSignOutCallback = callback;
   }
+
+  /**
+ * Return the current user email used for authentification
+ * @returns The user email or undefined if the user is not logged in
+ */
+  getUserID() {
+    if (this.auth.currentUser === null) return undefined;
+    return this.auth.currentUser.uid;
+  }
+
 
   /**
    * Return the current user email used for authentification

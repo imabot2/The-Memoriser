@@ -1,9 +1,12 @@
 import M_MemoryTestQuestions from "Js/models/M_memory-test-questions.js";
 import settings from "Js/controllers/C_settings.js";
+import auth from "Js/models/M_auth.js";
+import { db } from "Js/models/M_firebase.js";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+
 
 
 class M_MemoryTestStatistics extends M_MemoryTestQuestions {
-
 
   // Constructor 
   constructor() {
@@ -14,6 +17,12 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
 
     // No last question at start up
     this.lastQuestion = undefined;
+
+    setTimeout(() => {
+
+      this.saveStatistics();
+
+    }, 1000)
   }
 
 
@@ -34,7 +43,6 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     // Get the unasked questions and prepare the next question variable
     let next, unasked = this.getUnanskedQuestions();
 
-
     if (unasked.length) {
       // There are unasked questions
       // Pick a random unasked questions
@@ -44,7 +52,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     else {
       // All the question have been asked
       // Compute the probabilites and pick a question
-      let max = this.computeProbabilities();      
+      let max = this.computeProbabilities();
       const random = max * Math.random();
       next = this.stats.find(q => (random >= q.min && random < q.max));
     }
@@ -67,7 +75,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    */
   computeProbabilities() {
     // Get and scale beta coefficient
-    let beta = (5-settings.get("beta"))/5;
+    let beta = (5 - settings.get("beta")) / 5;
     beta = (beta >= 0) ? (1 + beta) ** 3.5 : 1 + beta;
 
     // Normalize the score z(i) = 1-(score-min(score(i)))
@@ -135,7 +143,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    * @param {object} qStat Statistics of the question to update
    */
   update(qStat) {
-    
+
     // Get a reference to the current question
     let qToUpdate = this.getQuestionStats(qStat.path, qStat.uid);
 
@@ -144,6 +152,47 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
 
     // Increase the counter for this question
     qToUpdate.count++
+  }
+
+
+  /**
+   * Save the statistics of a given quizz in Firestore
+   * @param {string} path path to the quizz to save
+   * @returns A promise on Firestore writing
+   */
+  saveQuizStats(path) {
+
+    // Filter stats to keep only data related to the requested quizz
+    let stats = this.stats.filter((q) => q.path === path);
+
+    // Select data to store
+    stats = stats.map((q) => { 
+      return { 
+        "uid": q.uid, 
+        "count": q.count, 
+        "score": q.score } 
+    });
+
+    // Sanitize document name for Firebase
+    let docName = path.slice(1,-1).replaceAll('/', '\\');
+
+    // Store statistics and return a promise
+    return setDoc(doc(db, "users", `${auth.getUserID()}`, "statistics", docName),
+      {
+        timestamp: serverTimestamp(),
+        stats: stats,
+      })
+
+
+  }
+
+  /**
+   * Save the statistics of all the current quizzes loaded
+   */
+  saveStatistics() {    
+    Object.keys(this.metaData).forEach((key) => {
+      this.saveQuizStats(key);
+    })
   }
 
 
