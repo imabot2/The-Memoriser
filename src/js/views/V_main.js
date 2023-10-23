@@ -3,11 +3,16 @@ import * as bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "Assets/css/style.css";
+import V_MainLoader from "Js/views/V_main-loader.js";
 
 
 
-class V_Main {
+class V_Main extends V_MainLoader {
   constructor() {
+    
+    // Call the parent constructor
+    super();
+
     // Get main element and answer input
     this.main = document.getElementById("main");
     
@@ -21,14 +26,11 @@ class V_Main {
     const toastElList = document.querySelectorAll('.toast');
     [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, { animation: true, autohide: true, delay: 10000 }));
 
-    // Get the loader container element
-    this.loaderEl = document.getElementById("loader");
-
     // On resize, resize the main container     
     window.visualViewport.addEventListener('resize', () => {this.onResize(); });
 
+    // Call the onResize function for first rendering
     this.onResize();
-
   }
 
 
@@ -42,23 +44,6 @@ class V_Main {
   }
  
 
-  /**
-   * Hide the loader overlay
-   * @param {integer} ms Fade out duration in milliseconds
-   */
-  hideLoader(ms) {
-
-    // Set deflaut time is ms is not provided
-    ms = ms ?? 250;
-    // Set transition time and start transition
-    this.loaderEl.style.transition = `opacity ${ms}ms ease-in-out`;    
-    this.loaderEl.style.opacity = 0;
-
-    // Start a timer to hide the overlay (prevent keeping the overlay over page content)
-    setTimeout(() => {
-      this.loaderEl.classList.add("d-none");
-    }, ms);
-  }
 
 }
 

@@ -64,16 +64,38 @@
       height: 70vmin;
       max-height: 600px;
       margin-left: 3%;
+      z-index: 2;
     }
 
-    #loader>div {
+    #loader-status {
       position: fixed;
-      bottom:0;
-      width: 100vw;
+      bottom: 0;
+      width: 100vw;            
       text-align: center;
       color: lightgray;
-      font-size: 0.8rem;
+      font-size: clamp(0.2rem, 0.8rem, 2.5vmin);
       font-family: monospace;
+      max-height: 17vh;
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    #loader-status::-webkit-scrollbar {
+      display: none;
+    }
+
+    #loader-status .status {
+      font-weight: bold;
+      color: orange;
+    }
+
+    #loader-status .status.success {
+      color: green;
+    }
+
+    #loader-status .status.error {
+      color: #e83c4b;
     }
   </style>
 </head>

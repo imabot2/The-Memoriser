@@ -9,9 +9,17 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
   /**
    * Constructor 
    * - Load parents constructor
+   * - Initialize stats counter
    */
   constructor() {
+    
+    // Call the parent constructor
     super();
+
+    // Statistics counter (prevent overiding existing statistics)
+    this.statCounter = [];
+
+    
   }
 
 
@@ -67,6 +75,7 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
 
             // Get stats from the DB data
             let dbData = docSnap.data();
+            this.statCounter[path] = dbData.counter;
 
             // For each UID in the questions of this path
             uidList.map((uid) => {
@@ -79,6 +88,9 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
           else {
             // The document does not exists, create new stats
             uidList.map((uid) => { super.createStatsIfDontExist(path, uid); });
+
+            // Set the counter to 0
+            this.statCounter[path] = 0;
           }
           // Always resolve (load or create statistics)
           resolve();
@@ -130,12 +142,17 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
     paths.forEach(path => {
       // Sanitize document name for Firestore
       let docName = path.slice(1, -1).replaceAll('/', '\\');
+
+      // Increase the statistic counter
+      this.statCounter[path]++;
+
       // Document to write
       const docRef = doc(db, "users", `${auth.getUserID()}`, "statistics", docName);
 
       // Add the document to the batch
       batch.set(docRef,
         {
+          counter: this.statCounter[path],
           timestamp: serverTimestamp(),
           stats: this.getQuizStatsToStore(path),
         })

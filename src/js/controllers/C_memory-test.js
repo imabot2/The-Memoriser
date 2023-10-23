@@ -205,7 +205,7 @@ class C_MemoryTest {
         notifications.success("Data saved", "Your memory test statistics have been saved.");
       })
       .catch((error) => {
-        console.error(path, error);
+        console.error(error);
         notifications.error("DB Error", "Error while saving statistics");
       })
     }
