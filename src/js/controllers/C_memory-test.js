@@ -199,7 +199,12 @@ class C_MemoryTest {
     view.disableInput();
 
     // If the user is logged, save statistics in database
-    if (auth.isLogged()) this.saveStatistics();
+    if (auth.isLogged()) {
+      model.saveStatistics().catch((error) => {
+        console.error(path, error);
+        notifications.error("DB Error", "Error while saving statistics");
+      })
+    }
   }
 
 
@@ -215,6 +220,9 @@ class C_MemoryTest {
 
       // Save the quiz
       model.saveQuizStats(path)
+      .then((data) => {
+        console.log (data);
+      })
         .catch((error) => {
           console.error(path, error);
           notifications.error("DB Error", "Error while saving statistics");

@@ -2,7 +2,7 @@ import M_MemoryTestQuestions from "Js/models/M_memory-test-questions.js";
 import settings from "Js/controllers/C_settings.js";
 import auth from "Js/models/M_auth.js";
 import { db } from "Js/models/M_firebase.js";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp, writeBatch } from "firebase/firestore";
 
 
 
@@ -17,12 +17,6 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
 
     // No last question at start up
     this.lastQuestion = undefined;
-
-    setTimeout(() => {
-
-      this.saveStatistics();
-
-    }, 1000)
   }
 
 
@@ -160,40 +154,55 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    * @param {string} path path to the quizz to save
    * @returns A promise on Firestore writing
    */
-  saveQuizStats(path) {
+  getQuizStatsToStore(path) {
 
     // Filter stats to keep only data related to the requested quizz
     let stats = this.stats.filter((q) => q.path === path);
 
     // Select data to store
-    stats = stats.map((q) => { 
-      return { 
-        "uid": q.uid, 
-        "count": q.count, 
-        "score": q.score } 
+    stats = stats.map((q) => {
+      return {
+        "uid": q.uid,
+        "count": q.count,
+        "score": q.score
+      }
     });
+    return stats;
+  }
 
-    // Sanitize document name for Firebase
-    let docName = path.slice(1,-1).replaceAll('/', '\\');
 
+/*
     // Store statistics and return a promise
     return setDoc(doc(db, "users", `${auth.getUserID()}`, "statistics", docName),
       {
         timestamp: serverTimestamp(),
         stats: stats,
       })
-
-
   }
+*/
 
-  /**
-   * Save the statistics of all the current quizzes loaded
-   */
-  saveStatistics() {    
-    Object.keys(this.metaData).forEach((key) => {
-      this.saveQuizStats(key);
+  saveStatistics() {
+
+    // Get the quiz names
+    let paths = this.getPaths()
+
+    // Get a new write batch
+    const batch = writeBatch(db);
+
+    // For each quiz
+    paths.forEach(path => {
+      // Sanitize document name for Firebase
+      let docName = path.slice(1, -1).replaceAll('/', '\\');
+      const document = doc(db, "users", `${auth.getUserID()}`, "statistics", docName);
+      batch.set(document, 
+        {
+          timestamp: serverTimestamp(),
+          stats: this.getQuizStatsToStore(path),
+        })
     })
+    return batch.commit();
   }
+
 
 
 
