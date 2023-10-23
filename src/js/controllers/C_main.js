@@ -14,7 +14,7 @@ let run = async () => {
 
 
   // Check if the user is logged before loading the memory tests
-  loaderContent.innerHTML += "Loading user data";  
+  loaderContent.innerHTML += "Loading user data";
   let user = await auth.onUserStateChanged();
   loaderContent.innerHTML += " [OK]<br>";
 
@@ -30,10 +30,10 @@ let run = async () => {
         promises.push(memoryTest.addQuiz("/fr/geographie/europe/"));
       }
       if (process.env.NODE_ENV == "development") {
-        promises.push(memoryTest.addQuiz("/en/geography/europe/"));
-        promises.push(memoryTest.addQuiz("/fr/geographie/europe/"));
+        //promises.push(memoryTest.addQuiz("/en/geography/europe/"));
+        //promises.push(memoryTest.addQuiz("/fr/geographie/europe/"));
         promises.push(memoryTest.addQuiz("/en/geography/africa/"));
-        promises.push(memoryTest.addQuiz("/iso/country-code/europe/"));
+        //promises.push(memoryTest.addQuiz("/iso/country-code/europe/"));
       }
       break;
     default: promises.push(memoryTest.addQuiz("/en/geography/europe/"));
@@ -44,21 +44,20 @@ let run = async () => {
 
   // When the quizzes are all loaded
   Promise.all(promises).finally(() => {
-    
+
+    console.log("resolved");
+
     loaderContent.innerHTML += " [OK]<br>";
     // Initialize the memory test (promise is resolved if the questions images are loaded)
     memoryTest.reset().then(() => {
 
-//      setTimeout(() => {
+      // Hide the loader overlay
+      view.hideLoader(300);
 
-        // Hide the loader overlay
-        view.hideLoader(300);
+      // If user is not on mobile device, set focus to the answer input
+      // On mobile device, do not focus to prevent soft keyboard from opening
+      if (!isMobile()) document.getElementById('answer-input').focus();
 
-        // If user is not on mobile device, set focus to the answer input
-        // On mobile device, do not focus to prevent soft keyboard from opening
-        if (!isMobile()) document.getElementById('answer-input').focus();
-
-//      }, 100);
     });
   })
 

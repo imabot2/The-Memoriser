@@ -19,8 +19,21 @@ class M_MemoryTestQuestions {
     return Object.keys(this.metaData);
   }
 
+  /**
+   * Get the list of UID for a given path
+   * @param {string} path The path for which the UID are returned
+   * @return {array} An array containing all the UID
+   */
+  getUidList(path) {
+    // Get the questions related to the requested path
+    let uidList = this.questions.filter((q) => q.path === path);
 
-  
+    // Isolate the UIDs and return an array
+    return uidList.map(q => q.uid);
+  }
+
+
+
   /**
    * Return a reference to a question given by its path/uid
    * @param {integer} path path of the question

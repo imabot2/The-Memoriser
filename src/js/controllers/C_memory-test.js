@@ -200,38 +200,16 @@ class C_MemoryTest {
 
     // If the user is logged, save statistics in database
     if (auth.isLogged()) {
-      model.saveStatistics().catch((error) => {
+      model.saveStatistics()
+      .then(() => {
+        notifications.success("Data saved", "Your memory test statistics have been saved.");
+      })
+      .catch((error) => {
         console.error(path, error);
         notifications.error("DB Error", "Error while saving statistics");
       })
     }
   }
-
-
-  /**
-   * Save the current statistics in the database
-   */
-  saveStatistics() {
-    // Get paths list
-    let paths = model.getPaths()
-
-    // For each quiz
-    paths.forEach(path => {
-
-      // Save the quiz
-      model.saveQuizStats(path)
-      .then((data) => {
-        console.log (data);
-      })
-        .catch((error) => {
-          console.error(path, error);
-          notifications.error("DB Error", "Error while saving statistics");
-        })
-    });
-  }
-
-
-
 
 
   /**

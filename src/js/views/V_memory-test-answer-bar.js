@@ -38,7 +38,7 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
     // Callback function and event when the user press Enter key
     this.onEnterCallback = () => { };
-    this.answerInput.addEventListener("keypress", (event) => {
+    this.answerInput.addEventListener("keydown", (event) => {
 
       // If the input is disabled, prevent adding characters in the input field
       if (this.answerInputDisable) {

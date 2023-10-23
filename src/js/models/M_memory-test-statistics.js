@@ -1,8 +1,6 @@
 import M_MemoryTestQuestions from "Js/models/M_memory-test-questions.js";
 import settings from "Js/controllers/C_settings.js";
-import auth from "Js/models/M_auth.js";
-import { db } from "Js/models/M_firebase.js";
-import { doc, setDoc, serverTimestamp, writeBatch } from "firebase/firestore";
+
 
 
 
@@ -37,11 +35,12 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     // Get the unasked questions and prepare the next question variable
     let next, unasked = this.getUnanskedQuestions();
 
+    // If there are unasked question, pick one of the unasked question
     if (unasked.length) {
       // There are unasked questions
       // Pick a random unasked questions
       let index = Math.floor(Math.random() * unasked.length);
-      next = this.stats[index];
+      next = unasked[index];
     }
     else {
       // All the question have been asked
@@ -119,9 +118,6 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
       // Resolve or reject the promises
       questionPromise
         .then((questions) => {
-          questions.map((q) => {
-            this.createStatsIfDontExist(q.path, q.uid);
-          });
           resolve();
         })
         .catch(() => {
@@ -149,60 +145,25 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
   }
 
 
+
   /**
-   * Save the statistics of a given quizz in Firestore
-   * @param {string} path path to the quizz to save
-   * @returns A promise on Firestore writing
+   * Create the statistics entry if the entry does not exist
+   * @param {string} path Path of the question
+   * @param {string} uid Unique Identifier of the question
+   * @returns A reference to the statistics of the question
    */
-  getQuizStatsToStore(path) {
+  updateOrCreateStat(path, uid, data) {
+    
+    // Create the stat if the stats for this question do not exist
+    let stat = this.createStatsIfDontExist(path, uid);
+    
+    // Update stat data
+    stat.count = data.count;
+    stat.score = data.score;
 
-    // Filter stats to keep only data related to the requested quizz
-    let stats = this.stats.filter((q) => q.path === path);
-
-    // Select data to store
-    stats = stats.map((q) => {
-      return {
-        "uid": q.uid,
-        "count": q.count,
-        "score": q.score
-      }
-    });
-    return stats;
+    // return the question
+    return stat;
   }
-
-
-/*
-    // Store statistics and return a promise
-    return setDoc(doc(db, "users", `${auth.getUserID()}`, "statistics", docName),
-      {
-        timestamp: serverTimestamp(),
-        stats: stats,
-      })
-  }
-*/
-
-  saveStatistics() {
-
-    // Get the quiz names
-    let paths = this.getPaths()
-
-    // Get a new write batch
-    const batch = writeBatch(db);
-
-    // For each quiz
-    paths.forEach(path => {
-      // Sanitize document name for Firebase
-      let docName = path.slice(1, -1).replaceAll('/', '\\');
-      const document = doc(db, "users", `${auth.getUserID()}`, "statistics", docName);
-      batch.set(document, 
-        {
-          timestamp: serverTimestamp(),
-          stats: this.getQuizStatsToStore(path),
-        })
-    })
-    return batch.commit();
-  }
-
 
 
 
@@ -214,11 +175,11 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    */
   createStatsIfDontExist(path, uid) {
     // Get the requested statistics
-    let question = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
+    let stat = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
 
     // If the question is not in the array, create the question
-    if (question === undefined) {
-      question = this.stats.push({
+    if (stat === undefined) {
+      let index = this.stats.push({
         "count": 0,
         "score": 0,
         "path": path,
@@ -226,10 +187,13 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
         "exp": 0,
         "P": 0,
       });
+
+      // Return the inserted elemnt
+      return this.stats[index-1];
     }
 
-    // Return the requested question
-    return question;
+    // Return the requested statistics
+    return stat;
   }
 
 
