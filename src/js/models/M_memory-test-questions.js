@@ -33,6 +33,15 @@ class M_MemoryTestQuestions {
   }
 
 
+  /**
+   * Returns the number of questions in the memory test
+   * @returns The number of questions in the memory test
+   */
+  countQuestions() {
+    return this.questions.length;
+  }
+
+
 
   /**
    * Return a reference to a question given by its path/uid

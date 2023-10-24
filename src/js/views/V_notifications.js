@@ -143,7 +143,7 @@ class Notifications {
     this.container.prepend(toastEl);
 
     // Configure and show the toast
-    let toast = new bootstrap.Toast(toastEl, { animation: true, autohide: true, delay: ms ?? 3000 })
+    let toast = new bootstrap.Toast(toastEl, { animation: true, autohide: true, delay: ms ?? 3000 });
     toast.show();
 
     // Remove the toast from DOM when hidden

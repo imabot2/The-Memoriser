@@ -45,7 +45,12 @@ class C_MemoryTest {
    * Reset the memory test
   */
   reset() {
-    return new Promise((resolve) => {
+    
+    return new Promise((resolve, reject) => {
+
+      // Check if the memory test is not empty
+      if (model.countQuestions() == 0) { reject("No question in the memory test."); return; }
+      
       // Get and display the first question
       this.current = model.getNextQuestion();
       let imageOnePromise = view.setNextImage(this.current.image, 0);

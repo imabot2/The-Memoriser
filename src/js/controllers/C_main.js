@@ -7,7 +7,7 @@ import "Js/controllers/C_timer.js";
 import memoryTest from "Js/controllers/C_memory-test.js";
 import { isMobile } from "Js/lib/client.js";
 import { clientLanguage } from "../lib/client";
-
+import notifications from "Js/views/V_notifications";
 
 
 // Set the callback functions for the loader
@@ -53,26 +53,32 @@ let run = async () => {
 
   // When the quizzes are all loaded
   model.loadQuizzes(memoryTests).finally(() => {
+      
+      //console.log (memoryTest.model.questions);
 
-    // Memory tests are all loaded
-    view.setSuccess(memoryTestId);
+      // Memory tests are all loaded
+      view.setSuccess(memoryTestId);
 
-    // Initialize the memory test (promise is resolved if the questions images are loaded)
-    let imagesId = view.newMessage("Loading first images");
-    memoryTest.reset().then(() => {
-      view.setSuccess(imagesId);
+      // Initialize the memory test (promise is resolved if the questions images are loaded)
+      let imagesId = view.newMessage("Loading first images");
+      memoryTest.reset().then(() => {
+        view.setSuccess(imagesId);
 
 
-      setTimeout(() => {
-        // Hide the loader overlay
-        view.hideLoader(300);
+        setTimeout(() => {
+          // Hide the loader overlay
+          view.hideLoader(300);
 
-        // If user is not on mobile device, set focus to the answer input
-        // On mobile device, do not focus to prevent soft keyboard from opening
-        if (!isMobile()) document.getElementById('answer-input').focus();
-      }, 100)
-    });
-  })
+          // If user is not on mobile device, set focus to the answer input
+          // On mobile device, do not focus to prevent soft keyboard from opening
+          if (!isMobile()) document.getElementById('answer-input').focus();
+        }, 100)
+      })
+      .catch((error) => {
+        notifications.error("An error occured", error, 60000);
+        view.setError(imagesId);
+      })
+    })
 
 
 

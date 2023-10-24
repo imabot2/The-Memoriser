@@ -41,7 +41,7 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
             .catch((error) => {
               // If an error occured during DB reading, 
               // Remove the test and reject the promise
-              this.removeQuiz(path);
+              this.removeQuiz(path);              
               reject(error);
             })
 

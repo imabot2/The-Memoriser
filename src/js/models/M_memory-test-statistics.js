@@ -158,6 +158,16 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
   }
 
 
+  /**
+   * Remove the statistics for a given path and call the parent function to remove the questions
+   * @param {string} path Path of the quiz to remove
+   */
+  removeQuiz(path) {
+    // Remove stats for this path
+    this.stats = this.stats.filter((q) => {return q.path !== path});
+    // Remove the question
+    super.removeQuiz(path);    
+  }
 
   /**
    * Create the statistics entry if the entry does not exist
@@ -177,49 +187,50 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     // Return the updated stat
     return stat;
   }
-  
 
 
 
-/**
- * Create the statistics entry if the entry does not exist
- * @param {string} path Path of the question
- * @param {string} uid Unique Identifier of the question
- * @returns A reference to the statistics of the question
- */
-createStatsIfDontExist(path, uid) {
-  // Get the requested statistics
-  let stat = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
 
-  // If the question is not in the array, create the question
-  if (stat === undefined) {
-    let index = this.stats.push({
-      "count": 0,
-      "score": 0,
-      "path": path,
-      "uid": uid,
-      "exp": 0,
-      "P": 0,
-    });
+  /**
+   * Create the statistics entry if the entry does not exist
+   * @param {string} path Path of the question
+   * @param {string} uid Unique Identifier of the question
+   * @returns A reference to the statistics of the question
+   */
+  createStatsIfDontExist(path, uid) {
+    
+    // Get the requested statistics
+    let stat = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
 
-    // Return the inserted elemnt
-    return this.stats[index - 1];
+    // If the question is not in the array, create the question
+    if (stat === undefined) {
+      let index = this.stats.push({
+        "count": 0,
+        "score": 0,
+        "path": path,
+        "uid": uid,
+        "exp": 0,
+        "P": 0,
+      });
+
+      // Return the inserted elemnt
+      return this.stats[index - 1];
+    }
+
+    // Return the requested statistics
+    return stat;
   }
 
-  // Return the requested statistics
-  return stat;
-}
 
-
-/**
- * Get a reference to the statistics of a given question
- * @param {string} path Path of the question
- * @param {string} uid Unique Identifier of the question
- * @returns A reference to the statistics of the question
- */
-getQuestionStats(path, uid) {
-  return this.stats.find(q => q.path === path && q.uid === uid);
-}
+  /**
+   * Get a reference to the statistics of a given question
+   * @param {string} path Path of the question
+   * @param {string} uid Unique Identifier of the question
+   * @returns A reference to the statistics of the question
+   */
+  getQuestionStats(path, uid) {
+    return this.stats.find(q => q.path === path && q.uid === uid);
+  }
 
 
 }
