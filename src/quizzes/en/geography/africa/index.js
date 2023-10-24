@@ -11,6 +11,16 @@ import chad from "Quizzes/en/geography/africa/img/chad.png";
 import comoros from "Quizzes/en/geography/africa/img/comoros.png";
 import democraticRepublicOfTheCongo from "Quizzes/en/geography/africa/img/democratic-republic-of-the-congo.png";
 import djibouti from "Quizzes/en/geography/africa/img/djibouti.png";
+import egypt from "Quizzes/en/geography/africa/img/egypt.png";
+import equatorialGuinea from "Quizzes/en/geography/africa/img/equatorial-guinea.png";
+import eritrea from "Quizzes/en/geography/africa/img/eritrea.png";
+import eswatini from "Quizzes/en/geography/africa/img/eswatini.png";
+import ethiopia from "Quizzes/en/geography/africa/img/ethiopia.png";
+import gabon from "Quizzes/en/geography/africa/img/gabon.png";
+import gambia from "Quizzes/en/geography/africa/img/gambia.png";
+import ghana from "Quizzes/en/geography/africa/img/ghana.png";
+import guinea from "Quizzes/en/geography/africa/img/guinea.png";
+import guineaBissau from "Quizzes/en/geography/africa/img/guinea-bissau.png";
 
 import somalia from "Quizzes/en/geography/africa/img/somalia.png";
 import southAfrica from "Quizzes/en/geography/africa/img/south-africa.png";
@@ -47,24 +57,6 @@ import liberia from "Quizzes/en/geography/africa/img/liberia.png"
 import lesotho from "Quizzes/en/geography/africa/img/lesotho.png"
 import kenya from "Quizzes/en/geography/africa/img/kenya.png"
 import ivoryCoast from "Quizzes/en/geography/africa/img/ivory-coast.png"
-import guineaBissau from "Quizzes/en/geography/africa/img/guinea-bissau.png"
-import guinea from "Quizzes/en/geography/africa/img/guinea.png"
-import ghana from "Quizzes/en/geography/africa/img/ghana.png"
-import gambia from "Quizzes/en/geography/africa/img/gambia.png"
-import gabon from "Quizzes/en/geography/africa/img/gabon.png"
-import ethiopia from "Quizzes/en/geography/africa/img/ethiopia.png"
-import eswatini from "Quizzes/en/geography/africa/img/eswatini.png"
-import eritrea from "Quizzes/en/geography/africa/img/eritrea.png"
-import equatorialGuinea from "Quizzes/en/geography/africa/img/equatorial-guinea.png"
-import egypt from "Quizzes/en/geography/africa/img/egypt.png"
-
-
-
-
-
-
-
-
 
 */
 
@@ -162,10 +154,6 @@ export var questions = [
     prompt: "What country is this?",
     answer: "Djibouti"
   },
-
-
-
-
   {
     uid: "so",
     image: somalia,
@@ -226,62 +214,62 @@ export var questions = [
     prompt: "What country is this?",
     answer: "Zimbabwe"
   },
-
-
+  {
+    uid: "eg",
+    image: egypt,
+    prompt: "What country is this?",
+    answer: "Egypt"
+  },
+  {
+    uid: "gq",
+    image: equatorialGuinea,
+    prompt: "What country is this?",
+    answer: "Equatorial Guinea"
+  },
+  {
+    uid: "er",
+    image: eritrea,
+    prompt: "What country is this?",
+    answer: "Eritrea"
+  },
+  {
+    uid: "sz",
+    image: zswatini,
+    prompt: "What country is this?",
+    answer: "Eswatini"
+  },
+  {
+    uid: "et",
+    image: ethopia,
+    prompt: "What country is this?",
+    answer: "Ethiopia"
+  },
+  {
+    uid: "ga",
+    image: gabon,
+    prompt: "What country is this?",
+    answer: "Gabon"
+  },
+  {
+    uid: "gm",
+    image: gambia,
+    prompt: "What country is this?",
+    answer: "Gambia"
+  },
+  {
+    uid: "gh",
+    image: ghana,
+    prompt: "What country is this?",
+    answer: "Ghana"
+  },
+  {
+    uid: "gw",
+    image: guineaBissau,
+    prompt: "What country is this?",
+    answer: "Guinea-Bissau"
+  },
+  
   /*
-  
-  
-  
-      {
-        image: egypt,
-        text: "Egypt ",
-        mask: "xxxxx "
-      },
-      {
-        image: equatorialGuinea,
-        text: "Equatorial Guinea ",
-        mask: "xxxxxxxxxxxxxxxxx "
-      },
-      {
-        image: eritrea,
-        text: "Eritrea ",
-        mask: "xxxxxxx "
-      },
-      {
-        image: eswatini,
-        text: "Eswatini ",
-        mask: "xxxxxxxx "
-      },
-      {
-        image: ethiopia,
-        text: "Ethiopia ",
-        mask: "xxxxxxxx "
-      },
-      {
-        image: gabon,
-        text: "Gabon ",
-        mask: "xxxxx "
-      },
-      {
-        image: gambia,
-        text: "Gambia ",
-        mask: "xxxxxx "
-      },
-      {
-        image: ghana,
-        text: "Ghana ",
-        mask: "xxxxx "
-      },
-      {
-        image: guinea,
-        text: "Guinea ",
-        mask: "xxxxxx "
-      },
-      {
-        image: guineaBissau,
-        text: "Guinea-Bissau ",
-        mask: "xxxxxxxxxxxxx "
-      },
       {
         image: ivoryCoast,
         text: "Ivory Coast ",

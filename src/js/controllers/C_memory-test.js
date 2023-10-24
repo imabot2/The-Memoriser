@@ -202,7 +202,7 @@ class C_MemoryTest {
     if (auth.isLogged()) {
       model.saveStatistics()
       .then(() => {
-        notifications.success("Data saved", "Your memory test statistics have been saved.");
+        notifications.success("Results saved", "Your memory test results are saved.");
       })
       .catch((error) => {
         console.error(error);
