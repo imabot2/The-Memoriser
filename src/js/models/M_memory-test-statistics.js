@@ -105,25 +105,38 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
 
 
   /**
-   * Load a quiz and return a promise when the file and statistics are loaded and append statistics to the list
+   * Overload the questions.addQuiz and create empty statistics for the quiz 
+   * Load a quiz and and create empty stats for each question 
+   * return a promise when the file  is loaded and append statistics to the list
    * testPath must start and end with /, ie : /fr/grec/alphabet/
    * @param {string} quizPath - Path of the quiz folder
    * @returns A promise resolved when the quiz is loaded
    */
-  addQuiz(quizPath) {
+  addQuiz(path) {
     return new Promise((resolve, reject) => {
-      let questionPromise = super.addQuiz(quizPath);
 
-
-      // Resolve or reject the promises
-      questionPromise
+      // Load the questions from file
+      super.addQuiz(path)
         .then((questions) => {
-          resolve();
+          // The questions are successfully loaded, create the initial statistics
+          this.createStatsForQuiz(path);
+          resolve(questions);
         })
-        .catch(() => {
-          reject();
+        .catch((error) => {
+          reject(error);
         })
+    })
+  }
 
+
+  /**
+   * Create the initial statistics for a given quiz
+   * Append data to this.stats
+   * @param {string} path Path of the quiz 
+   */
+  createStatsForQuiz(path) {
+    this.getUidList(path).forEach((uid) => {
+      this.createStatsIfDontExist(path, uid);
     })
   }
 
@@ -152,60 +165,61 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    * @param {string} uid Unique Identifier of the question
    * @returns A reference to the statistics of the question
    */
-  updateOrCreateStat(path, uid, data) {
-    
-    // Create the stat if the stats for this question do not exist
-    let stat = this.createStatsIfDontExist(path, uid);
-    
+  updateStatForPathUid(path, uid, data) {
+
+    // Get the stat for the requested path & UID
+    let stat = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
+
     // Update stat data
     stat.count = data.count;
     stat.score = data.score;
 
-    // return the question
+    // Return the updated stat
     return stat;
   }
+  
 
 
 
-  /**
-   * Create the statistics entry if the entry does not exist
-   * @param {string} path Path of the question
-   * @param {string} uid Unique Identifier of the question
-   * @returns A reference to the statistics of the question
-   */
-  createStatsIfDontExist(path, uid) {
-    // Get the requested statistics
-    let stat = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
+/**
+ * Create the statistics entry if the entry does not exist
+ * @param {string} path Path of the question
+ * @param {string} uid Unique Identifier of the question
+ * @returns A reference to the statistics of the question
+ */
+createStatsIfDontExist(path, uid) {
+  // Get the requested statistics
+  let stat = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
 
-    // If the question is not in the array, create the question
-    if (stat === undefined) {
-      let index = this.stats.push({
-        "count": 0,
-        "score": 0,
-        "path": path,
-        "uid": uid,
-        "exp": 0,
-        "P": 0,
-      });
+  // If the question is not in the array, create the question
+  if (stat === undefined) {
+    let index = this.stats.push({
+      "count": 0,
+      "score": 0,
+      "path": path,
+      "uid": uid,
+      "exp": 0,
+      "P": 0,
+    });
 
-      // Return the inserted elemnt
-      return this.stats[index-1];
-    }
-
-    // Return the requested statistics
-    return stat;
+    // Return the inserted elemnt
+    return this.stats[index - 1];
   }
 
+  // Return the requested statistics
+  return stat;
+}
 
-  /**
-   * Get a reference to the statistics of a given question
-   * @param {string} path Path of the question
-   * @param {string} uid Unique Identifier of the question
-   * @returns A reference to the statistics of the question
-   */
-  getQuestionStats(path, uid) {
-    return this.stats.find(q => q.path === path && q.uid === uid);
-  }
+
+/**
+ * Get a reference to the statistics of a given question
+ * @param {string} path Path of the question
+ * @param {string} uid Unique Identifier of the question
+ * @returns A reference to the statistics of the question
+ */
+getQuestionStats(path, uid) {
+  return this.stats.find(q => q.path === path && q.uid === uid);
+}
 
 
 }

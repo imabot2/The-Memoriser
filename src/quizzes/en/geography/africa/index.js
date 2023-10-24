@@ -234,13 +234,13 @@ export var questions = [
   },
   {
     uid: "sz",
-    image: zswatini,
+    image: eswatini,
     prompt: "What country is this?",
     answer: "Eswatini"
   },
   {
     uid: "et",
-    image: ethopia,
+    image: ethiopia,
     prompt: "What country is this?",
     answer: "Ethiopia"
   },
@@ -263,12 +263,18 @@ export var questions = [
     answer: "Ghana"
   },
   {
+    uid: "gn",
+    image: guinea,
+    prompt: "What country is this?",
+    answer: "Guinea"
+  },
+  {
     uid: "gw",
     image: guineaBissau,
     prompt: "What country is this?",
     answer: "Guinea-Bissau"
   },
-  
+
   /*
       {
         image: ivoryCoast,

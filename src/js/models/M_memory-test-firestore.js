@@ -12,14 +12,12 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
    * - Initialize stats counter
    */
   constructor() {
-    
+
     // Call the parent constructor
     super();
 
     // Statistics counter (prevent overiding existing statistics)
     this.statCounter = [];
-
-    
   }
 
 
@@ -32,7 +30,10 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
       super.addQuiz(path).catch((error) => { reject(error); })
         .then(() => {
 
-          // Quiz is loaded, get statistics from data
+          // If the user is not logged, do not load statistics from database
+          if (!auth.isLogged()) { resolve(); return; }
+
+          // The user is logged, get statistics from database
           this.loadStatistics(path)
             .then(() => {
               resolve();
@@ -43,9 +44,15 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
               this.removeQuiz(path);
               reject(error);
             })
+
         })
     })
   }
+
+
+
+
+
 
 
   /**
@@ -58,48 +65,60 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
     // Return a promise
     return new Promise(async (resolve, reject) => {
 
-      // Sanitize document name for Firestore
-      let docName = path.slice(1, -1).replaceAll('/', '\\');
+      // Set the default counter to zero
+      this.statCounter[path] = 0;
 
-      // Document to read
-      const docRef = doc(db, "users", `${auth.getUserID()}`, "statistics", docName);
+      // Read data from database
+      this.readStatisticsFromDB(path)
+        .catch((error) => { reject(error); })
+        .then((data) => {
 
-      // Get the document from the database
-      getDoc(docRef)
-        .then((docSnap) => {
+          // If there is data in the database, this is not the first time, update data
+          if (data !== undefined) {
 
-          // Get the list of UID to update or create
-          let uidList = this.getUidList(path);
+            // There is data for this test
+            // Set the counter
+            this.statCounter[path] = data.counter;
 
-          if (docSnap.exists()) {
-
-            // Get stats from the DB data
-            let dbData = docSnap.data();
-            this.statCounter[path] = dbData.counter;
+            // Get the list of UID to update
+            let uidList = this.getUidList(path);
 
             // For each UID in the questions of this path
             uidList.map((uid) => {
 
               // Get the stat for the given UID and update or create
-              let stat = dbData.stats.find((dbStat) => { return dbStat.uid === uid });
-              super.updateOrCreateStat(path, uid, stat);
+              let stat = data.stats.find((dbStat) => { return dbStat.uid === uid });
+
+              // If the statistic exists for the given path / uid, update the statistics
+              if (stat != undefined) super.updateStatForPathUid(path, uid, stat);
             });
           }
-          else {
-            // The document does not exists, create new stats
-            uidList.map((uid) => { super.createStatsIfDontExist(path, uid); });
-
-            // Set the counter to 0
-            this.statCounter[path] = 0;
-          }
-          // Always resolve (load or create statistics)
           resolve();
         })
-        .catch((error) => {
-          console.error(error);
-          reject(error);
-        })
+    })
 
+  }
+
+
+  readStatisticsFromDB(path) {
+    return new Promise((resolve, reject) => {
+
+      // Sanitize document name for Firestore
+      let docName = path.slice(1, -1).replaceAll('/', '\\');
+
+      // Create the document to read
+      const docRef = doc(db, "users", `${auth.getUserID()}`, "statistics", docName);
+
+      // Get the document from the database
+      getDoc(docRef)
+        .catch((error) => { reject(error); })
+        .then((docSnap) => {
+          // If the document exists, return the stats for the requested quiz, otherwise returns undefined
+          if (docSnap.exists())
+            resolve(docSnap.data());
+          else
+            resolve(undefined);
+        })
     })
   }
 

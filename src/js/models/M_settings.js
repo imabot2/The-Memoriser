@@ -13,9 +13,7 @@ class M_Settings {
 
       // Timer mode [up | down]
       timerMode: "down",
-      timerValue: 300,
-
-      
+      timerValue: 30,      
     }
   }
 
