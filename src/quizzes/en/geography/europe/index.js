@@ -105,7 +105,7 @@ export var questions = [
     answer: "Bulgaria"
   },
   {
-    uid: "fr",
+    uid: "hr",
     image: croatia,
     prompt: "What country is this?",
     answer: "Croatia"

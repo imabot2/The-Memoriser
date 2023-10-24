@@ -233,6 +233,14 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
   }
 
 
+  /**
+   * Returns the number of statistics for the current memory test
+   * @returns The number of statistics
+   */
+  countStatistics() {
+    return this.stats.length;
+  }
+
 }
 
 export default M_MemoryTestStatistics;

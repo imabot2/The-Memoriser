@@ -43,14 +43,31 @@ class C_MemoryTest {
 
   /**
    * Reset the memory test
+   * - Check if the questions and statistics are equal
   */
   reset() {
-    
+
     return new Promise((resolve, reject) => {
 
       // Check if the memory test is not empty
       if (model.countQuestions() == 0) { reject("No question in the memory test."); return; }
-      
+
+      // #DEBUG FOR DEBUGGING MEMORY TEST
+      if (model.countQuestions() != model.countStatistics()) {
+                
+        // The number of statistics is not the same as the number of questions
+        console.warn(`Number of statistics is not equal to number of questions (${model.countQuestions()} vs ${model.countStatistics()}). Two questions with the same ID?`);
+        
+        // Display the questions with the same Path / UID
+        model.getPaths().forEach((path) => {
+          let uids = model.getUidList(path);
+          uids.forEach((uid) => {
+            let count = uids.filter(u => u === uid).length;
+            if (count!==1) console.warn(path, uid, count);
+          })
+        })
+      }
+
       // Get and display the first question
       this.current = model.getNextQuestion();
       let imageOnePromise = view.setNextImage(this.current.image, 0);
@@ -62,7 +79,6 @@ class C_MemoryTest {
       this.next = model.getNextQuestion();
       let imageTwoPromise = view.setNextImage(this.next.image, 0);
       view.setNextFlag(this.next.metaData.flag)
-
 
       // When all images are loaded, resolve the promise
       Promise.all([imageOnePromise, imageTwoPromise]).finally(() => {
@@ -206,13 +222,13 @@ class C_MemoryTest {
     // If the user is logged, save statistics in database
     if (auth.isLogged()) {
       model.saveStatistics()
-      .then(() => {
-        notifications.success("Results saved", "Your memory test results are saved.");
-      })
-      .catch((error) => {
-        console.error(error);
-        notifications.error("DB Error", "Error while saving statistics");
-      })
+        .then(() => {
+          notifications.success("Results saved", "Your memory test results are saved.");
+        })
+        .catch((error) => {
+          console.error(error);
+          notifications.error("DB Error", "Error while saving statistics");
+        })
     }
   }
 
