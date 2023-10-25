@@ -1,25 +1,29 @@
-.pie-chart > canvas {  
+.pie-chart canvas {  
   z-index: 2;
 }
 
 
-.pie-chart > .label {
+.pie-chart .label {
   
   position: absolute;
   left: 50%;
   top: 50%;
-  padding-top: 0.7em;
+  padding-top: 1em;
   transform: translate(-50%, -50%);  
   font-family: 'Luckiest Guy', cursive;
   line-height: 1.4em;
 }
-.pie-chart > .label > div:nth-child(1) {
-  font-size: 0.9em;
+
+
+.pie-chart .title {
+  font-size: 1.2em;
+  font-family: 'Luckiest Guy', cursive;
+  margin-bottom: -1em;
   
 }
 
 
-.pie-chart > .label > div:nth-child(2) {
+.pie-chart .label > div {
   font-size: 1.6em;
   
 }

@@ -23,28 +23,17 @@
 }
 
 
-#results-modal .pie-chart {
+
+
+
+#results-modal .pie-chart .pie-chart-container{
   position: relative;
   height: clamp(150px, 20vh, 10vmin);
   font-size: clamp(1rem, 30%, 2vmin);
 }
 
 
-.pie-chart > .label {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);  
-  font-family: 'Luckiest Guy', cursive;
-  line-height: 1.3em;
-}
-.pie-chart > .label > div:nth-child(1) {
-  font-size: 1em;
-  
-}
-
-
-.pie-chart > .label > div:nth-child(2) {
-  font-size: 1.8em;
-  
+#results-modal #results-pie-score .pie-chart-container {
+  height: clamp(170px, 30vh, 14vmin);
+  font-size: 1.6em;
 }

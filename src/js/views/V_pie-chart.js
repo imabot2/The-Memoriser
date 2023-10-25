@@ -46,7 +46,8 @@ export default class V_PieChart {
         maintainAspectRatio: false,
         //layout: { padding: 10 },
         responsive: true,
-        animation: false, // { animateRotate: false, animateScale: false },
+        //animation: false, //{ animateRotate: false, animateScale: false },
+        animation: { duration: 0, animateRotate: true, animateScale: false },
         plugins: {
           legend: { display: true },
           tooltip: {
@@ -79,15 +80,18 @@ export default class V_PieChart {
    */
   enableAnimation() {
     this.animation = true;
-    this.chart.options.animation = { animateRotate: true, animateScale: false };
+    this.chart.options.animation.duration = 1000; //, animateRotate: true, animateScale: false };
+    this.chart.update();
+    
   }
 
   /**
    * Disable animation in the pie chart
    */
-  disableAnimation() {
+  disableAnimation() {    
     this.animation = false;
-    this.chart.options.animation.animateRotate = { animateRotate: false, animateScale: false };
+    this.chart.options.animation.duration = 0; //{ duration: 0, animateRotate: false, animateScale: false };
+    this.chart.update();    
   }
 
   /**
@@ -110,7 +114,7 @@ export default class V_PieChart {
     this.labels = [mainLabel, secondaryLabel];
   }
 
-  
+
   /**
    * Update the label with the easeOutQuad function
    * @param {float} from Initial value of the ratio

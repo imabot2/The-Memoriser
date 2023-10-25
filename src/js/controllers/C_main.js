@@ -70,7 +70,7 @@ let run = async () => {
         view.hideLoader(300);
 
 
-        currentStatistics.showResults();
+        //currentStatistics.showResults();
 
         // If user is not on mobile device, set focus to the answer input
         // On mobile device, do not focus to prevent soft keyboard from opening

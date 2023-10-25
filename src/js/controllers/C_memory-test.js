@@ -7,6 +7,7 @@ import Timer from "Js/lib/timer.js"
 import auth from "Js/models/M_auth.js";
 import notifications from "Js/views/V_notifications";
 
+
 class C_MemoryTest {
 
   constructor() {
@@ -208,7 +209,7 @@ class C_MemoryTest {
     this.currentStats.count = this.current.count;
     this.currentStats.distance = distance;
     this.currentStats.image = this.current.image;
-    this.currentStats.flag = this.current.metaData.flag;
+    this.currentStats.flag = this.current.metaData.flag;    
 
     // Compute WPM, 
     this.computeWpm(this.currentStats);
@@ -232,7 +233,8 @@ class C_MemoryTest {
    */
   computeWpm(qStat) {
     // Compute WPM
-    qStat.wpm = 12000 * (qStat.answered.trim().length) / qStat.time;
+    // Length +1 to consider the spaces between words
+    qStat.wpm = 12000 * (qStat.answered.trim().length+1) / qStat.time;
   }
 
 
