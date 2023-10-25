@@ -87,15 +87,15 @@
 
     #loader-status .status {
       font-weight: bold;
-      color: orange;
+      color: var(--main-orange);
     }
 
     #loader-status .status.success {
-      color: green;
+      color: var(--main-green);
     }
 
     #loader-status .status.error {
-      color: #e83c4b;
+      color: var(--main-red);
     }
   </style>
 </head>
@@ -225,7 +225,7 @@
                 <canvas></canvas>
                 <div class="label">
                   <div>SCORE</div>
-                  <div>100%</div>                  
+                  <div><span>0</span>%</div>                  
                 </div>
               </div>
               <div id="results-progression" class="col-md-6 py-2 d-flex justify-content-center align-items-center">

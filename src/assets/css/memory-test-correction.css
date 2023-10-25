@@ -35,7 +35,7 @@
 
 
 #correction:has(.expectedAnswer) {
-  background-color: #4865d6;
+  background-color: var(--main-blue);
   color: white;
   opacity: 0.8;
 }
@@ -44,7 +44,7 @@
 
 #correction>.delete {
   text-decoration-line: line-through;
-  text-decoration-color: #e83c4b; /* rgb(128,128,128);*/
+  text-decoration-color: var(--main-red); /* rgb(128,128,128);*/
   text-decoration-style: double;
   color: rgb(128,128,128);
   padding-left: 0.07em;
@@ -56,11 +56,11 @@
 }
 
 #correction>.insert {
-  color: #e83c4b;
+  color: var(--main-red);
 }
 
 #correction>.keep {
-  color: green;
+  color: var(--main-green);
 }
 
 #correction>.extra {
@@ -86,7 +86,7 @@
   border-radius: 10px;
   padding: 1vmin;
 
-  background-color: #4865d6;
+  background-color: var(--main-blue);
   color: white;
 
   min-width: 50%;

@@ -1,5 +1,13 @@
 :root {
-  --main-background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg);
+  --main-blue: #4865d6;
+  --main-red: #e83c4b;
+  --main-yellow: #bbdb06;
+  --main-orange: #F08700;
+  --main-green: #157f1f;
+  --main-purple: #331832;
+  --main-light-grey: #cdcdcd;
+  --main-dark-grey: #91908d;
+
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
@@ -17,20 +25,9 @@ body {
 #main {
   background-color: lightgray;
   position: relative;
-  /*display: flex;
-  justify-content: center;
-  align-items: center; */
   transition: height 0.15s ease-out;
-
   overflow: hidden;
-
   background-image: linear-gradient(rgba(220, 220, 220, 1), rgba(190, 190, 190, 1));
-
-  /*
-
-  background-image: linear-gradient(rgba(211, 211, 211, 0.9), rgba(211, 211, 211, 0.9)),
-   var(--main-background-image); 
-  */
 
   background-position: center;
   -webkit-background-size: cover;

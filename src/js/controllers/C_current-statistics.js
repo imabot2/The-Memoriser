@@ -19,10 +19,12 @@ class C_currentStatistics {
   showResults() {
     model.processCurrentStatistics(this.answersStats);
 
-    view.populateResultsModal(this.answersStats);
+    console.log(this.answersStats);
     
     view.showModal();
-    //console.log(this.answersStats);
+
+    view.populateResultsModal(this.answersStats);
+    
     //console.log(JSON.stringify(this.answersStats));
 
   }
