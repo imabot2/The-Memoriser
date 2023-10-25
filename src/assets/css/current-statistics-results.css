@@ -1,0 +1,50 @@
+#results-modal .logo>img {
+  height: clamp(50px, 200px, 12vh);
+}
+
+
+#results-modal .reload-btn>img {
+  height: clamp(3.2em, 4em, 6vh);
+  padding: 0.6em;
+
+}
+
+#results-modal .reload-btn > img:hover {
+  background-color: #dddfe9;
+  border-radius: 0.8em;
+  cursor: pointer;
+}
+
+
+
+#results-progression {
+  font-size: 6vmin;
+  font-family: 'Luckiest Guy', cursive;
+}
+
+
+#results-modal .pie-chart {
+  position: relative;
+  height: clamp(150px, 20vh, 10vmin);
+  font-size: clamp(1rem, 30%, 2vmin);
+}
+
+
+.pie-chart > .label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);  
+  font-family: 'Luckiest Guy', cursive;
+  line-height: 1.3em;
+}
+.pie-chart > .label > div:nth-child(1) {
+  font-size: 1em;
+  
+}
+
+
+.pie-chart > .label > div:nth-child(2) {
+  font-size: 1.8em;
+  
+}

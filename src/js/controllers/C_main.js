@@ -9,6 +9,7 @@ import { isMobile } from "Js/lib/client.js";
 import { clientLanguage } from "../lib/client";
 import notifications from "Js/views/V_notifications";
 
+import currentStatistics from "Js/controllers/C_current-statistics.js";
 
 // Set the callback functions for the loader
 model.setNewMessageCallback(msg => view.newMessage(msg));
@@ -42,9 +43,9 @@ let run = async () => {
         memoryTests = [
           //"/en/geography/europe/",
           //"/fr/geographie/europe/",          
-          //"/iso/country-code/europe/",
+          "/iso/country-code/europe/",
           "/en/geography/africa/",
-          //"/en/chess/stockfish-starting-position/"
+          "/en/chess/stockfish-starting-position/"
         ];
       }
       break;
@@ -54,30 +55,33 @@ let run = async () => {
 
   // When the quizzes are all loaded
   model.loadQuizzes(memoryTests).finally(() => {
-      
-      // Memory tests are all loaded
-      view.setSuccess(memoryTestId);
 
-      // Initialize the memory test (promise is resolved if the questions images are loaded)
-      let imagesId = view.newMessage("Loading first images");
-      memoryTest.reset().then(() => {
-        view.setSuccess(imagesId);
+    // Memory tests are all loaded
+    view.setSuccess(memoryTestId);
+
+    // Initialize the memory test (promise is resolved if the questions images are loaded)
+    let imagesId = view.newMessage("Loading first images");
+    memoryTest.reset().then(() => {
+      view.setSuccess(imagesId);
 
 
-        setTimeout(() => {
-          // Hide the loader overlay
-          view.hideLoader(300);
+      setTimeout(() => {
+        // Hide the loader overlay
+        view.hideLoader(300);
 
-          // If user is not on mobile device, set focus to the answer input
-          // On mobile device, do not focus to prevent soft keyboard from opening
-          if (!isMobile()) document.getElementById('answer-input').focus();
-        }, 100)
-      })
+
+        currentStatistics.showResults();
+
+        // If user is not on mobile device, set focus to the answer input
+        // On mobile device, do not focus to prevent soft keyboard from opening
+        if (!isMobile()) document.getElementById('answer-input').focus();
+      }, 100)
+    })
       .catch((error) => {
         notifications.error("An error occured", error, 60000);
         view.setError(imagesId);
       })
-    })
+  })
 
 
 

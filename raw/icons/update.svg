@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   role="img"
+   width="1000mm"
+   height="1000mm"
+   viewBox="0 0 1000 1000"
+   style="max-width:1.6em; height: auto;"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="update.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.21351875"
+     inkscape:cx="1887.4221"
+     inkscape:cy="1889.7638"
+     inkscape:window-width="1866"
+     inkscape:window-height="1016"
+     inkscape:window-x="1974"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <path
+     id="path"
+     style="opacity:1;vector-effect:none;fill:#4865d6;fill-opacity:1;stroke-width:1.1078"
+     d="M 772.78386,113.38036 C 772.78386,113.38036 752.84352,133.32069 752.84352,133.32069 642.06386,57.990526 499.1581,35.834595 367.33031,77.930865 193.40624,134.42849 70.440819,292.8434 61.578446,476.73764 51.608277,659.52408 155.74116,830.12475 323.01844,904.34712 490.29573,979.67729 687.48352,943.12 817.09572,813.5078 839.25165,791.35187 839.25165,755.90238 817.09572,734.85424 796.04759,712.69831 760.5981,712.69831 738.44216,734.85424 640.95606,832.34035 493.61912,860.03526 368.4381,803.53763 242.14929,747.04001 164.60353,619.6434 171.25031,482.27662 179.00489,344.90984 269.84421,226.37561 401.672,184.27934 493.61912,154.36883 592.21301,166.55459 671.97437,214.18985 671.97437,214.18985 665.32759,220.83663 665.32759,220.83663 646.49505,235.23798 638.74047,260.7173 646.49505,282.87323 654.24962,306.13696 675.29776,320.53832 699.66928,320.53832 699.66928,320.53832 817.09572,320.53832 817.09572,320.53832 847.00623,320.53832 872.48555,296.16679 872.48555,265.14849 872.48555,265.14849 872.48555,147.72205 872.48555,147.72205 872.48555,133.32069 866.94657,118.91934 856.9764,108.94917 833.71267,83.469848 793.83199,85.685441 772.78386,113.38036 772.78386,113.38036 772.78386,113.38036 772.78386,113.38036"
+     inkscape:export-filename="/home/philippe/uabox/2023-2024/projects/thememoriser/src/assets/static/icons/reload.png"
+     inkscape:export-xdpi="6.3499999"
+     inkscape:export-ydpi="6.3499999" />
+</svg>

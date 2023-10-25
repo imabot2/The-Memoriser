@@ -205,7 +205,10 @@ class C_MemoryTest {
     this.currentStats.answered = view.getAnswerText();
     this.currentStats.path = this.current.path;
     this.currentStats.uid = this.current.uid;
+    this.currentStats.count = this.current.count;
     this.currentStats.distance = distance;
+    this.currentStats.image = this.current.image;
+    this.currentStats.flag = this.current.metaData.flag;
 
     // Compute WPM, 
     this.computeWpm(this.currentStats);
@@ -216,17 +219,27 @@ class C_MemoryTest {
     let scores = model.update(this.currentStats.path, this.currentStats.uid, this.currentStats.answerScore);
     this.currentStats.previousScore = scores.previousScore;
     this.currentStats.newScore = scores.newScore;
+    this.currentStats.deltaScore = scores.newScore - scores.previousScore;
   
     // Push and update the statistics
     currentStatistics.push({...this.currentStats});
   }
 
 
+  /**
+   * Compute Words per Minutes for the provided question
+   * @param {object} qStat Statistics of the current question
+   */
   computeWpm(qStat) {
     // Compute WPM
-    qStat.wpm = 12000 * (qStat.answered.length) / qStat.time;
+    qStat.wpm = 12000 * (qStat.answered.trim().length) / qStat.time;
   }
 
+
+    /**
+   * Compute ratios for the provided question (max distance, distance and wpm)
+   * @param {object} qStat Statistics of the current question
+   */
 
   computeRatio(qStat) {
     // Comptute ratios
@@ -235,7 +248,10 @@ class C_MemoryTest {
     qStat.ratioWpm = 1 - Math.exp(-0.1 * qStat.wpm);
   }
 
-
+  /**
+   * Compute the score for the provided question
+   * @param {object} qStat Statistics of the current question
+   */
   computeScore(qStat) {
      // Compute the weighted global score for this question
      qStat.answerScore = 0.45 * qStat.ratioDistance + 0.45 * qStat.ratioMaxDistance + 0.1 * qStat.ratioWpm;

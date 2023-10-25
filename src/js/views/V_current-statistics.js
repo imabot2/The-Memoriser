@@ -1,11 +1,14 @@
-import "Assets/css/statistics.css";
+import "Assets/css/current-statistics.css";
+import V_CurrentStatisticsResults from "Js/views/V_current-statistics-results.js";
 
-class V_Statistics {
+class V_CurrentStatistics extends V_CurrentStatisticsResults {
 
   /**
    * Constructor, get and initialize the element
    */
   constructor() {
+    // Call the parent constructor
+    super();
 
     // Get the elements of the success card
     this.successContainer = document.getElementById("success-card");
@@ -125,4 +128,4 @@ class V_Statistics {
 
 
 
-export default new V_Statistics();
+export default new V_CurrentStatistics();
