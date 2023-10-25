@@ -2,7 +2,7 @@ import model from "Js/models/M_memory-test.js";
 import view from "Js/views/V_memory-test.js";
 import timer from "Js/controllers/C_timer.js";
 import Levenshtein from "Js/lib/levenshtein.js";
-import statistics from "Js/controllers/C_statistics.js";
+import currentStatistics from "Js/controllers/C_current-statistics.js";
 import Timer from "Js/lib/timer.js"
 import auth from "Js/models/M_auth.js";
 import notifications from "Js/views/V_notifications";
@@ -40,6 +40,9 @@ class C_MemoryTest {
 
   }
 
+  model() {
+    return model;
+  }
 
   /**
    * Reset the memory test
@@ -54,16 +57,16 @@ class C_MemoryTest {
 
       // #DEBUG FOR DEBUGGING MEMORY TEST
       if (model.countQuestions() != model.countStatistics()) {
-                
+
         // The number of statistics is not the same as the number of questions
         console.warn(`Number of statistics is not equal to number of questions (${model.countQuestions()} vs ${model.countStatistics()}). Two questions with the same ID?`);
-        
+
         // Display the questions with the same Path / UID
         model.getPaths().forEach((path) => {
           let uids = model.getUidList(path);
           uids.forEach((uid) => {
             let count = uids.filter(u => u === uid).length;
-            if (count!==1) console.warn(path, uid, count);
+            if (count !== 1) console.warn(path, uid, count);
           })
         })
       }
@@ -192,6 +195,7 @@ class C_MemoryTest {
 
   /**
    * Process the current question statistics
+   * Call every time a question is over (success of failed)
    */
   processQuestionOver(distance) {
 
@@ -203,12 +207,39 @@ class C_MemoryTest {
     this.currentStats.uid = this.current.uid;
     this.currentStats.distance = distance;
 
+    // Compute WPM, 
+    this.computeWpm(this.currentStats);
+    this.computeRatio(this.currentStats);
+    this.computeScore(this.currentStats);
+    
+    // Update global stats to get the new and previous scores
+    let scores = model.update(this.currentStats.path, this.currentStats.uid, this.currentStats.answerScore);
+    this.currentStats.previousScore = scores.previousScore;
+    this.currentStats.newScore = scores.newScore;
+  
     // Push and update the statistics
-    this.currentStats = statistics.push({ ...this.currentStats });
-    model.update({ ...this.currentStats });
+    currentStatistics.push({...this.currentStats});
   }
 
 
+  computeWpm(qStat) {
+    // Compute WPM
+    qStat.wpm = 12000 * (qStat.answered.length) / qStat.time;
+  }
+
+
+  computeRatio(qStat) {
+    // Comptute ratios
+    qStat.ratioMaxDistance = Math.max(1 - (qStat.maxDistance / qStat.expected.length), 0);
+    qStat.ratioDistance = Math.max(1 - (qStat.distance / qStat.expected.length), 0);
+    qStat.ratioWpm = 1 - Math.exp(-0.1 * qStat.wpm);
+  }
+
+
+  computeScore(qStat) {
+     // Compute the weighted global score for this question
+     qStat.answerScore = 0.45 * qStat.ratioDistance + 0.45 * qStat.ratioMaxDistance + 0.1 * qStat.ratioWpm;
+  }
 
   /**
    * Callback function called when the test is over
@@ -218,6 +249,9 @@ class C_MemoryTest {
     // Update status and disable input bar
     this.status = "over";
     view.disableInput();
+
+    // Show the results on the screen
+    currentStatistics.showResults();
 
     // If the user is logged, save statistics in database
     if (auth.isLogged()) {

@@ -37,7 +37,8 @@ class Notifications {
 
     // Set the requested message in the toast body
     toastEl.querySelector(".toast-body").innerHTML = message;
-
+    console.log (`%cError%c ${message}`, "background-color: #dc3545; padding:0.3em; border-radius: 0.5em;", '');
+    
     this.show(toastEl, ms);
   }
 
@@ -60,6 +61,7 @@ class Notifications {
 
     // Set the requested message in the toast body
     toastEl.querySelector(".toast-body").innerHTML = message;
+    console.log (`%cWarning%c ${message}`, "background-color: #ffc107; padding:0.3em; border-radius: 0.5em;", '');
 
     this.show(toastEl, ms);
   }
@@ -83,7 +85,7 @@ class Notifications {
 
     // Set the requested message in the toast body
     toastEl.querySelector(".toast-body").innerHTML = message;
-
+    console.log (`%cSuccess%c ${message}`, "background-color: #198754; padding:0.3em; border-radius: 0.5em;", '');
     this.show(toastEl, ms);
   }
 
@@ -106,6 +108,7 @@ class Notifications {
 
     // Set the requested message in the toast body
     toastEl.querySelector(".toast-body").innerHTML = message;
+    console.log (`%cInfo%c ${message}`, "background-color: #0dcaf0; color: #000; padding:0.3em; border-radius: 0.5em;", '');
 
     this.show(toastEl, ms);
   }
@@ -127,6 +130,7 @@ class Notifications {
 
     // Set the requested message in the toast body
     toastEl.querySelector(".toast-body").innerHTML = message;
+    console.log (`%cMessage%c ${message}`, "background-color: #e2e3e5; color: #000; padding:0.3em; border-radius: 0.5em;", '');
 
     this.show(toastEl, ms);
   }

@@ -83,6 +83,7 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
             // Get the list of UID to update
             let uidList = this.getUidList(path);
 
+
             // For each UID in the questions of this path
             uidList.map((uid) => {
 
@@ -92,6 +93,7 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
               // If the statistic exists for the given path / uid, update the statistics
               if (stat != undefined) super.updateStatForPathUid(path, uid, stat);
             });
+            
           }
           resolve();
         })

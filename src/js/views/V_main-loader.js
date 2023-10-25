@@ -10,6 +10,7 @@ class V_MainLoader {
     this.dialog = document.getElementById("loader-status");
 
     // No message at start up
+    this.messagesEl = {};
     this.messages = {};
     this.index = 0;
 
@@ -35,9 +36,12 @@ class V_MainLoader {
     this.dialog.scrollTo(0, this.dialog.scrollHeight);
 
 
-    // Store the element in the list
-    this.messages[this.index] = row;
-
+    // Store the element and the messagein the list
+    this.messages[this.index] = {
+      'el': row,
+      'msg': message
+    }
+    
     // Return and increase the index
     return this.index++;
   }
@@ -49,9 +53,10 @@ class V_MainLoader {
    * @param {integer} id ID of the message
    */
   setSuccess(id) {
-    let el = this.messages[id].querySelector(".status")
+    let el = this.messages[id].el.querySelector(".status")
     el.textContent = "[OK]";
     el.classList.add("success");
+    console.log (`%cOK%c ${this.messages[id].msg}`, "background-color: #198754; padding:0.3em; border-radius: 0.5em;", '');
   }
 
   /**
@@ -59,9 +64,10 @@ class V_MainLoader {
    * @param {integer} id ID of the message
    */
   setError(id) {
-    let el = this.messages[id].querySelector(".status")
+    let el = this.messages[id].el.querySelector(".status")
     el.textContent = "[Failed]";
     el.classList.add("error");
+    console.log (`%cFailed%c ${this.messages[id].msg}`, "background-color: #dc3545; padding:0.3em; border-radius: 0.5em;", '');
   }
 
 

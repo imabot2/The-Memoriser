@@ -9,7 +9,7 @@ class M_Settings {
       // Beta belongs to [0 10]
       // 0 = random questions
       // 10 = questions least well answered very frequently
-      beta : 8,
+      beta : 10,
 
       // Timer mode [up | down]
       timerMode: "down",

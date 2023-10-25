@@ -40,10 +40,11 @@ let run = async () => {
       }
       if (process.env.NODE_ENV == "development") {
         memoryTests = [
-          "/en/geography/europe/",
-          "/fr/geographie/europe/",
+          //"/en/geography/europe/",
+          //"/fr/geographie/europe/",          
+          //"/iso/country-code/europe/",
           "/en/geography/africa/",
-          "/iso/country-code/europe/"
+          //"/en/chess/stockfish-starting-position/"
         ];
       }
       break;
@@ -54,8 +55,6 @@ let run = async () => {
   // When the quizzes are all loaded
   model.loadQuizzes(memoryTests).finally(() => {
       
-      //console.log (memoryTest.model.questions);
-
       // Memory tests are all loaded
       view.setSuccess(memoryTestId);
 

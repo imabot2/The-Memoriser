@@ -50,16 +50,38 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
       next = this.stats.find(q => (random >= q.min && random < q.max));
     }
 
-    // Resets the deleted question if the question has been removed and update the last question
+    // Put the last question back 
+    // The last question has been removed to avoid picking the same question twice    
     if (this.lastQuestion != undefined) this.stats.push(this.lastQuestion);
+    // Update the last question with the new one
     this.lastQuestion = next;
 
 
     // Return the next question
-    return super.getQuestionByID(next.path, next.uid);
+    return this.getQuestionAndStatByID(next.path, next.uid);
   }
 
 
+  /**
+   * Return a question and its statistics
+   * @param {string} path Path of the question
+   * @param {string} uid UID of the question
+   * @returns The question with the associated statistics
+   */
+  getQuestionAndStatByID(path, uid) {
+
+    // Get the question and the statistics for this question
+    let question = super.getQuestionByID(path, uid);
+    let stat = this.getStatByUid(path, uid);
+
+    // Add the statistics to the question 
+    question.count = stat.count;
+    question.P = stat.P;
+    question.score = stat.score;
+
+    // Return the question
+    return question;
+  }
 
 
   /**
@@ -69,7 +91,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
   computeProbabilities() {
     // Get and scale beta coefficient
     let beta = (5 - settings.get("beta")) / 5;
-    beta = (beta >= 0) ? (1 + beta) ** 3.5 : 1 + beta;
+    beta = (beta >= 0) ? (1 + beta) ** 3.7 : 1 + beta;
 
     // Normalize the score z(i) = 1-(score-min(score(i)))
     // Compute the exponential exp = exp(beta*z(i))
@@ -118,6 +140,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
       // Load the questions from file
       super.addQuiz(path)
         .then((questions) => {
+
           // The questions are successfully loaded, create the initial statistics
           this.createStatsForQuiz(path);
           resolve(questions);
@@ -138,6 +161,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     this.getUidList(path).forEach((uid) => {
       this.createStatsIfDontExist(path, uid);
     })
+
   }
 
 
@@ -145,16 +169,20 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    * Update global statistics with the stats of a given question
    * @param {object} qStat Statistics of the question to update
    */
-  update(qStat) {
+  update(path, uid, answerScore) {
 
     // Get a reference to the current question
-    let qToUpdate = this.getQuestionStats(qStat.path, qStat.uid);
+    let qToUpdate = this.getStatByUid(path, uid);
 
-    // Compute the new score
-    qToUpdate.score = (qToUpdate.score * qToUpdate.count + qStat.score) / (qToUpdate.count + 1);
+    // Store the previous score (for computing the offset)
+    let previousScore = qToUpdate.score;
+    qToUpdate.score = (qToUpdate.score * qToUpdate.count + answerScore) / (qToUpdate.count + 1);
 
     // Increase the counter for this question
-    qToUpdate.count++
+    qToUpdate.count++;
+
+    // Return the previous and the new score
+    return {"previousScore": previousScore, "newScore": qToUpdate.score };
   }
 
 
@@ -164,9 +192,9 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    */
   removeQuiz(path) {
     // Remove stats for this path
-    this.stats = this.stats.filter((q) => {return q.path !== path});
+    this.stats = this.stats.filter((q) => { return q.path !== path });
     // Remove the question
-    super.removeQuiz(path);    
+    super.removeQuiz(path);
   }
 
   /**
@@ -198,7 +226,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    * @returns A reference to the statistics of the question
    */
   createStatsIfDontExist(path, uid) {
-    
+
     // Get the requested statistics
     let stat = this.stats.find((q) => { return (q.path === path && q.uid === uid) });
 
@@ -228,7 +256,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    * @param {string} uid Unique Identifier of the question
    * @returns A reference to the statistics of the question
    */
-  getQuestionStats(path, uid) {
+  getStatByUid(path, uid) {
     return this.stats.find(q => q.path === path && q.uid === uid);
   }
 
