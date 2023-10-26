@@ -147,6 +147,10 @@ class C_MemoryTest {
       .replace(/\s+/g, " ");    // Remove extra spaces
 
 
+    // Compute the Levenshtein distance for checking the answer
+    // The distanceCheck must be calculated BEFORE the truncated distance 
+    // Because the Levenstein class is reused with getHTML
+    let distanceCheck = this.levenshtein.distance(sanitized, this.current.answer);
 
     // Compute the Levenshtein distance and store the distance max
     let len = Math.min(sanitized.length, this.current.answer.length);
@@ -154,8 +158,6 @@ class C_MemoryTest {
     this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
 
 
-    // Compute the Levenshtein distance for checking the answer
-    let distanceCheck = this.levenshtein.distance(sanitized, this.current.answer);
 
     // Check the answer (user pressed space at the end of the right answer)
     if (input[input.length - 1] === " ") {

@@ -49,7 +49,8 @@ export default class AnswerCard {
     if (progress > 0) badge.classList.add("bg-success")
 
     this.cardEl.querySelector(".expected").innerText = data.expected;
-    this.cardEl.querySelector(".answered").innerText = data.answered;
+    this.cardEl.querySelector(".user-answer").innerText = data.answered;
+    this.cardEl.querySelector(".answered").innerText = `${data.count+1} ${(data.count)?'times':'time'}`;
     this.cardEl.querySelector(".time").innerText = `${(data.time / 1000).toFixed((data.time < 12000) ? 1 : 0)}s`;
     this.cardEl.querySelector(".accuracy").innerText = `${parseFloat(((100 * data.ratioMaxDistance).toFixed(1)))}%`;
     this.cardEl.querySelector(".wpm").innerText = `${(data.wpm).toFixed(0)}wpm`;
