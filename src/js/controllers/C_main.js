@@ -42,10 +42,10 @@ let run = async () => {
       if (process.env.NODE_ENV == "development") {
         memoryTests = [
           //"/en/geography/europe/",
-          //"/fr/geographie/europe/",          
-          "/iso/country-code/europe/",
-          "/en/geography/africa/",
-          "/en/chess/stockfish-starting-position/"
+          "/fr/geographie/europe/",     
+          //"/iso/country-code/europe/",
+          //"/en/geography/africa/",
+          //"/en/chess/stockfish-starting-position/"
         ];
       }
       break;
@@ -70,7 +70,7 @@ let run = async () => {
         view.hideLoader(300);
 
 
-        //currentStatistics.showResults();
+        currentStatistics.showResults();
 
         // If user is not on mobile device, set focus to the answer input
         // On mobile device, do not focus to prevent soft keyboard from opening

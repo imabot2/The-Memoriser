@@ -1,6 +1,31 @@
-#results-modal .logo>img {
-  height: clamp(50px, 200px, 12vh);
+#results-modal .modal-header {
+  background-color: var(--main-dark-grey);
+  font-size: clamp(30px, 100px, 6vmin);
+  font-family: 'Luckiest Guy', cursive;
+  color: var(--main-blue);
+  text-shadow: 0px 2px 2px black;
+  
 }
+
+
+#results-modal .logo img {
+  height: clamp(50px, 100px, 4vmin);
+  /* filter: drop-shadow(0px 2px 2px #black); */
+
+}
+
+/*
+#results-modal .logo {
+  background-color: white;
+  height: 100%;
+  height: clamp(50px, 100px, 7vmin);
+  width: clamp(50px, 100px, 7vmin);
+  border-radius: 50%
+
+}
+*/
+
+
 
 
 #results-modal .reload-btn>img {
@@ -9,7 +34,7 @@
 
 }
 
-#results-modal .reload-btn > img:hover {
+#results-modal .reload-btn>img:hover {
   background-color: #dddfe9;
   border-radius: 0.8em;
   cursor: pointer;
@@ -26,7 +51,7 @@
 
 
 
-#results-modal .pie-chart .pie-chart-container{
+#results-modal .pie-chart .pie-chart-container {
   position: relative;
   height: clamp(150px, 20vh, 10vmin);
   font-size: clamp(1rem, 30%, 2vmin);
