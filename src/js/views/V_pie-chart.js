@@ -1,6 +1,6 @@
 import "Assets/css/pie-chart.css";
 import Chart from 'chart.js/auto';
-
+import { easeOutQuadProgress } from "Js/lib/ease.js";
 
 
 export default class V_PieChart {
@@ -42,10 +42,10 @@ export default class V_PieChart {
 
       options: {
         cutout: '70%',
-        layout: { padding: { left: 50, right: 50, top: 10, bottom: 10 } },
-        maintainAspectRatio: false,
+        layout: {padding: 10}, //{ padding: { left: 50, right: 50, top: 10, bottom: 10 } },
+        //maintainAspectRatio: false,
         //layout: { padding: 10 },
-        responsive: true,
+        //responsive: true,
         //animation: false, //{ animateRotate: false, animateScale: false },
         animation: { duration: 0, animateRotate: true, animateScale: false },
         plugins: {
@@ -67,12 +67,13 @@ export default class V_PieChart {
    * Update the pie chart with the new ratio
    * @param {float} ratio Ratio to display in the pie chart
    */
-  setRatio(ratio) {
+  setRatio(ratio, from,  to) {
+
     let previousRatio = this.ratio;
     this.ratio = ratio;
     this.chart.data.datasets[0].data = [this.ratio, 1 - this.ratio];
     this.chart.update();
-    this.updateValue(previousRatio, this.ratio);
+    this.updateValue(from ?? 100*previousRatio, to ?? 100*this.ratio);
   }
 
   /**
@@ -126,33 +127,9 @@ export default class V_PieChart {
       this.valueText.innerText = Math.round(100 * this.ratio);
       return;
     }
-
-    // Count the iterations
-    let counter = 0;
-    let delta = to-from;
-    // Start the timer
-    let timer = setInterval(() => {
-      counter++;
-      if (counter >= 50) {
-        // If the animation is over, set the final value and stop the timer
-        this.valueText.innerText = Math.round(100 * this.ratio);
-        clearInterval(timer);
-      }
-      else {
-        let newValue = from + delta*this.easeOutQuad(counter/50);
-        this.valueText.innerText = Math.round(100 * newValue);
-      }
-    }, 20)
+    easeOutQuadProgress(this.valueText, from, to);
   }
 
-  /**
-   * Easing function [ cubic-bezier(0.5, 1, 0.89, 1) ]
-   * @param {float} x Absolute progress of the animation in the bounds of 0 (beginning of the animation) and 1 (end of animation).
-   * @returns 
-   */
-  easeOutQuad(x) {
-    return 1 - (1 - x) * (1 - x);
-  }
 
   /**
    * Callback function called before the tooltip is displayed

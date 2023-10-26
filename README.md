@@ -10,3 +10,4 @@ Visit the app on [The Memoriser](https://memoriser.com)
 * Review the calculation of probas to enable the most frequently asked questions to be picked.
 * Create unit tests (to check tests)
 * Remove the debug line in C_memoryTest.reset() function
+* Add tooltips on results titles

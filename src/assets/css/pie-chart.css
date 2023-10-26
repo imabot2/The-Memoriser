@@ -23,7 +23,11 @@
 }
 
 
-.pie-chart .label > div {
-  font-size: 1.6em;
-  
+.pie-chart .label .value {
+  font-size: 1.6em;  
+}
+
+.pie-chart .label .unit {
+  padding-left: 0.2em;
+  font-size: 1.2em;  
 }

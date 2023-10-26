@@ -3,7 +3,7 @@ import "Assets/css/current-statistics-results.css";
 import colors from "Js/views/V_colors.js";
 import PieChart from "Js/views/V_pie-chart.js";
 import * as bootstrap from "bootstrap";
-
+import { easeOutQuadProgress } from "Js/lib/ease.js";
 
 export default class V_CurrentStatisticsResults {
 
@@ -17,9 +17,14 @@ export default class V_CurrentStatisticsResults {
     this.resultsModal = new bootstrap.Modal('#results-modal', { 'focus': false });
 
     // Set the callback function when the modal is shown
-    this.resultsModalEl.addEventListener('show.bs.modal', () => { this.onModalShow() });
-    this.resultsModalEl.addEventListener('shown.bs.modal', () => { this.onModalShown() });
+    this.resultsModalEl.addEventListener('show.bs.modal', (e) => { this.onModalShow(); });
+    this.resultsModalEl.addEventListener('shown.bs.modal', (e) => { this.onModalShown(); });
 
+    // Get the score value element
+    this.resultsScoreEl = this.resultsModalEl.querySelector("#results-score .value");
+
+    // Get the progress value element
+    this.resultsProgressEl = this.resultsModalEl.querySelector("#results-progress .value");
 
     // Initialize the pie chart for the score
     this.pieScoreEl = this.resultsModalEl.querySelector("#results-pie-score");
@@ -67,6 +72,10 @@ export default class V_CurrentStatisticsResults {
    * When the show instance is called, reset the modal content to run the animations
    */
   onModalShow() {
+
+    this.resultsScoreEl.innerText = 0;
+    this.resultsProgressEl.innerText = 0;
+
     this.pieScore.disableAnimation();
     this.pieScore.setRatio(0);
 
@@ -86,9 +95,15 @@ export default class V_CurrentStatisticsResults {
    * Lauch the animation
    */
   onModalShown() {
+
     setTimeout(() => {
+
+      // Update the score
+      easeOutQuadProgress(this.resultsScoreEl, 0, this.results.score)
+      easeOutQuadProgress(this.resultsProgressEl, 0, 100*this.results.progress, 2, true)
+
       this.pieScore.enableAnimation();
-      this.pieScore.setRatio(this.results.score);
+      this.pieScore.setRatio(this.results.scoreRatio);
 
       this.pieCorrect.enableAnimation();
       this.pieCorrect.setRatio(this.results.distance);
@@ -98,7 +113,7 @@ export default class V_CurrentStatisticsResults {
       this.pieAccuracy.setRatio(this.results.maxDistance);
 
       this.pieWpm.enableAnimation();
-      this.pieWpm.setRatio(this.results.ratioWpm);
+      this.pieWpm.setRatio(this.results.ratioWpm, 0, this.results.wpm);
     }, 250);
   }
 
