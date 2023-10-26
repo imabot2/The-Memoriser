@@ -147,31 +147,35 @@ class C_MemoryTest {
       .replace(/\s+/g, " ");    // Remove extra spaces
 
 
-    // Compute the Levenshtein distance
-    let distance = this.levenshtein.distance(sanitized, this.current.answer);
 
-    // Check the answer (user pressed space at the end of the right answer)
-    if (input[input.length - 1] === " " && !distance) {
-
-      // Process the current question for statistics
-      this.processQuestionOver(0);
-
-      // Switch to the next question
-      this.nextQuestion();
-      view.clearInput();
-      return;
-    }
-
-    // Compute the Levenshtein distance    
+    // Compute the Levenshtein distance and store the distance max
     let len = Math.min(sanitized.length, this.current.answer.length);
-    distance = this.levenshtein.distance(sanitized, this.current.answer.slice(0, len));
-
-    // Store the max distance
+    let distance = this.levenshtein.distance(sanitized, this.current.answer.slice(0, len));
     this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
 
 
+    // Compute the Levenshtein distance for checking the answer
+    let distanceCheck = this.levenshtein.distance(sanitized, this.current.answer);
+
+    // Check the answer (user pressed space at the end of the right answer)
+    if (input[input.length - 1] === " ") {
+
+      // If this is the right answer 
+      // or if f the current score if less than 0.8 and the answer is higher than the answer
+      // process the answer
+      if ((this.current.score >= 0.8 && sanitized.length >= this.current.answer.length) || !distanceCheck) {
+
+        // Process the current question for statistics
+        this.processQuestionOver(distanceCheck);
+        return;
+      }
+    }
+
+
+
     // Set the correction if the distance is higher than zero
-    if (distance) {
+    // And the score is not higher than 0
+    if (distance && (this.current.score < 0.8 || this.questionTimer.getTime().raw > 10000)) {
       // Show the correction if the Levenshtein distance is not null
       let html = this.levenshtein.getHTML();
       html += `<span class="extra insert">${this.current.answer.slice(len)}</span>`;
@@ -212,19 +216,12 @@ class C_MemoryTest {
     this.processQuestionOver(distance);
 
 
-    if (distance == 0) {
 
-      // This is the right answer
-      this.nextQuestion();
-      view.clearInput();
-    }
-    else {
-
-      // This is not the right answer, show the expected answer      
-      view.setExpectedAnswer(this.current.answer)
-        .then(() => { this.nextQuestion(); });
-    }
   }
+
+
+
+
 
   /**
    * Process the current question statistics
@@ -256,6 +253,19 @@ class C_MemoryTest {
 
     // Push and update the statistics
     currentStatistics.push({ ...this.currentStats });
+
+
+    // Check if this is the right answer
+    if (distance == 0) {
+      // This is the right answer
+      this.nextQuestion();
+      view.clearInput();
+    }
+    else {
+      // This is not the right answer, show the expected answer      
+      view.setExpectedAnswer(this.current.answer)
+        .then(() => { this.nextQuestion(); });
+    }
   }
 
 
@@ -288,7 +298,7 @@ class C_MemoryTest {
    */
   computeScore(qStat) {
     // Compute the weighted global score for this question
-    qStat.answerScore = 0.45 * qStat.ratioDistance + 0.45 * qStat.ratioMaxDistance + 0.1 * qStat.ratioWpm;
+    qStat.answerScore = 0.40 * qStat.ratioDistance + 0.40 * qStat.ratioMaxDistance + 0.2 * qStat.ratioWpm;
   }
 
   /**
@@ -298,17 +308,44 @@ class C_MemoryTest {
 
     // Update status and disable input bar
     this.status = "over";
+
+    // Disable the input 
     view.disableInput();
+    view.clearInput();
+    view.setCorrectionHTML("");
 
-    // Show the results on the screen 
-    currentStatistics.showResults().then(() => {
-      // When the modal is closed, reset the test and enable the view when the images are loaded
-      this.reset().then(() => {
-        view.enableInput();
-        this.start();
-      });
-    });
 
+    // If the user didn't answer to any questions
+    // show a notification and reset the test
+    if (currentStatistics.countQuestionsAnswered() == 0) {
+      notifications.info("What happened?", "You haven't answered any questions!?!?", 2500);
+      setTimeout(() => {
+        this.reset()
+          .then(() => {
+            view.enableInput();
+            this.start();
+          })
+      }, 2500)
+      return;
+    }
+
+
+    // Hide the timer, the test is over
+    timer.hide();
+
+    // Show the results on the screen    
+    currentStatistics.showResults()
+      .finally(() => {
+        // When the modal is closed, reset the test and enable the view when the images are loaded
+        this.reset()
+          .then(() => {
+            view.enableInput();
+            this.start();
+          })
+      })
+      .catch((error) => {
+        notifications.error("Results Error", error);
+      })
 
 
     // If the user is logged, save statistics in database

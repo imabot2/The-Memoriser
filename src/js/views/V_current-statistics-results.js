@@ -61,7 +61,7 @@ export default class V_CurrentStatisticsResults extends V_CurentStatisticsCards 
    * @param {object} data The statistics of the current memory test
    */
   setNewResults(data) {
-    this.results = data;
+    super.setNewResults(data);
   }
 
   /**
@@ -105,6 +105,9 @@ export default class V_CurrentStatisticsResults extends V_CurentStatisticsCards 
     // Reset wpm pie chart
     this.pieWpm.disableAnimation();
     this.pieWpm.setRatio(0);
+
+    // Populate cards
+    this.populateCards();
   }
 
 

@@ -32,10 +32,12 @@ class C_currentStatistics {
    * @returns A promise resolved when the modal is closed
    */
   showResults() {
+
+    /*
     this.answersStats = [
       { "maxDistance": 0, "time": 1345, "expected": "Vatican", "answered": "vatican ", "path": "/fr/geographie/europe/", "uid": "va", "count": 0, "distance": 0, "image": "/images/9e10fc4e4155734c0bd9038238246bc2-vatican-city.png", "flag": "/static/circle-flags/fr.svg", "wpm": 71.37546468401487, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.999205300473151, "answerScore": 0.9999205300473151, "previousScore": 0, "newScore": 0.9999205300473151, "deltaScore": 0.9999205300473151 },
       { "maxDistance": 0, "time": 2343, "expected": "Malte", "answered": "malte ", "path": "/fr/geographie/europe/", "uid": "mt", "count": 0, "distance": 0, "image": "/images/5de437b76e6b27c83aa2dd1c4652706f-malta.png", "flag": "/static/circle-flags/fr.svg", "wpm": 30.729833546734955, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.953717129533604, "answerScore": 0.9953717129533605, "previousScore": 0, "newScore": 0.9953717129533605, "deltaScore": 0.9953717129533605 },
-      { "maxDistance": 0, "time": 3376, "expected": "Islande", "answered": "islande ", "path": "/fr/geographie/europe/", "uid": "is", "count": 0, "distance": 0, "image": "/images/766b58cbd36ff164e388ce458527ad8d-iceland.png", "flag": "/static/circle-flags/fr.svg", "wpm": 28.436018957345972, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.9417843986499995, "answerScore": 0.994178439865, "previousScore": 0, "newScore": 0.994178439865, "deltaScore": 0.994178439865 },
+      { "maxDistance": 0, "time": 3376, "expected": "Islande", "answered": "islande ", "path": "/fr/geographie/europe/", "uid": "is", "count": 0, "distance": 2, "image": "/images/766b58cbd36ff164e388ce458527ad8d-iceland.png", "flag": "/static/circle-flags/fr.svg", "wpm": 28.436018957345972, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.9417843986499995, "answerScore": 0.994178439865, "previousScore": 0, "newScore": 0.994178439865, "deltaScore": 0.994178439865 },
       { "maxDistance": 0, "time": 2533, "expected": "Belgique", "answered": "belgique ", "path": "/fr/geographie/europe/", "uid": "be", "count": 0, "distance": 0, "image": "/images/d8a4b8aa08d22b448ea0ddb150017989-belgium.png", "flag": "/static/circle-flags/fr.svg", "wpm": 42.63718910382945, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.9859301196300478, "answerScore": 0.9985930119630049, "previousScore": 0, "newScore": 0.9985930119630049, "deltaScore": 0.9985930119630049 },
       { "maxDistance": 0, "time": 1734, "expected": "France", "answered": "france ", "path": "/fr/geographie/europe/", "uid": "fr", "count": 0, "distance": 0, "image": "/images/2f13b9c978670f094d0614d34bd2e7c8-france.png", "flag": "/static/circle-flags/fr.svg", "wpm": 48.44290657439446, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.9921267997292722, "answerScore": 0.9992126799729273, "previousScore": 0, "newScore": 0.9992126799729273, "deltaScore": 0.9992126799729273 },
       { "maxDistance": 0, "time": 3524, "expected": "Estonie", "answered": "estonie ", "path": "/fr/geographie/europe/", "uid": "ee", "count": 0, "distance": 0, "image": "/images/8f3bccd84afab0ac5e51229c069ecbe6-estonia.png", "flag": "/static/circle-flags/fr.svg", "wpm": 27.241770715096482, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.9343998352439207, "answerScore": 0.9934399835243921, "previousScore": 0, "newScore": 0.9934399835243921, "deltaScore": 0.9934399835243921 },
@@ -51,20 +53,29 @@ class C_currentStatistics {
       { "maxDistance": 0, "time": 3356, "expected": "Lituanie", "answered": "Lituanie ", "path": "/fr/geographie/europe/", "uid": "lt", "count": 0, "distance": 0, "image": "/images/e618a51ee75bf19aa0ce723de42f6b7c-lithuania.png", "flag": "/static/circle-flags/fr.svg", "wpm": 32.18116805721097, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.9599696277089989, "answerScore": 0.9959969627708999, "previousScore": 0, "newScore": 0.9959969627708999, "deltaScore": 0.9959969627708999 },
       { "maxDistance": 0, "time": 4430, "expected": "Slovénie", "answered": "Slovénie ", "path": "/fr/geographie/europe/", "uid": "si", "count": 0, "distance": 0, "image": "/images/66ea9b9c45c9a23c812db7a593a9cca8-slovenia.png", "flag": "/static/circle-flags/fr.svg", "wpm": 24.37923250564334, "ratioMaxDistance": 1, "ratioDistance": 1, "ratioWpm": 0.9126579492012471, "answerScore": 0.9912657949201247, "previousScore": 0, "newScore": 0.9912657949201247, "deltaScore": 0.9912657949201247 }
     ];
+    */
+    return new Promise((resolve, reject) => {
+      if (this.answersStats.length == 0) {
+        reject("You haven't answered any questions");
+        return;
+      }
 
-    
-    // Prepare the data for display
-    this.results = model.processCurrentStatistics(this.answersStats);
+      // Prepare the data for display
+      this.results = model.processCurrentStatistics(this.answersStats);
 
-    // Populate static results
-    view.setNewResults(this.results);
+      // Populate static results
+      view.setNewResults(this.results);
 
 
-    console.log(this.results)
-    //console.log(JSON.stringify(this.answersStats));
+      //console.log(this.results)
+      //console.log(JSON.stringify(this.answersStats));
 
-    // Show the modal promise
-    return view.showModal();
+      // Show the modal promise
+      view.showModal()
+        .then((data) => resolve(data))
+        .catch((error) => reject(error))
+
+    })
   }
 
 
@@ -88,7 +99,13 @@ class C_currentStatistics {
     return qStat;
   }
 
-
+  /**
+   * Return the number of questions answered
+   * @returns The number of questions answered
+   */
+  countQuestionsAnswered() {
+    return this.answersStats.length;
+  }
 
 }
 

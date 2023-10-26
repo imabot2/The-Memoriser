@@ -119,9 +119,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
    * @returns An array with all the question with a counter equal to zero
    */
   getUnanskedQuestions() {
-
     return this.stats.filter(q => !q.count);
-
   }
 
 

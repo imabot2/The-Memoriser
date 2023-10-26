@@ -6,14 +6,23 @@
   background-color: var(--main-light-grey);
 }
 
+#results-modal .answer-card .id-badge {
+  background-color: var(--main-blue);
+  color: white;
+  opacity: 0.7;
+}
 
 #results-modal .answer-card .score {
   font-family: 'Luckiest Guy', cursive;
   font-size: 1.6em;
   margin-bottom: -0.5em;
-
 }
 
+
+#results-modal .answer-card.failed .card-body {
+  background-color: var(--main-red);
+  color: white;
+}
 
 #results-modal .answer-card .flag {
   height: 40px;

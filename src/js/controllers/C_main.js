@@ -71,7 +71,7 @@ let run = async () => {
         memoryTest.start();
 
         // FOR DEBUG
-        currentStatistics.showResults();
+        //currentStatistics.showResults();
 
 
       }, 100)
