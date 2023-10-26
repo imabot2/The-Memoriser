@@ -83,6 +83,8 @@ class C_MemoryTest {
         })
       }
 
+      // Reset statistics
+      currentStatistics.reset();
 
       // Get and display the first question
       this.current = model.getNextQuestion();
@@ -110,7 +112,7 @@ class C_MemoryTest {
     })
   }
 
-  
+
   /**
    * Start the memory test, enable input and set focus on the input bar
    */
@@ -313,7 +315,7 @@ class C_MemoryTest {
     if (auth.isLogged()) {
       model.saveStatistics()
         .then(() => {
-          notifications.success("Results saved", "Your memory test results are saved.");
+          notifications.success("Results saved", "Your memory test results are saved.", 1000);
         })
         .catch((error) => {
           console.error(error);

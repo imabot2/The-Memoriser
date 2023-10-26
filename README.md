@@ -12,3 +12,4 @@ Visit the app on [The Memoriser](https://memoriser.com)
 * Create unit tests (to check tests)
 * Remove the debug line in C_memoryTest.reset() function
 * Add tooltips on results titles
+* Make image inner or outer

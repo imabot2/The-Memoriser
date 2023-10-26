@@ -15,7 +15,7 @@ export default class V_CurrentStatisticsResults {
 
     // Get the modal elements
     this.resultsModalEl = document.getElementById("results-modal");
-    this.resultsModal = new bootstrap.Modal('#results-modal', { 'focus': false });
+    this.resultsModal = new bootstrap.Modal('#results-modal', { 'focus': true });
 
     // Set the callback function when the modal is shown
     this.resultsModalEl.addEventListener('show.bs.modal', () => { this.onModalShow(); });

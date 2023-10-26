@@ -5,7 +5,7 @@ import * as bootstrap from 'bootstrap';
 class V_Timer {
 
   constructor() {
-    
+
     // Get the main container
     this.timerContainer = document.getElementById("timer-container");
 
@@ -42,15 +42,15 @@ class V_Timer {
   startBlinking() {
     this.timerText.classList.add("blink");
   }
-  
-  
+
+
   /**
    * Stops the timer from blinking
    */
   stopBlinking() {
     this.timerText.classList.remove("blink");
   }
-  
+
 }
 
 
