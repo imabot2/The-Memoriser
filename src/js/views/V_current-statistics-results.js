@@ -7,6 +7,7 @@ import { easeOutQuadProgress } from "Js/lib/ease.js";
 
 export default class V_CurrentStatisticsResults {
 
+
   /**
    * Constructor, get and initialize the element
    */
@@ -17,8 +18,8 @@ export default class V_CurrentStatisticsResults {
     this.resultsModal = new bootstrap.Modal('#results-modal', { 'focus': false });
 
     // Set the callback function when the modal is shown
-    this.resultsModalEl.addEventListener('show.bs.modal', (e) => { this.onModalShow(); });
-    this.resultsModalEl.addEventListener('shown.bs.modal', (e) => { this.onModalShown(); });
+    this.resultsModalEl.addEventListener('show.bs.modal', () => { this.onModalShow(); });
+    this.resultsModalEl.addEventListener('shown.bs.modal', () => { this.onModalShown(); });
 
     // Get the score value element
     this.resultsScoreEl = this.resultsModalEl.querySelector("#results-score .value");
@@ -64,7 +65,16 @@ export default class V_CurrentStatisticsResults {
    * Show the modal
    */
   showModal() {
-    this.resultsModal.show();
+    return new Promise((resolve) => {
+
+      // Show the modal
+      this.resultsModal.show();
+
+      // Add an event listener to resolve the promise when the modal is closed
+      this.resultsModalEl.addEventListener('hidden.bs.modal', () => { 
+        resolve();
+      }, {once: true}); 
+    })
   }
 
 
@@ -73,18 +83,23 @@ export default class V_CurrentStatisticsResults {
    */
   onModalShow() {
 
+    // Reset score and progress
     this.resultsScoreEl.innerText = 0;
     this.resultsProgressEl.innerText = 0;
 
+    // Reset memory score pie chart
     this.pieScore.disableAnimation();
     this.pieScore.setRatio(0);
 
+    // Reset right answers pie chart
     this.pieCorrect.disableAnimation();
     this.pieCorrect.setRatio(0);
 
+    // Reset accuracy pie chart
     this.pieAccuracy.disableAnimation();
     this.pieAccuracy.setRatio(0);
 
+    // Reset wpm pie chart
     this.pieWpm.disableAnimation();
     this.pieWpm.setRatio(0);
   }
@@ -98,20 +113,23 @@ export default class V_CurrentStatisticsResults {
 
     setTimeout(() => {
 
-      // Update the score
+      // Update the score and progress
       easeOutQuadProgress(this.resultsScoreEl, 0, this.results.score)
-      easeOutQuadProgress(this.resultsProgressEl, 0, 100*this.results.progress, 2, true)
+      easeOutQuadProgress(this.resultsProgressEl, 0, 100 * this.results.progress, (this.results.progress >= 0.1) ? 1 : 2, true)
 
+      // Update memory score pie chart
       this.pieScore.enableAnimation();
       this.pieScore.setRatio(this.results.scoreRatio);
 
+      // Update right answers pie chart
       this.pieCorrect.enableAnimation();
       this.pieCorrect.setRatio(this.results.distance);
 
-
+      // Update accuracy pie chart
       this.pieAccuracy.enableAnimation();
       this.pieAccuracy.setRatio(this.results.maxDistance);
 
+      // Update wpm pie chart
       this.pieWpm.enableAnimation();
       this.pieWpm.setRatio(this.results.ratioWpm, 0, this.results.wpm);
     }, 250);

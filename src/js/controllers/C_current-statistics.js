@@ -28,14 +28,13 @@ class C_currentStatistics {
     // Prepare the data for display
     this.results = model.processCurrentStatistics(this.answersStats);
 
-    console.log(this.results)
-
     // Populate static results
     view.setNewResults(this.results);
 
     // Show the modal
-    view.showModal();
+    return view.showModal();
 
+    //console.log(this.results)
     //console.log(JSON.stringify(this.answersStats));
 
   }

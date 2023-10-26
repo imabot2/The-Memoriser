@@ -69,6 +69,10 @@ class C_Timer {
     view.show();
   }
 
+  hide() {
+    view.hide();
+  }
+
   /**
    * Refresh the timer in the view
    * It time is not provided, get current time from the timer

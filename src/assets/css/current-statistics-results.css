@@ -1,14 +1,20 @@
 #results-modal .modal-header {
   background-color: var(--main-dark-grey);
+}
+#results-modal .modal-header > div {
   font-size: clamp(30px, 100px, 6vmin);
-  font-family: 'Luckiest Guy', cursive;
-  color: var(--main-blue);
+  font-family: 'Luckiest Guy', cursive;  
   text-shadow: 0px 2px 2px black;
-
+  color: white;
 }
 
-#results-modal .modal-body .title {}
+#results-modal .modal-header .btn-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 
+#results-modal .modal-body .unit,
 #results-modal .modal-body .value {
   color: var(--main-purple);
   font-style: italic;

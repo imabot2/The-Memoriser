@@ -5,7 +5,6 @@ import "Js/controllers/C_login.js";
 import "Js/controllers/C_sign-up.js";
 import "Js/controllers/C_timer.js";
 import memoryTest from "Js/controllers/C_memory-test.js";
-import { isMobile } from "Js/lib/client.js";
 import { clientLanguage } from "../lib/client";
 import notifications from "Js/views/V_notifications";
 
@@ -68,13 +67,9 @@ let run = async () => {
       setTimeout(() => {
         // Hide the loader overlay
         view.hideLoader(300);
-
+        memoryTest.start();
 
         //currentStatistics.showResults();
-
-        // If user is not on mobile device, set focus to the answer input
-        // On mobile device, do not focus to prevent soft keyboard from opening
-        if (!isMobile()) document.getElementById('answer-input').focus();
       }, 100)
     })
       .catch((error) => {

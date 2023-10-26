@@ -6,11 +6,12 @@ import currentStatistics from "Js/controllers/C_current-statistics.js";
 import Timer from "Js/lib/timer.js"
 import auth from "Js/models/M_auth.js";
 import notifications from "Js/views/V_notifications";
-
+import { isMobile } from "Js/lib/client.js";
 
 class C_MemoryTest {
 
   constructor() {
+
     // Set callback functions when the user press Enter or the submit button
     view.onInput((text) => this.onInputChange(text));
     view.onEnter((text) => this.onEnterPressed(text));
@@ -51,6 +52,16 @@ class C_MemoryTest {
   */
   reset() {
 
+    // Current status of the memory test during reset
+    this.status = "reset";
+
+    // Clear and disable the input
+    view.clearInput();
+    view.disableInput();
+
+    // Hide the timer
+    timer.hide();
+
     return new Promise((resolve, reject) => {
 
       // Check if the memory test is not empty
@@ -72,6 +83,7 @@ class C_MemoryTest {
         })
       }
 
+
       // Get and display the first question
       this.current = model.getNextQuestion();
       let imageOnePromise = view.setNextImage(this.current.image, 0);
@@ -82,15 +94,33 @@ class C_MemoryTest {
       // Get and prepare the next question
       this.next = model.getNextQuestion();
       let imageTwoPromise = view.setNextImage(this.next.image, 0);
-      view.setNextFlag(this.next.metaData.flag)
+      view.setNextFlag(this.next.metaData.flag);
 
       // When all images are loaded, resolve the promise
       Promise.all([imageOnePromise, imageTwoPromise]).finally(() => {
+
+        // Reset the timer
+        timer.reset();
+
+        // Memory test is ready
+        this.status = "ready";
+
         resolve();
       })
     })
   }
 
+  
+  /**
+   * Start the memory test, enable input and set focus on the input bar
+   */
+  start() {
+    view.enableInput();
+
+    // If user is not on mobile device, set focus to the answer input
+    // On mobile device, do not focus to prevent soft keyboard from opening
+    if (!isMobile()) document.getElementById('answer-input').focus();
+  }
 
 
   /**
@@ -209,21 +239,21 @@ class C_MemoryTest {
     this.currentStats.count = this.current.count;
     this.currentStats.distance = distance;
     this.currentStats.image = this.current.image;
-    this.currentStats.flag = this.current.metaData.flag;    
+    this.currentStats.flag = this.current.metaData.flag;
 
     // Compute WPM, 
     this.computeWpm(this.currentStats);
     this.computeRatio(this.currentStats);
     this.computeScore(this.currentStats);
-    
+
     // Update global stats to get the new and previous scores
     let scores = model.update(this.currentStats.path, this.currentStats.uid, this.currentStats.answerScore);
     this.currentStats.previousScore = scores.previousScore;
     this.currentStats.newScore = scores.newScore;
     this.currentStats.deltaScore = scores.newScore - scores.previousScore;
-  
+
     // Push and update the statistics
-    currentStatistics.push({...this.currentStats});
+    currentStatistics.push({ ...this.currentStats });
   }
 
 
@@ -234,14 +264,14 @@ class C_MemoryTest {
   computeWpm(qStat) {
     // Compute WPM
     // Length +1 to consider the spaces between words
-    qStat.wpm = 12000 * (qStat.answered.trim().length+1) / qStat.time;
+    qStat.wpm = 12000 * (qStat.answered.trim().length + 1) / qStat.time;
   }
 
 
-    /**
-   * Compute ratios for the provided question (max distance, distance and wpm)
-   * @param {object} qStat Statistics of the current question
-   */
+  /**
+ * Compute ratios for the provided question (max distance, distance and wpm)
+ * @param {object} qStat Statistics of the current question
+ */
 
   computeRatio(qStat) {
     // Comptute ratios
@@ -255,8 +285,8 @@ class C_MemoryTest {
    * @param {object} qStat Statistics of the current question
    */
   computeScore(qStat) {
-     // Compute the weighted global score for this question
-     qStat.answerScore = 0.45 * qStat.ratioDistance + 0.45 * qStat.ratioMaxDistance + 0.1 * qStat.ratioWpm;
+    // Compute the weighted global score for this question
+    qStat.answerScore = 0.45 * qStat.ratioDistance + 0.45 * qStat.ratioMaxDistance + 0.1 * qStat.ratioWpm;
   }
 
   /**
@@ -268,8 +298,16 @@ class C_MemoryTest {
     this.status = "over";
     view.disableInput();
 
-    // Show the results on the screen
-    currentStatistics.showResults();
+    // Show the results on the screen 
+    currentStatistics.showResults().then(() => {
+      // When the modal is closed, reset the test and enable the view when the images are loaded
+      this.reset().then(() => {
+        view.enableInput();
+        view.focus();
+      });
+    });
+
+
 
     // If the user is logged, save statistics in database
     if (auth.isLogged()) {
@@ -340,7 +378,9 @@ class C_MemoryTest {
    * Remove a quiz from the list
    * @param {string} path Path to the quiz to remove
    */
-  removeQuiz(path) { return model.removeQuiz(path); }
+  removeQuiz(path) {
+    return model.removeQuiz(path);
+  }
 
 
 
