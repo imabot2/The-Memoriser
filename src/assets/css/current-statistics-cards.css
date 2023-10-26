@@ -1,0 +1,25 @@
+#results-modal #answer-cards .card {
+  font-size: 0.98em;
+}
+
+#results-modal .answer-card .card-img-top {
+  background-color: var(--main-light-grey);
+}
+
+
+#results-modal .answer-card .score {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.6em;
+  margin-bottom: -0.5em;
+
+}
+
+
+#results-modal .answer-card .flag {
+  height: 40px;
+}
+
+
+#results-modal .answer-card .row>.col-6:nth-child(2n+1) {
+  font-weight: bold;
+}

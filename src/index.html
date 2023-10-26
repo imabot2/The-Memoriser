@@ -203,11 +203,11 @@
   <!--#region Results modal -->
   <div id="results-modal" class="modal modal-xl" tabindex="-1">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content mb-5">
 
 
         <div class="modal-header pb-0">
-          
+
           <div class="w-100 d-flex justify-content-center align-items-center">
             <div class="logo text-center"><img src="/static/logo/logo.png"></div>
             <div class="ps-3">THE MEMORISER</div>
@@ -219,7 +219,7 @@
         <div class="modal-body">
           <div class="container-fluid">
 
-
+            <!--#region Scores and Progress results -->
             <div class="row text-center">
 
               <div id="results-score"
@@ -245,9 +245,10 @@
                 <div></div>
               </div>
             </div>
-
+            <!--#endregion Scores and Progress results -->
             <hr>
 
+            <!--#region Pie charts -->
             <div class="row text-center">
 
               <div id="results-pie-correct" class="col-lg-4 py-2 pie-chart">
@@ -282,14 +283,111 @@
               </div>
 
             </div>
+            <!--#endregion Pie charts -->
+            <hr>
+
+            <!--#region Answers cards -->
+            <div id="answer-cards" class="row row-cols-1 row-cols-lg-2 row-cols-xl-4 g-4 mb-4">
+
+              <div class="col">
+                <div class="answer-card card h-100 position-relative mt-3">
+                  <img src="/images/0bafcf2ae15bda89abf34abb36e94c83-poland.png" class="card-img-top">
+                  <div class="position-absolute top-0 start-50 translate-middle">
+                    <img src="/static/circle-flags/fr.svg" class="flag">
+                  </div>
+                  <div class="card-body container">
+                    <div class="card-title text-center mb-0 ">
+                      <div class="score">98.2%</div> 
+                      <span class="badge bg-success small">+1.2%</span>                                          
+                    </div>
+                    <hr>
+                    <div class="row">
 
 
+                      <div class="col-6 text-end pe-1">Expected:</div>
+                      <div class="col-6 ps-1">Vatican</div>
+                    
+                      <div class="col-6 text-end pe-1">Answered:</div>
+                      <div class="col-6 ps-1 ">Vatican</div>
+                    
+
+                      <div class="col-6 text-end pe-1">Time:</div>
+                      <div class="col-6 ps-1">2.18s</div>
+                    
+                      <div class="col-6 text-end pe-1">Accuracy:</div>
+                      <div class="col-6 ps-1 ">95%</div>
+
+                      <div class="col-6 text-end pe-1">Typing speed:</div>
+                      <div class="col-6 ps-1 ">36wpm</div>
+
+
+                    </div>
+                  </div>
+                  <div class="card-footer text-center">
+                    <img src="/static/icons/success.png" height="40">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="card h-100">
+                  <img src="/images/0bafcf2ae15bda89abf34abb36e94c83-poland.png" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.</p>
+                  </div>
+                  <div class="card-footer">
+                    f
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="card h-100">
+                  <img src="/images/0bafcf2ae15bda89abf34abb36e94c83-poland.png" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.</p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="card h-100">
+                  <img src="/images/0bafcf2ae15bda89abf34abb36e94c83-poland.png" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.</p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-body-secondary">Last updated 3 mins ago</small>
+                  </div>
+                </div>
+              </div>
+
+            </div>
 
           </div>
+
+          <!--#endregion Answers cards -->
+
         </div>
 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        </div>
+
+
       </div>
+
     </div>
+  </div>
   </div>
   <!--#endregion Results modal -->
 

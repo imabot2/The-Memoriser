@@ -60,7 +60,8 @@ let run = async () => {
 
     // Initialize the memory test (promise is resolved if the questions images are loaded)
     let imagesId = view.newMessage("Loading first images");
-    memoryTest.reset().then(() => {
+    memoryTest.reset()
+    .then(() => {
       view.setSuccess(imagesId);
 
 
@@ -69,7 +70,10 @@ let run = async () => {
         view.hideLoader(300);
         memoryTest.start();
 
-        //currentStatistics.showResults();
+        // FOR DEBUG
+        currentStatistics.showResults();
+
+
       }, 100)
     })
       .catch((error) => {

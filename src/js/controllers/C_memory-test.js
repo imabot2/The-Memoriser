@@ -305,7 +305,7 @@ class C_MemoryTest {
       // When the modal is closed, reset the test and enable the view when the images are loaded
       this.reset().then(() => {
         view.enableInput();
-        view.focus();
+        this.start();
       });
     });
 

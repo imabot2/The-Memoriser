@@ -1,17 +1,20 @@
-
 import "Assets/css/current-statistics-results.css";
+import V_CurentStatisticsCards from "Js/views/V_current-statistics-cards.js";
 import colors from "Js/views/V_colors.js";
 import PieChart from "Js/views/V_pie-chart.js";
 import * as bootstrap from "bootstrap";
 import { easeOutQuadProgress } from "Js/lib/ease.js";
 
-export default class V_CurrentStatisticsResults {
+export default class V_CurrentStatisticsResults extends V_CurentStatisticsCards {
 
 
   /**
    * Constructor, get and initialize the element
    */
   constructor() {
+
+    // Call the parent constructor
+    super();
 
     // Get the modal elements
     this.resultsModalEl = document.getElementById("results-modal");
