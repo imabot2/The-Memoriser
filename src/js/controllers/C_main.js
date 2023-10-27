@@ -12,12 +12,11 @@ import "Js/controllers/C_timer.js";
 import memoryTest from "Js/controllers/C_memory-test.js";
 import { clientLanguage } from "../lib/client";
 import notifications from "Js/views/V_notifications";
-import quizzes from "Js/models/M_quizzes-list.js";
-
-console.log (quizzes);
-
+import "Js/controllers/C_menu.js";
 
 import currentStatistics from "Js/controllers/C_current-statistics.js";
+
+
 
 // Set the callback functions for the loader
 model.setNewMessageCallback(msg => view.newMessage(msg));

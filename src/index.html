@@ -200,30 +200,59 @@
   </div>
   <!--#endregion Main container-->
 
-  <!--#region Main menu-->
+
+
+
+  <!--#region menu-->
   <div class="modal fade" id="menu-modal" tabindex="-1" aria-labelledby="menu-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
 
         <div class="modal-header position-relative pb-0">
+          <button type="button"
+            class="back-btn btn btn-sm btn-secondary position-absolute left-0 top-50 translate-middle-y align-middle">
+            <i class="bi bi-arrow-left-circle-fill mr-2"></i> Back
+          </button>
           <h1 class="modal-title luckiest text-center w-100" id="menu-modal-label">Menu</h1>
           <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
             aria-label="Close"></button>
         </div>
 
-        <div class="modal-body">
-          <div class="d-grid gap-2">
-            <button id="menu-select-memory-test" class="btn btn-lg btn-primary" type="button" data-bs-target="#menu-memory-test-language-modal" data-bs-toggle="modal">
-              <span class="luckiest">Select Memory Test</span>
-            </button>
-            <button class="btn btn-lg btn-primary disabled" type="button">
-              <span class="luckiest">Settings</span>
-            </button>
-            <button class="btn btn-lg btn-primary disabled" type="button">
-              <span class="luckiest">About</span>
-            </button>            
+        <div class="content modal-body">
+
+          <div class="collapse main-menu show">
+            <div class="d-grid gap-2">
+              <button class="btn btn-lg btn-primary menu-btn" data-type="navigation" data-target="languages" type="button">
+                <span class="luckiest">Select Memory Test</span>
+              </button>
+              <button class="setting-btn btn btn-lg btn-primary disabled" type="button">
+                <span class="luckiest">Settings</span>
+              </button>
+              <button class="about-btn btn btn-lg btn-primary disabled" type="button">
+                <span class="luckiest">About</span>
+              </button>
+            </div>
           </div>
+
+          <div class="collapse languages-menu">
+            <div class="d-grid gap-2"></div>
+          </div>
+
+          <div class="collapse categories-menu">
+            <div class="d-grid gap-2"></div>
+          </div>
+
+          <div class="collapse list-menu">
+            <div class="d-grid gap-2">
+
+
+              
+            </div>
+          </div>
+
         </div>
+
+
 
       </div>
     </div>
@@ -231,7 +260,8 @@
   <!--#endregion Main menu-->
 
   <!--#region Memory test language-->
-  <div class="modal fade" id="menu-memory-test-language-modal" tabindex="-1" aria-labelledby="menu-memory-test-language-modal-label" aria-hidden="true">
+  <div class="modal fade" id="menu-memory-test-language-modal" tabindex="-1"
+    aria-labelledby="menu-memory-test-language-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
 
@@ -241,7 +271,9 @@
           <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
             aria-label="Close"></button>
 
-          <button type="button" class="btn btn-sm btn-secondary position-absolute left-0 top-50 translate-middle-y align-middle" data-bs-target="#menu-modal" data-bs-toggle="modal">
+          <button type="button"
+            class="btn btn-sm btn-secondary position-absolute left-0 top-50 translate-middle-y align-middle"
+            data-bs-target="#menu-modal" data-bs-toggle="modal">
             <i class="bi bi-arrow-left-circle-fill mr-2"></i> Back
           </button>
         </div>
@@ -256,10 +288,10 @@
             </button>
             <button class="btn btn-lg btn-primary" type="button">
               <span class="luckiest">Deutsch</span>
-            </button>            
+            </button>
           </div>
         </div>
-        
+
       </div>
     </div>
   </div>

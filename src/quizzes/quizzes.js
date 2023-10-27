@@ -9,7 +9,7 @@ const quizzes = {
     categories: en,
   },
   fr: {
-    name: 'French',
+    name: 'Français',
     categories: fr,
   },
   de: {

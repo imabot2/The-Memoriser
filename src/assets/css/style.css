@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+
 :root {
   --main-blue: #4865d6;
   --main-red: #e83c4b;
@@ -25,7 +28,7 @@
   background-color: var(--main-red);
   color: white;
 }
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
 
 body {
   margin: 0;
