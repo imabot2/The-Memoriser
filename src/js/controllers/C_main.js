@@ -1,3 +1,8 @@
+// Initialize Firebase, the analytics
+import "Js/models/M_firebase.js";
+import "Js/models/M_analytics.js";
+
+
 import view from "Js/views/V_main.js";
 import model from "Js/models/M_main.js";
 import auth from "Js/models/M_auth.js";

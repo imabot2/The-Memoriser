@@ -7,6 +7,8 @@ import Timer from "Js/lib/timer.js"
 import auth from "Js/models/M_auth.js";
 import notifications from "Js/views/V_notifications";
 import { isMobile } from "Js/lib/client.js";
+import analytics from "Js/models/M_analytics.js";
+
 
 class C_MemoryTest {
 
@@ -134,6 +136,7 @@ class C_MemoryTest {
     if (this.status === "ready") {
 
       this.status = "running";
+      analytics.log ("Start memory test", model.getPaths() );
       timer.start();
       timer.show();
       this.questionTimer.init(0, "up");

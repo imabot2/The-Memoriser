@@ -3,14 +3,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
+
+
 module.exports = {
 
   // Optional and for development only. This provides the ability to
   // map the built code back to the original source format when debugging.
   devtool: "eval-source-map",
   watch: true,
-  //mode: "development",
-  mode: 'production',
+  mode: "development",
+  //mode: 'production',
 
 
   // The entry point file described above

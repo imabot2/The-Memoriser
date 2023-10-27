@@ -32,7 +32,7 @@ class V_Timer {
  */
   hide() {
     let h = this.timerContainer.offsetHeight;
-    this.timerContainer.style.top = `-${1.4 * h}px`;
+    this.timerContainer.style.top = `-${1.6 * h}px`;
   }
 
 
