@@ -205,7 +205,7 @@
 
   <!--#region menu-->
   <div class="modal fade" id="menu-modal" tabindex="-1" aria-labelledby="menu-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog">
       <div class="modal-content">
 
         <div class="modal-header position-relative pb-0">
@@ -222,7 +222,8 @@
 
           <div class="collapse main-menu show">
             <div class="d-grid gap-2">
-              <button class="btn btn-lg btn-primary menu-btn" data-type="navigation" data-target="languages" type="button">
+              <button class="btn btn-lg btn-primary menu-btn" data-type="navigation" data-target="languages"
+                type="button">
                 <span class="luckiest">Select Memory Test</span>
               </button>
               <button class="setting-btn btn btn-lg btn-primary disabled" type="button">
@@ -235,19 +236,32 @@
           </div>
 
           <div class="collapse languages-menu">
-            <div class="d-grid gap-2"></div>
+            <div class="parent d-grid gap-2"></div>
           </div>
 
           <div class="collapse categories-menu">
-            <div class="d-grid gap-2"></div>
+            <div class="parent d-grid gap-2"></div>
           </div>
 
           <div class="collapse list-menu">
-            <div class="d-grid gap-2">
-
-
-              
+            <!-- 
+            <div class="row pb-2">
+              <button class="col btn btn-primary me-1 luckiest">
+                <span class="luckiest">Select All</span>
+              </button>
+              <button class="col btn btn-primary ms-1 luckiest">
+                <span class="luckiest">Unselect All</span>
+              </button>
             </div>
+          -->
+            <div class="parent d-grid gap-2">
+              <div class="form-check form-switch fs-5">
+                <input class="form-check-input menu-btn" type="checkbox" role="switch"
+                  id="/fr/pays-sur-la-carte/europe/">
+                <label class="form-check-label" for="/fr/pays-sur-la-carte/europe/">Default switch checkbox input</label>
+              </div>
+            </div>
+
           </div>
 
         </div>

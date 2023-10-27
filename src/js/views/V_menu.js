@@ -10,6 +10,9 @@ class V_menu {
     this.modalEl = document.getElementById("menu-modal")
     this.modal = new bootstrap.Modal(this.modalEl);
 
+
+    this.titleEl = this.modalEl.querySelector('.modal-title');
+
     setTimeout(() => {
       this.modal.show();
     }, 1000)
@@ -39,11 +42,13 @@ class V_menu {
 
     this.mainListEl = this.modalEl.querySelector(".list-menu");
     this.menuCollapse.list = new bootstrap.Collapse(this.mainListEl, { toggle: false, parent: parent });
-/*
-    setTimeout(() => {
-      this.showMenu('languages');
-    }, 1500)
-*/
+
+    this.titles = {};
+    this.titles['main'] = 'Menu';
+    this.titles['languages'] = 'Languages';
+    this.titles['categories'] = 'Categories';
+    this.titles['list'] = 'Memory Tests';
+
   }
 
 
@@ -53,7 +58,7 @@ class V_menu {
   populateLanguages() {
 
     // Get the parent element
-    let parent = this.modalEl.querySelector(".content .languages-menu>div");
+    let parent = this.modalEl.querySelector(".content .languages-menu .parent");
 
     // For each language, create a button
     for (const [key, value] of Object.entries(quizzes)) {
@@ -76,8 +81,12 @@ class V_menu {
    */
     populateCategories(language) {
       
+      console.log (quizzes[language])
       // Get the parent element
-      let parent = this.modalEl.querySelector(".content .categories-menu>div");
+      let parent = this.modalEl.querySelector(".content .categories-menu .parent");
+
+      // Empty the parent
+      parent.innerHTML = "";
       
       // For each language, create a button
       for (const [category, value] of Object.entries(quizzes[language].categories)) {
@@ -128,6 +137,7 @@ class V_menu {
    * @param {string} label Label of the menu to show
    */
   showMenu(label) {
+    this.titleEl.innerText = this.titles[label];
     this.menuCollapse[label].show()
   }
 
@@ -140,9 +150,10 @@ class V_menu {
   }
 
   onBtnMenuClicked(event) {
+
+    // Check if this is an interactive element
     let element = event.target.closest(".menu-btn");
     if (element === null) return;
-
 
     // Process the event attribute on the button
     let e = {};
@@ -153,6 +164,7 @@ class V_menu {
         break;
     }
 
+    // Run the callback with the event
     this.onMenuBtnCallback(e)
   }
 

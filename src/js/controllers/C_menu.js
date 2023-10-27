@@ -18,7 +18,9 @@ class C_Menu {
   }
 
   onMenuBtn(event) {
-    console.log(event);
+    
+    //console.log(event);
+    
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
 
@@ -26,12 +28,18 @@ class C_Menu {
   }
 
   goToMenu(target) {
+
+    // Get the target 
     let menu = target.split('/');
+
+    // Populate the next menu
     switch (menu[0]) {
       case 'categories': view.populateCategories(menu[1]); break;
       
     }
 
+    // Show the next menu
+    this.currentMenu = menu[0];
     view.showMenu(menu[0]);
   }
 
@@ -41,12 +49,16 @@ class C_Menu {
    * Callback function called when the back button is clicked
    */
   onBackBtn() {
+    
+    // Select previous menu according to the current one
     switch (this.currentMenu) {
-      case 'main': view.hideModal();
-      case 'languages': view.showMenu('main');
-      case 'categories': view.showMenu('languages');
-      case 'list': view.showMenu('categories');
+      case 'main': view.hideModal(); return;
+      case 'languages': this.currentMenu = 'main'; break;
+      case 'categories': this.currentMenu = 'languages'; break;
+      case 'list': this.currentMenu = 'categories'; break;
     }
+    // Show the previous menu
+    view.showMenu(this.currentMenu); 
   }
 
 
