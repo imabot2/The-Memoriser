@@ -12,6 +12,10 @@ import "Js/controllers/C_timer.js";
 import memoryTest from "Js/controllers/C_memory-test.js";
 import { clientLanguage } from "../lib/client";
 import notifications from "Js/views/V_notifications";
+import quizzes from "Js/models/M_quizzes-list.js";
+
+console.log (quizzes);
+
 
 import currentStatistics from "Js/controllers/C_current-statistics.js";
 
@@ -41,14 +45,14 @@ let run = async () => {
   switch (clientLanguage) {
     case "fr":
       if (process.env.NODE_ENV == "production") {
-        memoryTests = ["/fr/geographie/europe/"];
+        memoryTests = ["/fr/pays-sur-la-carte/europe/"];
       }
       if (process.env.NODE_ENV == "development") {
         memoryTests = [
-          //"/en/geography/europe/",
-          //"/fr/geographie/europe/",     
-          //"/iso/country-code/europe/",
-          //"/en/geography/africa/",
+          "/en/countries-on-the-map/europe/",
+          "/fr/pays-sur-la-carte/europe/",     
+          "/iso/country-codes/europe/",
+          "/en/countries-on-the-map/africa/",
           "/en/chess/stockfish-starting-position/"
         ];
       }
