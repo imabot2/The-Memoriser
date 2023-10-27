@@ -203,6 +203,7 @@ class C_MemoryTest {
     if (this.status === "ready") {
 
       this.status = "running";
+      analytics.log ("Start memory test", model.getPaths() );
       timer.start();
       timer.show();
       this.questionTimer.init(0, "up");

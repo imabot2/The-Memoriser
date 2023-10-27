@@ -128,7 +128,7 @@
 
   <!--#region Top buttons -->
   <!-- Burger icon that open the main menu -->
-  <img id="burger" src="/static/icons/burger.png" class="disable">
+  <img id="burger" src="/static/icons/burger.png" data-bs-toggle="modal" data-bs-target="#menu-modal">
 
 
   <!-- Login icon that open the authentification menu -->
@@ -199,6 +199,72 @@
 
   </div>
   <!--#endregion Main container-->
+
+  <!--#region Main menu-->
+  <div class="modal fade" id="menu-modal" tabindex="-1" aria-labelledby="menu-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header position-relative pb-0">
+          <h1 class="modal-title luckiest text-center w-100" id="menu-modal-label">Menu</h1>
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-grid gap-2">
+            <button id="menu-select-memory-test" class="btn btn-lg btn-primary" type="button" data-bs-target="#menu-memory-test-language-modal" data-bs-toggle="modal">
+              <span class="luckiest">Select Memory Test</span>
+            </button>
+            <button class="btn btn-lg btn-primary disabled" type="button">
+              <span class="luckiest">Settings</span>
+            </button>
+            <button class="btn btn-lg btn-primary disabled" type="button">
+              <span class="luckiest">About</span>
+            </button>            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--#endregion Main menu-->
+
+  <!--#region Memory test language-->
+  <div class="modal fade" id="menu-memory-test-language-modal" tabindex="-1" aria-labelledby="menu-memory-test-language-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header position-relative pb-0">
+          <h1 class="modal-title luckiest text-center w-100" id="mmenu-memory-test-language-modal-label">Language</h1>
+
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+
+          <button type="button" class="btn btn-sm btn-secondary position-absolute left-0 top-50 translate-middle-y align-middle" data-bs-target="#menu-modal" data-bs-toggle="modal">
+            <i class="bi bi-arrow-left-circle-fill mr-2"></i> Back
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-grid gap-2">
+            <button id="menu-select-memory-test" class="btn btn-lg btn-primary" type="button">
+              <span class="luckiest">English</span>
+            </button>
+            <button class="btn btn-lg btn-primary" type="button">
+              <span class="luckiest">Français</span>
+            </button>
+            <button class="btn btn-lg btn-primary" type="button">
+              <span class="luckiest">Deutsch</span>
+            </button>            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!--#region Memory test language-->
+
 
   <!--#region Results modal -->
   <div id="results-modal" class="modal modal-xl" tabindex="-1">
@@ -334,10 +400,11 @@
               </div>
 
             </div>
+            <!--#endregion Answers cards -->
 
           </div>
 
-          <!--#endregion Answers cards -->
+
 
         </div>
 
@@ -350,7 +417,7 @@
 
     </div>
   </div>
-  </div>
+
   <!--#endregion Results modal -->
 
 
