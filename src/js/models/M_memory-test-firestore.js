@@ -21,6 +21,22 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
   }
 
 
+
+  replaceAllQuiz(path) {
+    // Remove all existing quizz
+    this.getPaths().forEach((pathToRemove) => {
+      this.removeQuiz(pathToRemove)
+    })
+    // Add the new quiz
+    return this.addQuiz(path);
+  }
+
+
+  /**
+   * Load a quiz and the associated statistics
+   * @param {string} path The path of the quiz to load
+   * @returns A promise when the quiz is loaded
+   */
   addQuiz(path) {
 
     // Return a promise

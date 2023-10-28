@@ -435,9 +435,23 @@ class C_MemoryTest {
    * @param {string} path Path to the quiz to remove
    */
   removeQuiz(path) {
-    return model.removeQuiz(path);
+    
+    // Do not remove quiz if there is only one
+    if (model.countPaths() == 1) return false;
+
+    // Remove the requested quizz
+    model.removeQuiz(path);
+  
+    return true;
   }
 
+  /**
+   * Remove all quiz and replace with a single one
+   * @param {string} path The new quiz to load
+   */
+  replaceAllQuiz(path) {
+    return model.replaceAllQuiz(path);
+  }
 
 
 }

@@ -149,20 +149,19 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     })
   }
 
+
+
   /**
  * Remove the statistics for a given path and call the parent function to remove the questions
  * @param {string} path Path of the quiz to remove
  */
   removeQuiz(path) {
 
-    if (this.countPaths() == 1) return false;
-
     // Remove stats for this path
     this.stats = this.stats.filter((q) => { return q.path !== path });
     // Remove the question
     super.removeQuiz(path);
 
-    return true;
   }
 
 

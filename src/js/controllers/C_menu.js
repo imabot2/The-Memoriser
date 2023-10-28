@@ -47,7 +47,7 @@ class C_Menu {
 
           // Add a message in the loader
           let id = loader.newMessage(`Loading memory test ${event.target}.`);
-          
+
           // Load a new quiz
           memoryTest.addQuiz(event.target)
             .then(() => {
@@ -61,6 +61,29 @@ class C_Menu {
         }
 
         break;
+
+
+      case 'select-quiz':
+        if (event.checked) {
+
+          // Add a message in the loader
+          let id = loader.newMessage(`Loading single memory test ${event.target}.`);
+
+          // Load and replace with a new quiz
+          memoryTest.replaceAllQuiz(event.target)
+            .then(() => {
+              loader.setSuccess(id);
+              
+            })
+            .catch((error) => {
+              loader.setError(id);
+              notifications.error('Loading Error', `Error while loading a single memory test ${event.target}.`);
+            })
+
+        }
+
+        break;
+
     }
   }
 
