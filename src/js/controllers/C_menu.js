@@ -5,28 +5,35 @@ import loader from "Js/views/V_main.js";
 
 class C_Menu {
 
-
+  /**
+   * Constructor 
+   * - Set callback function
+   * - Initialize variables
+   * - Populate the language menu
+   */
   constructor() {
 
     // Callback menu for back button
     view.setBackBtnCallback(() => { this.onBackBtn() });
     view.setMenuBtnCallback((e) => { this.onMenuBtn(e) });
+    view.setModalHiddenCallback(() => { this.onModalHide() })
 
     // Set the initial current menu
     this.currentMenu = 'main';
 
     // Populate the language menu
     view.populateLanguages();
-
   }
+
+
+
 
   /**
    * Process a click in the menu button
    * @param {object} event The event properties
    */
   onMenuBtn(event) {
-    
-   
+
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
       case 'add-remove-quiz':
@@ -38,19 +45,22 @@ class C_Menu {
         }
         else {
 
-          // Load a new quiz
+          // Add a message in the loader
           let id = loader.newMessage(`Loading memory test ${event.target}.`);
+          
+          // Load a new quiz
           memoryTest.addQuiz(event.target)
-          .then(() => {
-            loader.setSuccess(id);
-          })
-          .catch(() => {
-            loader.setError(id);
-            notifications.error('Loading Error', `Error while loading the memory test ${event.target}.`);
-          })
+            .then(() => {
+              loader.setSuccess(id);
+            })
+            .catch(() => {
+              loader.setSuccess(error);
+              notifications.error('Loading Error', `Error while loading the memory test ${event.target}.`);
+            })
+
         }
 
-      break;
+        break;
     }
   }
 
@@ -63,7 +73,6 @@ class C_Menu {
     switch (menu[0]) {
       case 'categories': view.populateCategories(menu[1]); break;
       case 'list': view.populateList(menu[1], menu[2]); break;
-      
     }
 
     // Show the next menu
@@ -77,7 +86,7 @@ class C_Menu {
    * Callback function called when the back button is clicked
    */
   onBackBtn() {
-    
+
     // Select previous menu according to the current one
     switch (this.currentMenu) {
       case 'main': view.hideModal(); return;
@@ -86,10 +95,28 @@ class C_Menu {
       case 'list': this.currentMenu = 'categories'; break;
     }
     // Show the previous menu
-    view.showMenu(this.currentMenu); 
+    view.showMenu(this.currentMenu);
   }
 
 
+  /**
+   * Callback function called when the modal is closed
+   */
+  onModalHide() {
+
+    // Set the initial current menu
+    this.currentMenu = 'main';
+    view.showMenu('main');
+
+    // Show the loader until message are pending
+    loader.showLoaderWhilePending()
+      .then(() => {
+        memoryTest.reset().then(() => {
+          loader.hideLoader();
+          memoryTest.start();
+        })
+      })
+  }
 
 }
 

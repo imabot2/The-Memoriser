@@ -13,6 +13,9 @@ class V_MainLoader {
     // No message at start up
     this.messages = {};
     this.resetMessages();
+
+    // Create the event when all the message are resolved
+    this.lastMessageResolvedEvent = new Event("last-message-resolved");
   }
 
 
@@ -20,16 +23,17 @@ class V_MainLoader {
    * Delete all messages
    */
   resetMessages() {
-       
+
     // Delete the elements
     Object.values(this.messages).forEach(message => {
       message.el.remove();
     })
 
     // Reset the arrays
-    this.messages={};
+    this.messages = {};
     this.index = 0;
     this.pending = 0;
+
   }
 
   /**
@@ -50,13 +54,12 @@ class V_MainLoader {
     this.dialog.append(row);
     this.dialog.scrollTo(0, this.dialog.scrollHeight);
 
-
     // Store the element and the messagein the list
     this.messages[this.index] = {
       'el': row,
       'msg': message
     }
-    
+
     // Increase the number of pending messages
     this.pending++;
     // Return and increase the index
@@ -73,9 +76,11 @@ class V_MainLoader {
     let el = this.messages[id].el.querySelector(".status")
     el.textContent = "[OK]";
     el.classList.add("success");
-    console.log (`%cOK%c ${this.messages[id].msg}`, "background-color: #198754; padding:0.3em; border-radius: 0.5em;", '');
+    console.log(`%cOK%c ${this.messages[id].msg}`, "background-color: #198754; padding:0.3em; border-radius: 0.5em;", '');
     this.pending--;
+    if (this.pending == 0) this.dialog.dispatchEvent(this.lastMessageResolvedEvent);
   }
+
 
   /**
    * Mark a message as failed
@@ -85,8 +90,9 @@ class V_MainLoader {
     let el = this.messages[id].el.querySelector(".status")
     el.textContent = "[Failed]";
     el.classList.add("error");
-    console.log (`%cFailed%c ${this.messages[id].msg}`, "background-color: #dc3545; padding:0.3em; border-radius: 0.5em;", '');
+    console.log(`%cFailed%c ${this.messages[id].msg}`, "background-color: #dc3545; padding:0.3em; border-radius: 0.5em;", '');
     this.pending--;
+    if (this.pending == 0) this.dialog.dispatchEvent(this.lastMessageResolvedEvent);
     this.countErrors++;
   }
 
@@ -95,7 +101,7 @@ class V_MainLoader {
    * Hide the loader overlay
    * @param {integer} ms Fade out duration in milliseconds
    */
-  showLoader(ms=250, opacity=0.5) {
+  showLoader(ms = 250, opacity = 0.95) {
 
     // Set deflaut time is ms is not provided
     ms = ms ?? 250;
@@ -103,9 +109,31 @@ class V_MainLoader {
     // Set transition time and start transition
     this.loaderEl.style.transition = `opacity ${ms}ms ease-in-out`;
     this.loaderEl.style.opacity = opacity;
-
-    
   }
+
+
+  /**
+   * Show the loader (if messages are pending)
+   * And resolve the the last message is resolved
+   * @returns A promise resolved when there is no more pending messages
+   */
+  showLoaderWhilePending() {
+
+    return new Promise((resolve) => {
+
+      // If no message are pending, resolve and return
+      if (this.pending == 0) { resolve(); return; }
+
+      // There are pending messages, wait until they are resolved
+      this.showLoader();
+
+      // Resolve the promise when the last message is resolved
+      this.dialog.addEventListener('last-message-resolved', () => {
+        resolve();
+      }, { once: true });
+    })
+  }
+
 
   /**
    * Hide the loader overlay
@@ -125,10 +153,9 @@ class V_MainLoader {
       this.resetMessages();
     }, ms);
   }
-
-  
-
 }
+
+
 
 
 export default V_MainLoader;

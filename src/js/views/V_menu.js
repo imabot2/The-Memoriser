@@ -8,19 +8,26 @@ import memoryTest from "Js/models/M_memory-test.js";
 class V_menu {
 
 
+  /**
+   * Constructor Get the elements and initialize the bootstrap components
+   */
   constructor() {
 
     // Get the modal element
     this.modalEl = document.getElementById("menu-modal")
     this.modal = new bootstrap.Modal(this.modalEl);
 
+    this.onModalHiddenCallback = () => {};
+    this.modalEl.addEventListener('hidden.bs.modal', (e) => { this.onModalHiddenCallback(e)   })
 
+    // Get the title modal
     this.titleEl = this.modalEl.querySelector('.modal-title');
 
+    /*
     setTimeout(() => {
       this.modal.show();
     }, 1000)
-
+*/
     // Set callback when the user click the back button
     this.onBackBtnCallback = () => { };
     this.backBtn = this.modalEl.querySelector(".back-btn");
@@ -180,7 +187,7 @@ class V_menu {
 
   }
 
-  
+
   /**
    * Check a switch in the modal
    * @param {string} id Id of the switch to check
@@ -235,6 +242,11 @@ class V_menu {
     this.modal.hide();
   }
 
+
+  /**
+   * Callback function called when the user click in an interactive element of the menu
+   * @param {object} event Detail of the user action
+   */
   onBtnMenuClicked(event) {
 
     // Check if this is an interactive element
@@ -245,7 +257,8 @@ class V_menu {
     let e = {};
     e.type = element.getAttribute('data-type');
     switch (e.type) {
-      case 'navigation':
+
+      case 'navigation':        
         e.target = element.getAttribute('data-target');
         break;
 
@@ -269,6 +282,7 @@ class V_menu {
     this.onMenuBtnCallback = callback;
   }
 
+
   /**
    * Set the callback function called when the back button is clicked
    * @param {function} callback Function called
@@ -277,6 +291,14 @@ class V_menu {
     this.onBackBtnCallback = callback;
   }
 
+
+  /**
+   * Set the callback function called when the 
+   * @param {function} callback Fonction called when the hide instance of the modal is called
+   */
+  setModalHiddenCallback(callback) {
+    this.onModalHiddenCallback = callback;
+  }
 
 }
 

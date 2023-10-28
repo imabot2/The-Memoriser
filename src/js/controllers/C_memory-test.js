@@ -8,7 +8,7 @@ import auth from "Js/models/M_auth.js";
 import notifications from "Js/views/V_notifications";
 import { isMobile } from "Js/lib/client.js";
 import analytics from "Js/models/M_analytics.js";
-
+import loader from "Js/views/V_main.js";
 
 class C_MemoryTest {
 
@@ -41,8 +41,8 @@ class C_MemoryTest {
 
     // Initialize the timer used for each question
     this.questionTimer = new Timer();
-
   }
+
 
   model() {
     return model;
@@ -108,7 +108,6 @@ class C_MemoryTest {
 
         // Memory test is ready
         this.status = "ready";
-
         resolve();
       })
     })
@@ -136,7 +135,7 @@ class C_MemoryTest {
     if (this.status === "ready") {
 
       this.status = "running";
-      analytics.log ("Start memory test", model.getPaths() );
+      analytics.log("Start memory test", model.getPaths());
       timer.start();
       timer.show();
       this.questionTimer.init(0, "up");
@@ -203,7 +202,7 @@ class C_MemoryTest {
     if (this.status === "ready") {
 
       this.status = "running";
-      analytics.log ("Start memory test", model.getPaths() );
+      analytics.log("Start memory test", model.getPaths());
       timer.start();
       timer.show();
       this.questionTimer.init(0, "up");
@@ -342,12 +341,14 @@ class C_MemoryTest {
     // Show the results on the screen    
     currentStatistics.showResults()
       .finally(() => {
+        
         // When the modal is closed, reset the test and enable the view when the images are loaded
         this.reset()
           .then(() => {
             view.enableInput();
             this.start();
           })
+        
       })
       .catch((error) => {
         notifications.error("Results Error", error);

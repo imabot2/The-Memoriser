@@ -13,6 +13,7 @@ class V_Main extends V_MainLoader {
     // Call the parent constructor
     super();
 
+    
     // Get main element and answer input
     this.main = document.getElementById("main");
     
@@ -26,9 +27,11 @@ class V_Main extends V_MainLoader {
     const toastElList = document.querySelectorAll('.toast');
     [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, { animation: true, autohide: true, delay: 10000 }));
 
+
     // On resize, resize the main container     
     window.visualViewport.addEventListener('resize', () => {this.onResize(); });
 
+    
     // Call the onResize function for first rendering
     this.onResize();
   }

@@ -48,6 +48,19 @@ import ukraine from "Quizzes/en/countries-on-the-map/europe/img/ukraine.png";
 
 
 // Target language of the test
+export var metaData = {
+
+  // Quiz flag
+  flag: "/static/circle-flags/de.svg",
+
+
+  // Special characters for this test
+  specialCharacters: [
+  ]
+}
+
+
+// Target language of the test
 export var questions = [
   {
     uid: "al",
@@ -92,7 +105,7 @@ export var questions = [
     answer: "Bulgarien"
   },
   {
-    uid: "fr",
+    uid: "hr",
     image: croatia,
     prompt: "Welches Land ist das?",
     answer: "Kroatien"

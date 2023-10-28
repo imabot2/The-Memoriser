@@ -49,9 +49,9 @@ let run = async () => {
       if (process.env.NODE_ENV == "development") {
         memoryTests = [
           //"/en/countries-on-the-map/europe/",
-          //"/fr/pays-sur-la-carte/europe/",     
+          "/fr/pays-sur-la-carte/europe/",     
           //"/iso/country-codes/europe/",
-          "/en/countries-on-the-map/africa/",
+          //"/en/countries-on-the-map/africa/",
           //"/en/chess/stockfish-starting-position/"
         ];
       }
