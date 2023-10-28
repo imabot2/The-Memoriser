@@ -17,17 +17,18 @@ class V_menu {
     this.modalEl = document.getElementById("menu-modal")
     this.modal = new bootstrap.Modal(this.modalEl);
 
-    this.onModalHiddenCallback = () => {};
-    this.modalEl.addEventListener('hidden.bs.modal', (e) => { this.onModalHiddenCallback(e)   })
+    this.onModalHiddenCallback = () => { };
+    this.modalEl.addEventListener('hidden.bs.modal', (e) => { this.onModalHiddenCallback(e) })
 
     // Get the title modal
     this.titleEl = this.modalEl.querySelector('.modal-title');
 
-    /*
+
     setTimeout(() => {
+      console.log("Show modal on statup");
       this.modal.show();
     }, 1000)
-*/
+
     // Set callback when the user click the back button
     this.onBackBtnCallback = () => { };
     this.backBtn = this.modalEl.querySelector(".back-btn");
@@ -137,10 +138,9 @@ class V_menu {
       // Prepare the button properties
       let properties = {};
       properties.label = value.name;
-      properties.id = path.slice(1,-1).replaceAll('/', '_');
+      properties.id = path.slice(1, -1).replaceAll('/', '_');
       properties.checked = memoryTest.isPathSelected(`${path}`);
       properties.attributes = {}
-      properties.attributes['data-type'] = 'add-remove-quiz';
       properties.attributes['data-target'] = path;
 
 
@@ -157,30 +157,60 @@ class V_menu {
    */
   appendSwitch(parent, properties) {
 
-    // Create the element
+
+    // Create the main container
     let container = document.createElement('div');
-    container.classList.add('form-check', 'form-switch', 'fs-5');
+    container.classList.add('d-flex', 'fs-5');
+
+
+
+    // Create the radio button container
+    let radioContainer = document.createElement('div');
+    radioContainer.classList.add('form-check');
+    container.append(radioContainer);
+
+    // Create the radio button
+    let inputRadio = document.createElement('input');
+    inputRadio.classList.add('form-check-input', 'menu-btn')
+    inputRadio.checked = properties.checked;
+    // Add the attributes
+    for (const [key, value] of Object.entries(properties.attributes)) { inputRadio.setAttribute(key, value); }
+    inputRadio.setAttribute('type', 'radio');
+    inputRadio.setAttribute('data-type', 'select-quiz');
+    inputRadio.setAttribute('data-bs-toogle', 'tooltip');
+    inputRadio.setAttribute('data-bs-title', 'Select only this test. This will disable all others.');
+    new bootstrap.Tooltip(inputRadio, { trigger: 'hover'});
+    radioContainer.append(inputRadio);
+
+
 
     // Create the checkbox
-    let input = document.createElement('input');
-    input.classList.add('form-check-input', 'menu-btn')
-    input.checked = properties.checked;
+    let checkBoxContainer = document.createElement('div');
+    checkBoxContainer.classList.add('form-check');
+    container.append(checkBoxContainer);
+
+    let inputCheckbox = document.createElement('input');
+    inputCheckbox.classList.add('form-check-input', 'menu-btn');
+    inputCheckbox.id = properties.id;
+    checkBoxContainer.checked = properties.checked;
+    inputCheckbox.setAttribute('type', 'checkbox');
+    inputCheckbox.setAttribute('data-type', 'add-remove-quiz');
+    inputCheckbox.setAttribute('data-bs-toogle', 'tooltip');
+    inputCheckbox.setAttribute('data-bs-title', 'Add or remove this memory test.');
+    new bootstrap.Tooltip(inputCheckbox, { trigger: 'hover'});
 
     // Add the attributes
-    input.setAttribute('type', 'checkbox');
-    input.setAttribute('role', 'switch');
-    for (const [key, value] of Object.entries(properties.attributes)) { input.setAttribute(key, value); }
+    for (const [key, value] of Object.entries(properties.attributes)) { inputCheckbox.setAttribute(key, value); }
+    checkBoxContainer.append(inputCheckbox);
 
-    // Add the id
-    input.id = properties.id;
-    container.append(input);
+
 
     // Create and add the label
     let label = document.createElement('label');
     label.classList.add('form-check-label', 'w-100')
     label.setAttribute('for', properties.id);
     label.innerText = properties.label;
-    container.append(label)
+    checkBoxContainer.append(label)
 
     // Append the button in the dom
     parent.append(container);
@@ -193,7 +223,7 @@ class V_menu {
    * @param {string} id Id of the switch to check
    */
   checkSwitch(id) {
-    this.modalEl.querySelector('#'+id).checked = true;
+    this.modalEl.querySelector('#' + id).checked = true;
   }
 
 
@@ -252,17 +282,23 @@ class V_menu {
     // Check if this is an interactive element
     let element = event.target.closest(".menu-btn");
     if (element === null) return;
-
+    
     // Process the event attribute on the button
     let e = {};
     e.type = element.getAttribute('data-type');
     switch (e.type) {
 
-      case 'navigation':        
+      case 'navigation':
         e.target = element.getAttribute('data-target');
         break;
 
       case 'add-remove-quiz':
+        e.target = element.getAttribute('data-target');
+        e.checked = element.checked;
+        e.id = element.id;
+        break;
+
+      case 'select-quiz':
         e.target = element.getAttribute('data-target');
         e.checked = element.checked;
         e.id = element.id;
