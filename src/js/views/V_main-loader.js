@@ -3,6 +3,7 @@ class V_MainLoader {
   /**
    * Constructor
    * - Get DOM element 
+   * - Reset messages
    */
   constructor() {
 
@@ -11,10 +12,25 @@ class V_MainLoader {
 
     // No message at start up
     this.messages = {};
-    this.index = 0;
-
+    this.resetMessages();
   }
 
+
+  /**
+   * Delete all messages
+   */
+  resetMessages() {
+       
+    // Delete the elements
+    Object.values(this.messages).forEach(message => {
+      message.el.remove();
+    })
+
+    // Reset the arrays
+    this.messages={};
+    this.index = 0;
+    this.pending = 0;
+  }
 
   /**
    * Create and show a new message
@@ -41,6 +57,8 @@ class V_MainLoader {
       'msg': message
     }
     
+    // Increase the number of pending messages
+    this.pending++;
     // Return and increase the index
     return this.index++;
   }
@@ -56,6 +74,7 @@ class V_MainLoader {
     el.textContent = "[OK]";
     el.classList.add("success");
     console.log (`%cOK%c ${this.messages[id].msg}`, "background-color: #198754; padding:0.3em; border-radius: 0.5em;", '');
+    this.pending--;
   }
 
   /**
@@ -67,6 +86,8 @@ class V_MainLoader {
     el.textContent = "[Failed]";
     el.classList.add("error");
     console.log (`%cFailed%c ${this.messages[id].msg}`, "background-color: #dc3545; padding:0.3em; border-radius: 0.5em;", '');
+    this.pending--;
+    this.countErrors++;
   }
 
 
@@ -101,24 +122,11 @@ class V_MainLoader {
     // Start a timer to hide the overlay (prevent keeping the overlay over page content)
     setTimeout(() => {
       this.loaderEl.classList.add("d-none");
-      this.deleteAllMessage();
+      this.resetMessages();
     }, ms);
   }
 
-  /**
-   * Delete all messages
-   */
-  deleteAllMessage() {
-    
-    // Delete the elements
-    Object.values(this.messages).forEach(message => {
-      message.el.remove();
-    })
-
-    // Reset the arrays
-    this.messages={};
-    this.index = 0;
-  }
+  
 
 }
 

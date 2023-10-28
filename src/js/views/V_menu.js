@@ -130,7 +130,7 @@ class V_menu {
       // Prepare the button properties
       let properties = {};
       properties.label = value.name;
-      properties.id = path;
+      properties.id = path.slice(1,-1).replaceAll('/', '_');
       properties.checked = memoryTest.isPathSelected(`${path}`);
       properties.attributes = {}
       properties.attributes['data-type'] = 'add-remove-quiz';
@@ -178,6 +178,15 @@ class V_menu {
     // Append the button in the dom
     parent.append(container);
 
+  }
+
+  
+  /**
+   * Check a switch in the modal
+   * @param {string} id Id of the switch to check
+   */
+  checkSwitch(id) {
+    this.modalEl.querySelector('#'+id).checked = true;
   }
 
 
@@ -243,6 +252,7 @@ class V_menu {
       case 'add-remove-quiz':
         e.target = element.getAttribute('data-target');
         e.checked = element.checked;
+        e.id = element.id;
         break;
     }
 

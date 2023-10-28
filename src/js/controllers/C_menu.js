@@ -30,7 +30,12 @@ class C_Menu {
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
       case 'add-remove-quiz':
-        if (!event.checked) memoryTest.removeQuiz(event.target);
+        if (!event.checked) {
+          if (!memoryTest.removeQuiz(event.target)) {
+            notifications.warning('No Test Selected', `You must select at least one memory test.`, 1500);
+            view.checkSwitch(event.id);
+          }
+        }
         else {
 
           // Load a new quiz

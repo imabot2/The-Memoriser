@@ -25,6 +25,16 @@ class M_MemoryTestQuestions {
     return Object.keys(this.metaData);
   }
 
+
+  /**
+   * Count the number of quizzes loaded
+   * @returns The current number of quizzes 
+   */
+  countPaths() {
+    return Object.keys(this.metaData).length;
+  }
+
+
   /**
    * Get the list of UID for a given path
    * @param {string} path The path for which the UID are returned

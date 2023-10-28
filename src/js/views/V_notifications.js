@@ -61,7 +61,7 @@ class Notifications {
 
     // Set the requested message in the toast body
     toastEl.querySelector(".toast-body").innerHTML = message;
-    console.log (`%cWarning%c ${message}`, "background-color: #ffc107; padding:0.3em; border-radius: 0.5em;", '');
+    console.log (`%cWarning%c ${message}`, "background-color: #ffc107; color: #000; padding:0.3em; border-radius: 0.5em;", '');
 
     this.show(toastEl, ms);
   }
