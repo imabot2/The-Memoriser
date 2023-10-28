@@ -84,3 +84,9 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+#loader-overlay {
+  background-color:rgb(32,32,32,0.4);
+  border-radius: var(--bs-modal-border-radius);
+}

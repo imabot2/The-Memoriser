@@ -149,6 +149,17 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     })
   }
 
+  /**
+ * Remove the statistics for a given path and call the parent function to remove the questions
+ * @param {string} path Path of the quiz to remove
+ */
+  removeQuiz(path) {
+    // Remove stats for this path
+    this.stats = this.stats.filter((q) => { return q.path !== path });
+    // Remove the question
+    super.removeQuiz(path);
+  }
+
 
   /**
    * Create the initial statistics for a given quiz
@@ -180,20 +191,9 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
     qToUpdate.count++;
 
     // Return the previous and the new score
-    return {"previousScore": previousScore, "newScore": qToUpdate.score };
+    return { "previousScore": previousScore, "newScore": qToUpdate.score };
   }
 
-
-  /**
-   * Remove the statistics for a given path and call the parent function to remove the questions
-   * @param {string} path Path of the quiz to remove
-   */
-  removeQuiz(path) {
-    // Remove stats for this path
-    this.stats = this.stats.filter((q) => { return q.path !== path });
-    // Remove the question
-    super.removeQuiz(path);
-  }
 
   /**
    * Create the statistics entry if the entry does not exist

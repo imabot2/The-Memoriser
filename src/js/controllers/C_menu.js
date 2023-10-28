@@ -1,8 +1,11 @@
 import view from "Js/views/V_menu.js"
-
-
+import memoryTest from "Js/controllers/C_memory-test.js";
+import notifications from "Js/views/V_notifications";
+import loader from "Js/views/V_main.js";
 
 class C_Menu {
+
+
   constructor() {
 
     // Callback menu for back button
@@ -17,13 +20,32 @@ class C_Menu {
 
   }
 
+  /**
+   * Process a click in the menu button
+   * @param {object} event The event properties
+   */
   onMenuBtn(event) {
     
-    console.log(event);
-    
+   
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
+      case 'add-remove-quiz':
+        if (!event.checked) memoryTest.removeQuiz(event.target);
+        else {
 
+          // Load a new quiz
+          let id = loader.newMessage(`Loading memory test ${event.target}.`);
+          memoryTest.addQuiz(event.target)
+          .then(() => {
+            loader.setSuccess(id);
+          })
+          .catch(() => {
+            loader.setError(id);
+            notifications.error('Loading Error', `Error while loading the memory test ${event.target}.`);
+          })
+        }
+
+      break;
     }
   }
 

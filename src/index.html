@@ -46,27 +46,27 @@
       overflow: hidden;
     }
 
-    #loader {
+    #boot-loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       background-image: linear-gradient(rgba(145, 145, 145, 1), rgba(120, 120, 120, 1));
-      z-index: 1000;
+      z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
     }
 
-    #loader>img {
+    #boot-loader>img {
       height: 30vh;
       max-height: 600px;
       z-index: 2;
     }
 
-    #loader-status {
+    #boot-loader-status {
       position: fixed;
       bottom: 0;
       width: 100vw;
@@ -80,20 +80,20 @@
       scrollbar-width: none;
     }
 
-    #loader-status::-webkit-scrollbar {
+    #boot-loader-status::-webkit-scrollbar {
       display: none;
     }
 
-    #loader-status .status {
+    #boot-loader-status .status {
       font-weight: bold;
       color: var(--main-orange);
     }
 
-    #loader-status .status.success {
+    #boot-loader-status .status.success {
       color: var(--main-green);
     }
 
-    #loader-status .status.error {
+    #boot-loader-status .status.error {
       color: var(--main-red);
     }
   </style>
@@ -102,11 +102,12 @@
 <body>
 
   <!--#region Loader overlay -->
-  <div id="loader">
+  <div id="boot-loader">
     <img src="/static/loader/loader.png">
-    <div id="loader-status"></div>
+    <div id="boot-loader-status"></div>
   </div>
   <!--#endregion Loader overlay -->
+
 
   <!--#region toasts -->
   <div aria-live="polite" aria-atomic="true" class="position-relative">
@@ -207,7 +208,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
 
-        <div class="modal-header position-relative pb-0">
+        <div class="modal-header pb-0 position-relative">
           <button type="button"
             class="back-btn btn btn-sm btn-secondary position-absolute left-0 top-50 translate-middle-y align-middle">
             <i class="bi bi-arrow-left-circle-fill mr-2"></i> Back
@@ -217,7 +218,7 @@
             aria-label="Close"></button>
         </div>
 
-        <div class="content modal-body">
+        <div class="content modal-body position-relative">
           <!--#region Main menu-->
           <div class="collapse main-menu show">
             <div class="d-grid gap-2">
@@ -255,14 +256,9 @@
               </button>
             </div>
           -->
-            <div class="parent d-grid gap-2">
-              <div class="form-check form-switch fs-5">
-                <input class="form-check-input menu-btn" type="checkbox" role="switch"
-                  id="/fr/pays-sur-la-carte/europe/">
-                <label class="form-check-label" for="/fr/pays-sur-la-carte/europe/">Default switch checkbox
-                  input</label>
-              </div>
-            </div>
+            <div class="parent d-grid gap-2"></div>
+
+
 
           </div>
 

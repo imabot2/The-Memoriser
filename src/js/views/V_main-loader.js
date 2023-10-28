@@ -7,10 +7,9 @@ class V_MainLoader {
   constructor() {
 
     // Get the container of the dialog box
-    this.dialog = document.getElementById("loader-status");
+    this.dialog = document.getElementById("boot-loader-status");
 
     // No message at start up
-    this.messagesEl = {};
     this.messages = {};
     this.index = 0;
 
@@ -25,7 +24,7 @@ class V_MainLoader {
   newMessage(message) {
 
     // Get the loader container element
-    this.loaderEl = document.getElementById("loader");
+    this.loaderEl = document.getElementById("boot-loader");
 
     // Create new element
     let row = document.createElement("div");
@@ -71,7 +70,21 @@ class V_MainLoader {
   }
 
 
+  /**
+   * Hide the loader overlay
+   * @param {integer} ms Fade out duration in milliseconds
+   */
+  showLoader(ms=250, opacity=0.5) {
 
+    // Set deflaut time is ms is not provided
+    ms = ms ?? 250;
+    this.loaderEl.classList.remove("d-none");
+    // Set transition time and start transition
+    this.loaderEl.style.transition = `opacity ${ms}ms ease-in-out`;
+    this.loaderEl.style.opacity = opacity;
+
+    
+  }
 
   /**
    * Hide the loader overlay
@@ -88,7 +101,23 @@ class V_MainLoader {
     // Start a timer to hide the overlay (prevent keeping the overlay over page content)
     setTimeout(() => {
       this.loaderEl.classList.add("d-none");
+      this.deleteAllMessage();
     }, ms);
+  }
+
+  /**
+   * Delete all messages
+   */
+  deleteAllMessage() {
+    
+    // Delete the elements
+    Object.values(this.messages).forEach(message => {
+      message.el.remove();
+    })
+
+    // Reset the arrays
+    this.messages={};
+    this.index = 0;
   }
 
 }

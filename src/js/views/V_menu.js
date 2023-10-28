@@ -6,6 +6,8 @@ import memoryTest from "Js/models/M_memory-test.js";
 
 
 class V_menu {
+
+
   constructor() {
 
     // Get the modal element
@@ -79,11 +81,11 @@ class V_menu {
 
 
   /**
- * Populate the categories menu
- */
+   * Populate the categories menu
+   * @param {string} language The language of the category
+   */
   populateCategories(language) {
 
-    console.log(quizzes[language])
     // Get the parent element
     let parent = this.modalEl.querySelector(".content .categories-menu .parent");
 
@@ -108,9 +110,11 @@ class V_menu {
 
   /**
    * Populate the list menu
+   * @param {string} language The language of the list
+   * @param {string} category The category of the list
    */
   populateList(language, category) {
-    
+
 
     // Get the parent element
     let parent = this.modalEl.querySelector(".content .list-menu .parent");
@@ -121,23 +125,29 @@ class V_menu {
     // For each language, create a button
     for (const [testId, value] of Object.entries(quizzes[language].categories[category].list)) {
 
-      let path = `${language}/${category}/${testId}`;
+      let path = `/${language}/${category}/${testId}/`;
 
       // Prepare the button properties
       let properties = {};
       properties.label = value.name;
       properties.id = path;
-      properties.checked = memoryTest.isPathSelected(`/${path}/`);
+      properties.checked = memoryTest.isPathSelected(`${path}`);
       properties.attributes = {}
       properties.attributes['data-type'] = 'add-remove-quiz';
-      properties.attributes['data-target'] = `path`;
+      properties.attributes['data-target'] = path;
 
-      
+
       // Append the button to menu
       this.appendSwitch(parent, properties);
     }
   }
 
+
+  /**
+   * Append a new switch to the list (parent)
+   * @param {element} parent The parent element where the switch is appened
+   * @param {object} properties The properties of the switch
+   */
   appendSwitch(parent, properties) {
 
     // Create the element
@@ -227,8 +237,12 @@ class V_menu {
     e.type = element.getAttribute('data-type');
     switch (e.type) {
       case 'navigation':
+        e.target = element.getAttribute('data-target');
+        break;
+
       case 'add-remove-quiz':
         e.target = element.getAttribute('data-target');
+        e.checked = element.checked;
         break;
     }
 

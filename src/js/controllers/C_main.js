@@ -78,6 +78,11 @@ let run = async () => {
         view.hideLoader(300);
         memoryTest.start();
 
+/*
+        setTimeout(() => {
+          view.showLoader(0, 0.9)
+        }, 1000);
+*/
         // FOR DEBUG
         //currentStatistics.showResults();
 
