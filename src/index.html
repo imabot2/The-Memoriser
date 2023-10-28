@@ -63,7 +63,6 @@
     #loader>img {
       height: 30vh;
       max-height: 600px;
-      margin-left: 3%;
       z-index: 2;
     }
 
@@ -219,7 +218,7 @@
         </div>
 
         <div class="content modal-body">
-
+          <!--#region Main menu-->
           <div class="collapse main-menu show">
             <div class="d-grid gap-2">
               <button class="btn btn-lg btn-primary menu-btn" data-type="navigation" data-target="languages"
@@ -234,6 +233,8 @@
               </button>
             </div>
           </div>
+          <!--#endregion Main menu-->
+
 
           <div class="collapse languages-menu">
             <div class="parent d-grid gap-2"></div>
@@ -258,7 +259,8 @@
               <div class="form-check form-switch fs-5">
                 <input class="form-check-input menu-btn" type="checkbox" role="switch"
                   id="/fr/pays-sur-la-carte/europe/">
-                <label class="form-check-label" for="/fr/pays-sur-la-carte/europe/">Default switch checkbox input</label>
+                <label class="form-check-label" for="/fr/pays-sur-la-carte/europe/">Default switch checkbox
+                  input</label>
               </div>
             </div>
 
@@ -273,44 +275,7 @@
   </div>
   <!--#endregion Main menu-->
 
-  <!--#region Memory test language-->
-  <div class="modal fade" id="menu-memory-test-language-modal" tabindex="-1"
-    aria-labelledby="menu-memory-test-language-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-
-        <div class="modal-header position-relative pb-0">
-          <h1 class="modal-title luckiest text-center w-100" id="mmenu-memory-test-language-modal-label">Language</h1>
-
-          <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-
-          <button type="button"
-            class="btn btn-sm btn-secondary position-absolute left-0 top-50 translate-middle-y align-middle"
-            data-bs-target="#menu-modal" data-bs-toggle="modal">
-            <i class="bi bi-arrow-left-circle-fill mr-2"></i> Back
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div class="d-grid gap-2">
-            <button id="menu-select-memory-test" class="btn btn-lg btn-primary" type="button">
-              <span class="luckiest">English</span>
-            </button>
-            <button class="btn btn-lg btn-primary" type="button">
-              <span class="luckiest">Français</span>
-            </button>
-            <button class="btn btn-lg btn-primary" type="button">
-              <span class="luckiest">Deutsch</span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!--#region Memory test language-->
-
+ 
 
   <!--#region Results modal -->
   <div id="results-modal" class="modal modal-xl" tabindex="-1">

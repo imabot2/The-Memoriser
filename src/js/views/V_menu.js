@@ -1,6 +1,8 @@
 import "Assets/css/menu.css";
 import * as bootstrap from 'bootstrap';
 import quizzes from "Js/models/M_quizzes-list.js";
+import memoryTest from "Js/models/M_memory-test.js";
+
 
 
 class V_menu {
@@ -62,10 +64,10 @@ class V_menu {
 
     // For each language, create a button
     for (const [key, value] of Object.entries(quizzes)) {
-      
+
       // Prepare the button properties
       let properties = {};
-      properties.innerText = value.name;      
+      properties.innerText = value.name;
       properties.attributes = {}
       properties.attributes['data-type'] = 'navigation';
       properties.attributes['data-target'] = `categories/${key}`;
@@ -76,33 +78,98 @@ class V_menu {
   }
 
 
-    /**
-   * Populate the categories menu
-   */
-    populateCategories(language) {
-      
-      console.log (quizzes[language])
-      // Get the parent element
-      let parent = this.modalEl.querySelector(".content .categories-menu .parent");
+  /**
+ * Populate the categories menu
+ */
+  populateCategories(language) {
 
-      // Empty the parent
-      parent.innerHTML = "";
-      
-      // For each language, create a button
-      for (const [category, value] of Object.entries(quizzes[language].categories)) {
-        
-        // Prepare the button properties
-        let properties = {};
-        properties.innerText = value.name;      
-        properties.attributes = {}
-        properties.attributes['data-type'] = 'navigation';
-        properties.attributes['data-target'] = `list/${language}/${category}`;
-  
-        // Append the button to menu
-        this.appendButton(parent, properties);
-      }
+    console.log(quizzes[language])
+    // Get the parent element
+    let parent = this.modalEl.querySelector(".content .categories-menu .parent");
+
+    // Empty the parent
+    parent.innerHTML = "";
+
+    // For each language, create a button
+    for (const [category, value] of Object.entries(quizzes[language].categories)) {
+
+      // Prepare the button properties
+      let properties = {};
+      properties.innerText = value.name;
+      properties.attributes = {}
+      properties.attributes['data-type'] = 'navigation';
+      properties.attributes['data-target'] = `list/${language}/${category}`;
+
+      // Append the button to menu
+      this.appendButton(parent, properties);
     }
-  
+  }
+
+
+  /**
+   * Populate the list menu
+   */
+  populateList(language, category) {
+    
+
+    // Get the parent element
+    let parent = this.modalEl.querySelector(".content .list-menu .parent");
+
+    // Empty the parent
+    parent.innerHTML = "";
+
+    // For each language, create a button
+    for (const [testId, value] of Object.entries(quizzes[language].categories[category].list)) {
+
+      let path = `${language}/${category}/${testId}`;
+
+      // Prepare the button properties
+      let properties = {};
+      properties.label = value.name;
+      properties.id = path;
+      properties.checked = memoryTest.isPathSelected(`/${path}/`);
+      properties.attributes = {}
+      properties.attributes['data-type'] = 'add-remove-quiz';
+      properties.attributes['data-target'] = `path`;
+
+      
+      // Append the button to menu
+      this.appendSwitch(parent, properties);
+    }
+  }
+
+  appendSwitch(parent, properties) {
+
+    // Create the element
+    let container = document.createElement('div');
+    container.classList.add('form-check', 'form-switch', 'fs-5');
+
+    // Create the checkbox
+    let input = document.createElement('input');
+    input.classList.add('form-check-input', 'menu-btn')
+    input.checked = properties.checked;
+
+    // Add the attributes
+    input.setAttribute('type', 'checkbox');
+    input.setAttribute('role', 'switch');
+    for (const [key, value] of Object.entries(properties.attributes)) { input.setAttribute(key, value); }
+
+    // Add the id
+    input.id = properties.id;
+    container.append(input);
+
+    // Create and add the label
+    let label = document.createElement('label');
+    label.classList.add('form-check-label', 'w-100')
+    label.setAttribute('for', properties.id);
+    label.innerText = properties.label;
+    container.append(label)
+
+    // Append the button in the dom
+    parent.append(container);
+
+  }
+
 
   /**
    * Create and append a new button and append to the parent
@@ -117,16 +184,16 @@ class V_menu {
     button.setAttribute("type", "button");
 
     // Add the attributes
-    for (const [key, value] of Object.entries(properties.attributes)) {    
-      button.setAttribute(key, value);    
+    for (const [key, value] of Object.entries(properties.attributes)) {
+      button.setAttribute(key, value);
     }
-    
+
     // Create the span inside the button
     let span = document.createElement('span');
     span.classList.add("luckiest");
     span.innerText = properties.innerText;
     button.append(span);
-    
+
     // Append the button in the dom
     parent.append(button);
   }
@@ -160,6 +227,7 @@ class V_menu {
     e.type = element.getAttribute('data-type');
     switch (e.type) {
       case 'navigation':
+      case 'add-remove-quiz':
         e.target = element.getAttribute('data-target');
         break;
     }

@@ -2,9 +2,10 @@
   --success-card-width: 200px;
   position: absolute;
   opacity: 0.8;
-  right: calc(var(--success-card-width)*-1.5);
+  right: calc(var(--success-card-width)*-1.7);
   top: 45%;
-  padding-right: var(--bs-border-radius);
+  padding-right: calc(2*var(--bs-border-radius));
+  padding-left: calc(2*var(--bs-border-radius));
   background-color: white;
   border-radius: var(--bs-border-radius);
   transform: translateY(-50%);
@@ -17,9 +18,10 @@
   --failed-card-width: 200px;
   position: absolute;
   opacity: 0.8;
-  left: calc(var(--failed-card-width)*-1.5);
+  left: calc(var(--failed-card-width)*-1.7);
   top: 45%;
-  padding-left: var(--bs-border-radius);
+  padding-right: calc(2*var(--bs-border-radius));
+  padding-left: calc(2*var(--bs-border-radius));
   background-color: white;
   border-radius: var(--bs-border-radius);
   transform: translateY(-50%);
@@ -51,13 +53,14 @@
 #failed-card .content,
 #success-card .content {
   
-  padding-top: 45%;
+  padding-top: 3.5em;
   font-size: clamp(0.8em, 2em ,2vmin);
   text-align: center;
   font-family: 'Luckiest Guy', cursive;
-  line-height: 1.4em;
+  line-height: 1.7em;
   padding-left: 0.5em;
   padding-right: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 #failed-card .content>div
@@ -82,7 +85,7 @@
 
 #failed-card .wpm,
 #success-card .wpm {
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 #failed-card .wpm span,

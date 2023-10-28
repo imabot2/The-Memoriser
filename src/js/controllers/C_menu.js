@@ -19,7 +19,7 @@ class C_Menu {
 
   onMenuBtn(event) {
     
-    //console.log(event);
+    console.log(event);
     
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
@@ -35,6 +35,7 @@ class C_Menu {
     // Populate the next menu
     switch (menu[0]) {
       case 'categories': view.populateCategories(menu[1]); break;
+      case 'list': view.populateList(menu[1], menu[2]); break;
       
     }
 

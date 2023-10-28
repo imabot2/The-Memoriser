@@ -11,6 +11,12 @@ class M_MemoryTestQuestions {
     this.questions = [];
   }
 
+  isPathSelected(path) {
+    return path in this.metaData;
+  }
+
+
+
   /**
    * Get the list of memory test currently loaded (paths)
    * @returns An array containing the paths
