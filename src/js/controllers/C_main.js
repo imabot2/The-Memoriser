@@ -42,6 +42,9 @@ let run = async () => {
   let memoryTestId = view.newMessage("Loading memory tests");
   let memoryTests = [];
   switch (clientLanguage) {
+    
+    case "de":memoryTests = ["/de/lander-auf-der-karte/europa/"]; break;
+
     case "fr":
       if (process.env.NODE_ENV == "production") {
         memoryTests = ["/fr/pays-sur-la-carte/europe/"];
@@ -49,13 +52,15 @@ let run = async () => {
       if (process.env.NODE_ENV == "development") {
         memoryTests = [
           //"/en/countries-on-the-map/europe/",
-          "/fr/pays-sur-la-carte/europe/",     
+          //"/fr/pays-sur-la-carte/europe/",
+          //"/de/lander-auf-der-karte/europa/",
           //"/iso/country-codes/europe/",
-          //"/en/countries-on-the-map/africa/",
+          "/en/countries-on-the-map/africa/",
           //"/en/chess/stockfish-starting-position/"
         ];
       }
       break;
+
     default: memoryTests = ["/en/geography/europe/"];
   }
 
@@ -69,26 +74,26 @@ let run = async () => {
     // Initialize the memory test (promise is resolved if the questions images are loaded)
     let imagesId = view.newMessage("Loading first images");
     memoryTest.reset()
-    .then(() => {
-      view.setSuccess(imagesId);
+      .then(() => {
+        view.setSuccess(imagesId);
 
 
-      setTimeout(() => {
-        // Hide the loader overlay
-        view.hideLoader(300);
-        memoryTest.start();
-
-/*
         setTimeout(() => {
-          view.showLoader(0, 0.9)
-        }, 1000);
-*/
-        // FOR DEBUG
-        //currentStatistics.showResults();
+          // Hide the loader overlay
+          view.hideLoader(300);
+          memoryTest.start();
+
+          /*
+                  setTimeout(() => {
+                    view.showLoader(0, 0.9)
+                  }, 1000);
+          */
+          // FOR DEBUG
+          //currentStatistics.showResults();
 
 
-      }, 100)
-    })
+        }, 100)
+      })
       .catch((error) => {
         notifications.error("An error occured", error, 60000);
         view.setError(imagesId);

@@ -203,8 +203,6 @@ export default class Levenshtein {
       }
 
 
-
-
       // Delete the letter
       if (y > 0 && this.D[x][y - 1] === min) {
         this.addOperation("delete", this.from[y - 1], "", x);
@@ -221,7 +219,7 @@ export default class Levenshtein {
 
 
     }
-
+    //console.log (this.operations);
     return this.operations;
   }
 

@@ -29,15 +29,20 @@ class C_MemoryTest {
     this.status = "ready";
 
     // Prepare the Levenshtein library options
+    this.levenshteinTruncated = new Levenshtein();
     this.levenshtein = new Levenshtein();
-    this.levenshtein.setOptions({
+
+    let options = {
       trim: true,
       removeExtraSpaces: true,
       ignoreHyphens: true,
       caseSensitive: false,
       ignoreAccents: true,
       appendSpaces: true,
-    });
+    }
+
+    this.levenshteinTruncated.setOptions(options);
+    this.levenshtein.setOptions(options);
 
     // Initialize the timer used for each question
     this.questionTimer = new Timer();
@@ -148,18 +153,10 @@ class C_MemoryTest {
       .replace(/\s*-\s*/, "-")  // Remove spaces around hyphens
       .replace(/\s+/g, " ");    // Remove extra spaces
 
-
     // Compute the Levenshtein distance for checking the answer
     // The distanceCheck must be calculated BEFORE the truncated distance 
     // Because the Levenstein class is reused with getHTML
     let distanceCheck = this.levenshtein.distance(sanitized, this.current.answer);
-
-    // Compute the Levenshtein distance and store the distance max
-    let len = Math.min(sanitized.length, this.current.answer.length);
-    let distance = this.levenshtein.distance(sanitized, this.current.answer.slice(0, len));
-    this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
-
-
 
     // Check the answer (user pressed space at the end of the right answer)
     if (input[input.length - 1] === " ") {
@@ -176,13 +173,26 @@ class C_MemoryTest {
     }
 
 
+    // Compute the Levenshtein distance and store the distance max
+    let len = Math.min(sanitized.length, this.current.answer.length);
+    //if (sanitized.length > this.current.answer.length)
+    //      len = sanitized.length;
 
-    // Set the correction if the distance is higher than zero
-    // And the score is not higher than 0
-    if (distance && (this.current.score < 0.8 || this.questionTimer.getTime().raw > 10000)) {
+    let distance = this.levenshteinTruncated.distance(sanitized.slice(0, len), this.current.answer.slice(0, len));
+    this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
+
+
+    // Set the correction if the distance is higher than zero or the user answer is longer than the expected answer
+    // And the score is not higher than 0.8
+    if ((distance || sanitized.length>this.current.answer.length) && (this.current.score < 0.8 || this.questionTimer.getTime().raw > 10000)) {
       // Show the correction if the Levenshtein distance is not null
-      let html = this.levenshtein.getHTML();
+      let html = this.levenshteinTruncated.getHTML();
       html += `<span class="extra insert">${this.current.answer.slice(len)}</span>`;
+
+      // If the answer is longer than the expected answer, add deleted extra characters
+      if (sanitized.length > this.current.answer.length)
+        html += `<span class="delete">${sanitized.slice(len)}</span>`;
+
       view.setCorrectionHTML(html);
     }
     else
@@ -341,14 +351,14 @@ class C_MemoryTest {
     // Show the results on the screen    
     currentStatistics.showResults()
       .finally(() => {
-        
+
         // When the modal is closed, reset the test and enable the view when the images are loaded
         this.reset()
           .then(() => {
             view.enableInput();
             this.start();
           })
-        
+
       })
       .catch((error) => {
         notifications.error("Results Error", error);
