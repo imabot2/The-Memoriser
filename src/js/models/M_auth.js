@@ -66,11 +66,13 @@ class M_Auth {
    * @returns True if the user is logged with a verified email, false otherwise
    */
   isLogged() {
-
+    
     // If the user is not logged, return false
     if (this.auth.currentUser === null) return false;
+    console.log ('after', this.auth.currentUser)
     // If the user email has not been verified, return false
     if (!this.auth.currentUser.emailVerified) return false;
+
     // The user is logged, return true
     return true;
   }

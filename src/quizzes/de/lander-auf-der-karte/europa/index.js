@@ -55,8 +55,7 @@ export var metaData = {
 
 
   // Special characters for this test
-  specialCharacters: [
-  ]
+  specialCharacters: ['ü', 'ä', 'ß', 'ö', 'Ü', 'Ä', 'ẞ', 'Ö'],
 }
 
 

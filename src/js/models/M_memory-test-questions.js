@@ -85,7 +85,7 @@ class M_MemoryTestQuestions {
    * @returns A promise resolved when the quiz is loaded
    */
   addQuiz(quizPath) {
-
+    
     // Return a promise when the quiz is loaded
     return new Promise((resolve, reject) => {
 
@@ -98,7 +98,7 @@ class M_MemoryTestQuestions {
       // Import the required typing test
       import('../../quizzes' + quizPath + 'index.js')
         .then((quiz) => {
-
+          
           // Check of the quiz has not been deleted in the meantime
           if (this.metaData[quizPath] === undefined) { resolve(); return; }
 
@@ -118,7 +118,7 @@ class M_MemoryTestQuestions {
           resolve(quiz.questions);
         })
         .catch((error) => {
-
+          
           // The quiz has not been loaded, delete the meta data related to the current quiz
           delete this.metaData[quizPath];
 

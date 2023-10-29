@@ -194,7 +194,8 @@ class C_Menu {
     // Set the initial current menu
     this.currentMenu = 'main';
     view.showMenu('main');
-
+    view.hideSelection();
+    
     // Show the loader until message are pending
     loader.showLoaderWhilePending()
       .then(() => {

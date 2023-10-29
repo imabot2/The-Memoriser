@@ -1,4 +1,5 @@
 import memoryTest from "Js/controllers/C_memory-test.js";
+import "Js/controllers/C_special-characters.js";
 
 class M_Main {
 
@@ -22,12 +23,13 @@ class M_Main {
   loadQuizzes(paths) {
 
     return new Promise((resolve) => {
-
+      
       // Array of promises
       let promises = [];
 
       // Load each memory test
       paths.forEach((path) => {
+        
         const id = this.onNewMessageCallback(`Loading memory test ${path}`);
         const promise = memoryTest.addQuiz(path);
         promise.then(() => { this.onUpdateMessageSuccessCallback(id, "success"); })

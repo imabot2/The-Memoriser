@@ -8,6 +8,7 @@ import auth from "Js/models/M_auth.js";
 import notifications from "Js/views/V_notifications";
 import { isMobile } from "Js/lib/client.js";
 import analytics from "Js/models/M_analytics.js";
+import specialCharacters from "Js/controllers/C_special-characters.js";
 
 class C_MemoryTest {
 
@@ -112,6 +113,9 @@ class C_MemoryTest {
         // Reset the timer
         timer.reset();
 
+        // Set the list of special characters
+        specialCharacters.set(this.current.metaData.specialCharacters);
+
         // Memory test is ready
         this.status = "ready";
         resolve();
@@ -124,6 +128,8 @@ class C_MemoryTest {
    * Start the memory test, enable input and set focus on the input bar
    */
   start() {
+
+    // Enable the input
     view.enableInput();
 
     // If user is not on mobile device, set focus to the answer input
@@ -174,18 +180,21 @@ class C_MemoryTest {
     }
 
 
+    // If the last character of the input is a space, 
+    // add a space to show the correction 
+    // if the user type space before the end of the correct word
+    if (input[input.length - 1] == ' ') sanitized += ' ';
+
     // Compute the Levenshtein distance and store the distance max
     let len = Math.min(sanitized.length, this.current.answer.length);
-    //if (sanitized.length > this.current.answer.length)
-    //      len = sanitized.length;
 
+    // Compute the truncated distance    
     let distance = this.levenshteinTruncated.distance(sanitized.slice(0, len), this.current.answer.slice(0, len));
     this.currentStats.maxDistance = Math.max(this.currentStats.maxDistance, distance);
 
-
     // Set the correction if the distance is higher than zero or the user answer is longer than the expected answer
     // And the score is not higher than 0.8
-    if ((distance || sanitized.length>this.current.answer.length) && (this.current.score < 0.8 || this.questionTimer.getTime().raw > 10000)) {
+    if ((distance || sanitized.length > this.current.answer.length) && (this.current.score < 0.8 || this.questionTimer.getTime().raw > 10000)) {
       // Show the correction if the Levenshtein distance is not null
       let html = this.levenshteinTruncated.getHTML();
       html += `<span class="extra insert">${this.current.answer.slice(len)}</span>`;
@@ -414,6 +423,9 @@ class C_MemoryTest {
     // Update the card and show if changes occured
     view.showNextFlag();
 
+    // Set the list of special characters
+    specialCharacters.set(this.current.metaData.specialCharacters);
+
     // Prepare the next question
     this.prepareNextQuestion();
 
@@ -421,6 +433,7 @@ class C_MemoryTest {
     this.questionTimer.init(0, "up");
     this.questionTimer.start();
   }
+
 
 
   /**
@@ -437,13 +450,13 @@ class C_MemoryTest {
    * @param {string} path Path to the quiz to remove
    */
   removeQuiz(path) {
-    
+
     // Do not remove quiz if there is only one
     if (model.countPaths() == 1) return false;
 
     // Remove the requested quizz
     model.removeQuiz(path);
-  
+
     return true;
   }
 

@@ -51,12 +51,12 @@ let run = async () => {
       }
       if (process.env.NODE_ENV == "development") {
         memoryTests = [
-          "/en/countries-on-the-map/europe/",
-          "/fr/pays-sur-la-carte/europe/",
+          //"/en/countries-on-the-map/europe/",
+          //"/fr/pays-sur-la-carte/europe/",
           "/de/lander-auf-der-karte/europa/",
           //"/en/chess/stockfish-starting-position/",
           //"/iso/country-codes/europe/",
-          "/en/countries-on-the-map/africa/",
+          //"/en/countries-on-the-map/africa/",
           //"/en/chess/stockfish-starting-position/"
         ];
       }

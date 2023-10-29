@@ -43,7 +43,7 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
     return new Promise((resolve, reject) => {
 
       // Load the quiz from files
-      super.addQuiz(path).catch((error) => { reject(error); })
+      super.addQuiz(path).catch((error) => { reject(error); return; })
         .then(() => {
 
           // If the user is not logged, do not load statistics from database
@@ -77,13 +77,13 @@ class M_MemoryTestFirestore extends M_MemoryTestStatistics {
    * @returns {promise} A promise when the statistics are created or loaded
    */
   loadStatistics(path) {
-
+    console.log ('ok')
     // Return a promise
     return new Promise(async (resolve, reject) => {
 
       // Set the default counter to zero
       this.statCounter[path] = 0;
-
+      
       // Read data from database
       this.readStatisticsFromDB(path)
         .catch((error) => { reject(error); })

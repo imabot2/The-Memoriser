@@ -164,7 +164,7 @@
     </div>
     <!--#endregion Success card -->
 
-    <!-- #region Failed card -->
+    <!--#region Failed card -->
     <div id="failed-card">
       <img src="/static/icons/error.png" class="card-img-top">
       <div class="content">
@@ -175,9 +175,39 @@
     </div>
     <!-- #endregion Failed card -->
 
+    <!--#region Special characters -->
+    <div class="modal" id="special-characters" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content position-relative">
+
+          <button type="button" class="btn-close position-absolute top-0 end-0 p-3" tabindex="-1" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="container text-center px-4 pb-4 pt-5">
+             <div class="d-flex justify-content-evenly flex-wrap list"> 
+                            
+              <button type="button" class="btn btn-lg btn-outline-dark m-2">à</button>
+              <button type="button" class="btn btn-lg btn-outline-dark m-2">é</button>
+              <button type="button" class="btn btn-lg btn-outline-dark m-2">è</button>
+              <button type="button" class="btn btn-lg btn-outline-dark m-2">ê</button>
+              <button type="button" class="btn btn-lg btn-outline-dark m-2">ù</button>
+
+            
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute top-50 start-50 translate-middle ps-3 pe-3 pt-4 pb-4"></div>
+      
+
+    <!--#endregion Special characters -->
+
     <!--#region  Answer bar -->
     <div id="answer-bar">
-      <img id="characters-btn" src="/static/icons/special-characters.png" class="disable">
+      <img id="characters-btn" src="/static/icons/special-characters.png" data-bs-toggle="modal"
+        data-bs-target="#special-characters">
       <div contenteditable="true" tabindex="0" class="form-control" id="answer-input" placeholder="&nbsp;"
         spellcheck="false" autocomplete="off" autocorrect="off" data-gram="false" data-gramm_editor="false"
         data-enable-grammarly="false"></div>
@@ -226,7 +256,8 @@
                 type="button">
                 <span class="luckiest">Select Memory Test</span>
               </button>
-              <button class="setting-btn btn btn-lg btn-primary menu-btn" data-type="navigation" data-target="settings" type="button">
+              <button class="setting-btn btn btn-lg btn-primary menu-btn" data-type="navigation" data-target="settings"
+                type="button">
                 <span class="luckiest">Settings</span>
               </button>
               <button class="about-btn btn btn-lg btn-primary disabled" type="button">
@@ -238,29 +269,33 @@
 
           <div class="collapse settings-menu">
             <div class="d-flex align-items-center pb-2">
-                <div class="luckiest fs-4 pe-2 mt-2">Duration</div>
-                <div class="flex-grow-1 text-end">Select memory test duration</div>
-              </div>
-                <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
+              <div class="luckiest fs-4 pe-2 mt-2">Duration</div>
+              <div class="flex-grow-1 text-end">Select memory test duration</div>
+            </div>
+            <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
 
-                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-15" autocomplete="off" data-type="settings" data-key="duration" data-value="15">
-                  <label class="btn btn-outline-primary" for="settings-duration-15">15s</label>
-                
-                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-30" autocomplete="off" data-type="settings" data-key="duration" data-value="30">
-                  <label class="btn btn-outline-primary" for="settings-duration-30">30s</label>
-                
-                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-60" autocomplete="off" data-type="settings" data-key="duration" data-value="60">
-                  <label class="btn btn-outline-primary" for="settings-duration-60">60s</label>
+              <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-15"
+                autocomplete="off" data-type="settings" data-key="duration" data-value="15">
+              <label class="btn btn-outline-primary" for="settings-duration-15">15s</label>
 
-                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-120" autocomplete="off" data-type="settings" data-key="duration" data-value="120">
-                  <label class="btn btn-outline-primary" for="settings-duration-120">2min</label>
+              <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-30"
+                autocomplete="off" data-type="settings" data-key="duration" data-value="30">
+              <label class="btn btn-outline-primary" for="settings-duration-30">30s</label>
 
-                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-300" autocomplete="off" data-type="settings" data-key="duration" data-value="300">
-                  <label class="btn btn-outline-primary" for="settings-duration-300">5min</label>
-                </div>
+              <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-60"
+                autocomplete="off" data-type="settings" data-key="duration" data-value="60">
+              <label class="btn btn-outline-primary" for="settings-duration-60">60s</label>
 
-              <hr>
+              <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-120"
+                autocomplete="off" data-type="settings" data-key="duration" data-value="120">
+              <label class="btn btn-outline-primary" for="settings-duration-120">2min</label>
 
+              <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-300"
+                autocomplete="off" data-type="settings" data-key="duration" data-value="300">
+              <label class="btn btn-outline-primary" for="settings-duration-300">5min</label>
+            </div>
+
+            <hr>
 
           </div>
 
