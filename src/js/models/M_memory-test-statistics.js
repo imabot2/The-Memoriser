@@ -18,6 +18,7 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
   }
 
 
+
   /**
    * Compute the next question
    * - Previous question can't be picked
@@ -159,6 +160,10 @@ class M_MemoryTestStatistics extends M_MemoryTestQuestions {
 
     // Remove stats for this path
     this.stats = this.stats.filter((q) => { return q.path !== path });
+    
+    // Reset last question
+    this.lastQuestion = undefined;
+    
     // Remove the question
     super.removeQuiz(path);
 

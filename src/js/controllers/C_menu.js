@@ -33,17 +33,24 @@ class C_Menu {
    * @param {object} event The event properties
    */
   onMenuBtn(event) {
-
+    console.log(event)
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
       case 'add-remove-quiz':
+
+        // The button is not checked => Remove quiz
         if (!event.checked) {
+
+          // Remove the memory test
           if (!memoryTest.removeQuiz(event.target)) {
+
+            // Do not allow removing last test and check the radio button
             notifications.warning('No Test Selected', `You must select at least one memory test.`, 1500);
-            view.checkSwitch(event.id);
+            view.updateRadioCheckboxes(memoryTest.model().getPaths());
           }
         }
         else {
+          // The button is checked => Add a new quiz
 
           // Add a message in the loader
           let id = loader.newMessage(`Loading memory test ${event.target}.`);
@@ -51,9 +58,11 @@ class C_Menu {
           // Load a new quiz
           memoryTest.addQuiz(event.target)
             .then(() => {
-              loader.setSuccess(id);
+              view.updateRadioCheckboxes(memoryTest.model().getPaths());
+              loader.setSuccess(id);              
             })
             .catch(() => {
+              view.updateRadioCheckboxes(memoryTest.model().getPaths());
               loader.setSuccess(error);
               notifications.error('Loading Error', `Error while loading the memory test ${event.target}.`);
             })
@@ -72,10 +81,13 @@ class C_Menu {
           // Load and replace with a new quiz
           memoryTest.replaceAllQuiz(event.target)
             .then(() => {
+              view.updateRadioCheckboxes(memoryTest.model().getPaths());
               loader.setSuccess(id);
-              
+
             })
             .catch((error) => {
+              console.error(error);
+              view.updateRadioCheckboxes(memoryTest.model().getPaths());
               loader.setError(id);
               notifications.error('Loading Error', `Error while loading a single memory test ${event.target}.`);
             })
@@ -87,6 +99,8 @@ class C_Menu {
     }
   }
 
+
+
   goToMenu(target) {
 
     // Get the target 
@@ -95,7 +109,10 @@ class C_Menu {
     // Populate the next menu
     switch (menu[0]) {
       case 'categories': view.populateCategories(menu[1]); break;
-      case 'list': view.populateList(menu[1], menu[2]); break;
+      case 'list': 
+        view.populateList(menu[1], menu[2]); 
+        view.updateRadioCheckboxes(memoryTest.model().getPaths());
+        break;
     }
 
     // Show the next menu

@@ -139,14 +139,42 @@ class V_menu {
       let properties = {};
       properties.label = value.name;
       properties.id = path.slice(1, -1).replaceAll('/', '_');
-      properties.checked = memoryTest.isPathSelected(`${path}`);
       properties.attributes = {}
       properties.attributes['data-target'] = path;
-
 
       // Append the button to menu
       this.appendSwitch(parent, properties);
     }
+  }
+
+  /**
+   * Update the radio and checkbox buttons
+   * @param {array} paths An array containing the path of the selected test
+   */
+  updateRadioCheckboxes(paths) {
+    console.log(paths);
+    const buttons = this.modalEl.querySelectorAll('[data-type="add-remove-quiz"]');
+    buttons.forEach((button) => {
+      const path = button.getAttribute("data-target");
+      button.checked = paths.includes(path);
+    })
+
+    if (paths.length == 1) {
+      const radio = this.modalEl.querySelector(`[data-type="select-quiz"][data-target="${paths[0]}"]`);
+      if (radio!==null) radio.checked = true;
+    }
+  }
+
+  /**
+ * Check a radio in the modal
+ * @param {string} id Id of the switch to check
+ */
+  checkRadio(id) {
+    this.modalEl.querySelector('#' + id).checked = true;
+  }
+
+  checkBox(id) {
+    this.modalEl.querySelector('#' + id).checked = true;
   }
 
 
@@ -172,14 +200,15 @@ class V_menu {
     // Create the radio button
     let inputRadio = document.createElement('input');
     inputRadio.classList.add('form-check-input', 'menu-btn')
-    inputRadio.checked = properties.checked;
+    inputRadio.name = "memory-test-radio-selector";
+    inputRadio.id = `${properties.id}-radio`;
     // Add the attributes
     for (const [key, value] of Object.entries(properties.attributes)) { inputRadio.setAttribute(key, value); }
     inputRadio.setAttribute('type', 'radio');
     inputRadio.setAttribute('data-type', 'select-quiz');
     inputRadio.setAttribute('data-bs-toogle', 'tooltip');
     inputRadio.setAttribute('data-bs-title', 'Select only this test. This will disable all others.');
-    new bootstrap.Tooltip(inputRadio, { trigger: 'hover'});
+    new bootstrap.Tooltip(inputRadio, { trigger: 'hover' });
     radioContainer.append(inputRadio);
 
 
@@ -192,12 +221,11 @@ class V_menu {
     let inputCheckbox = document.createElement('input');
     inputCheckbox.classList.add('form-check-input', 'menu-btn');
     inputCheckbox.id = properties.id;
-    checkBoxContainer.checked = properties.checked;
     inputCheckbox.setAttribute('type', 'checkbox');
     inputCheckbox.setAttribute('data-type', 'add-remove-quiz');
     inputCheckbox.setAttribute('data-bs-toogle', 'tooltip');
     inputCheckbox.setAttribute('data-bs-title', 'Add or remove this memory test.');
-    new bootstrap.Tooltip(inputCheckbox, { trigger: 'hover'});
+    new bootstrap.Tooltip(inputCheckbox, { trigger: 'hover' });
 
     // Add the attributes
     for (const [key, value] of Object.entries(properties.attributes)) { inputCheckbox.setAttribute(key, value); }
@@ -217,14 +245,6 @@ class V_menu {
 
   }
 
-
-  /**
-   * Check a switch in the modal
-   * @param {string} id Id of the switch to check
-   */
-  checkSwitch(id) {
-    this.modalEl.querySelector('#' + id).checked = true;
-  }
 
 
   /**
@@ -282,7 +302,7 @@ class V_menu {
     // Check if this is an interactive element
     let element = event.target.closest(".menu-btn");
     if (element === null) return;
-    
+
     // Process the event attribute on the button
     let e = {};
     e.type = element.getAttribute('data-type');
