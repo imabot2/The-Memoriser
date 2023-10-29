@@ -23,6 +23,11 @@ class C_Menu {
 
     // Populate the language menu
     view.populateLanguages();
+
+    // When the modal is shown, populate the current memory tests selection
+    view.setModalShowCallback(() => {
+      view.populateActiveSelection(memoryTest.model().getPaths());
+    })
   }
 
 
@@ -33,7 +38,7 @@ class C_Menu {
    * @param {object} event The event properties
    */
   onMenuBtn(event) {
-    console.log(event)
+
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
       case 'add-remove-quiz':
@@ -46,8 +51,9 @@ class C_Menu {
 
             // Do not allow removing last test and check the radio button
             notifications.warning('No Test Selected', `You must select at least one memory test.`, 1500);
-            view.updateRadioCheckboxes(memoryTest.model().getPaths());
           }
+          view.updateRadioCheckboxes(memoryTest.model().getPaths());
+          view.populateActiveSelection(memoryTest.model().getPaths());
         }
         else {
           // The button is checked => Add a new quiz
@@ -59,10 +65,12 @@ class C_Menu {
           memoryTest.addQuiz(event.target)
             .then(() => {
               view.updateRadioCheckboxes(memoryTest.model().getPaths());
-              loader.setSuccess(id);              
+              view.populateActiveSelection(memoryTest.model().getPaths());
+              loader.setSuccess(id);
             })
             .catch(() => {
               view.updateRadioCheckboxes(memoryTest.model().getPaths());
+              view.populateActiveSelection(memoryTest.model().getPaths());
               loader.setSuccess(error);
               notifications.error('Loading Error', `Error while loading the memory test ${event.target}.`);
             })
@@ -82,12 +90,14 @@ class C_Menu {
           memoryTest.replaceAllQuiz(event.target)
             .then(() => {
               view.updateRadioCheckboxes(memoryTest.model().getPaths());
+              view.populateActiveSelection(memoryTest.model().getPaths());
               loader.setSuccess(id);
 
             })
             .catch((error) => {
               console.error(error);
               view.updateRadioCheckboxes(memoryTest.model().getPaths());
+              view.populateActiveSelection(memoryTest.model().getPaths());
               loader.setError(id);
               notifications.error('Loading Error', `Error while loading a single memory test ${event.target}.`);
             })
@@ -106,12 +116,23 @@ class C_Menu {
     // Get the target 
     let menu = target.split('/');
 
+    console.log(menu[0])
     // Populate the next menu
     switch (menu[0]) {
-      case 'categories': view.populateCategories(menu[1]); break;
-      case 'list': 
-        view.populateList(menu[1], menu[2]); 
+      case 'main':
+        view.hideSelection();
+        break;
+      case 'languages':
+        view.showSelection();
+        break;
+      case 'categories':
+        view.populateCategories(menu[1]);
+        view.showSelection();
+        break;
+      case 'list':
+        view.populateList(menu[1], menu[2]);
         view.updateRadioCheckboxes(memoryTest.model().getPaths());
+        view.showSelection();
         break;
     }
 
@@ -129,8 +150,14 @@ class C_Menu {
 
     // Select previous menu according to the current one
     switch (this.currentMenu) {
-      case 'main': view.hideModal(); return;
-      case 'languages': this.currentMenu = 'main'; break;
+      case 'main':
+        view.hideSelection();
+        view.hideModal();
+        return;
+      case 'languages':
+        this.currentMenu = 'main';
+        view.hideSelection();
+        break;
       case 'categories': this.currentMenu = 'languages'; break;
       case 'list': this.currentMenu = 'categories'; break;
     }

@@ -18,10 +18,13 @@ class V_menu {
     this.modal = new bootstrap.Modal(this.modalEl);
 
     this.onModalHiddenCallback = () => { };
-    this.modalEl.addEventListener('hidden.bs.modal', (e) => { this.onModalHiddenCallback(e) })
+    this.modalEl.addEventListener('hidden.bs.modal', (e) => { this.onModalHiddenCallback(e) });
+    this.onModalShowCallback = {};
+    this.modalEl.addEventListener('show.bs.modal', (e) => { this.onModalShowCallback(e) });
 
     // Get the title modal
     this.titleEl = this.modalEl.querySelector('.modal-title');
+
 
 
     setTimeout(() => {
@@ -54,6 +57,9 @@ class V_menu {
 
     this.mainListEl = this.modalEl.querySelector(".list-menu");
     this.menuCollapse.list = new bootstrap.Collapse(this.mainListEl, { toggle: false, parent: parent });
+
+    this.footerEl = document.getElementById('menu-modal-footer');
+    this.footerCollapse = new bootstrap.Collapse(this.footerEl, { toggle: false });
 
     this.titles = {};
     this.titles['main'] = 'Menu';
@@ -159,9 +165,15 @@ class V_menu {
       button.checked = paths.includes(path);
     })
 
+    // Unchecked all
+    const radios = this.modalEl.querySelectorAll('[data-type="select-quiz"]');
+    radios.forEach((radio) => { radio.checked = false });
+
+    // Check the selected if is in menu
     if (paths.length == 1) {
+      // Only one test, check the button
       const radio = this.modalEl.querySelector(`[data-type="select-quiz"][data-target="${paths[0]}"]`);
-      if (radio!==null) radio.checked = true;
+      if (radio !== null) radio.checked = true;
     }
   }
 
@@ -331,6 +343,86 @@ class V_menu {
 
 
   /**
+   * Sort an object by keys
+   * @param {object} unordered The unordered object
+   * @returns The ordered object
+   */
+  sortObjectByKey(unordered) {
+
+    return Object.keys(unordered).sort().reduce(
+      (obj, key) => {
+        obj[key] = unordered[key];
+        return obj;
+      },
+      {}
+    );
+  }
+
+  /**
+   * Populate the active selection list
+   * @param {array} paths Populate the active selection with the list of paths
+   */
+  populateActiveSelection(paths) {
+
+    // Get the human readable list of memory tests
+    let selection = {};
+    paths.forEach((path) => {
+      // Add the test to the list
+      const split = path.split('/');
+      const language = quizzes[split[1]].name
+      const category = quizzes[split[1]].categories[split[2]].name;
+      const name = quizzes[split[1]].categories[split[2]].list[split[3]].name;
+
+      selection[language] = selection[language] ?? {}
+      selection[language][category] = selection[language][category] ?? [];
+      selection[language][category].push(name);
+
+    });
+
+    // Prepare the parent element (add title)
+    const parent = document.getElementById('selected-memory-test');
+    parent.innerHTML = '<li class="list-group-item active luckiest pt-3 h6 text-center list-group-item-dark" aria-current="true">Active selection</li>';
+
+
+    // Iterate through languages
+    for (const [language, categories] of Object.entries(this.sortObjectByKey(selection))) {
+      // Iterate through categories
+      for (const [category, names] of Object.entries(this.sortObjectByKey(categories))) {
+        // Sort names
+        names.sort().forEach((name) => {
+          this.appendListItem(parent, `${language} / ${category} / ${name}`);
+        })
+      }
+    }
+  }
+
+
+  /**
+   * Add a list item to the parent
+   * @param {element} parent Parent to append the new item
+   * @param {string} html HTML content of the item
+   */
+  appendListItem(parent, html) {
+    const newItem = document.createElement('li');
+    newItem.classList.add('list-group-item')
+    newItem.innerHTML = html;
+    parent.append(newItem);
+  }
+
+
+  showSelection() {
+    setTimeout(() => {
+      this.footerCollapse.show();
+    }, 500);    
+  }
+
+  hideSelection() {
+    setTimeout(() => {
+      this.footerCollapse.hide();
+    }, 500);
+  }
+
+  /**
    * Set the callback function called when a button menu button is clicked
    * @param {function} callback Function called
    */
@@ -349,11 +441,19 @@ class V_menu {
 
 
   /**
-   * Set the callback function called when the 
+   * Set the callback function called when the modal is hidden
    * @param {function} callback Fonction called when the hide instance of the modal is called
    */
   setModalHiddenCallback(callback) {
     this.onModalHiddenCallback = callback;
+  }
+
+  /**
+   * Set the callback function called when the modal is show
+   * @param {function} callback Fonction called when the show instance of the modal is called
+   */
+  setModalShowCallback(callback) {
+    this.onModalShowCallback = callback;
   }
 
 }
