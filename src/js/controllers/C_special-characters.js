@@ -2,6 +2,10 @@ import view from "Js/views/V_special-characters.js";
 import memoryTest from "Js/views/V_memory-test.js";
 
 class M_SpecialCharacters {
+
+  /**
+   * Constructor 
+   */
   constructor() {
     // Store a copy of the character list
     this.charactersList = [];
@@ -9,8 +13,9 @@ class M_SpecialCharacters {
     // Set the callback functin
     view.setButtonClickCallback((i) => { this.onCharacterSelected(i) });
 
+    // Callback function when the modal is hidden
     view.setHiddenModalCallback(() => {
-      console.log ('focus');
+      // Set focus in the answer bar
       memoryTest.focus();
     })
   }
@@ -26,7 +31,10 @@ class M_SpecialCharacters {
   }
 
 
-
+  /**
+   * Set a new list of special characters
+   * @param {array} list Array of special characters
+   */
   set(list) {
 
     // If this is not a new list, do nothing
@@ -43,6 +51,19 @@ class M_SpecialCharacters {
     
     // Enable the button
     view.enableModalButton();
+  }
+
+
+
+  showModal(focusOnFirst) {
+    // If there is no special characters, do not open the modal
+    if (this.charactersList.length==0) return;
+
+    // Open the mosdal
+    view.showModal();
+
+    // If focus is requested, set focus on first character
+    if (focusOnFirst) view.setFocusOnFirst();
   }
 
 }

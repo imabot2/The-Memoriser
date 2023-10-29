@@ -14,6 +14,8 @@ class V_SpecialCharacters {
 
     // Get the button element that open the modal
     this.modalButtonEl = document.getElementById("special-characters-btn");
+    this.modalButtonImgEl = this.modalButtonEl.querySelector('img');    
+    this.modalButtonTooltip = bootstrap.Tooltip.getInstance(this.modalButtonImgEl);
 
 
     // Initialize the container with the buttons and add event listener to catch button click
@@ -30,7 +32,6 @@ class V_SpecialCharacters {
     // Default callback for button clicked
     this.onButtonClickedCallback = () => { };
 
-    this.showModal();
   }
 
 
@@ -40,13 +41,12 @@ class V_SpecialCharacters {
    * @param {array} list Array of characters to populate
    */
   populate(list) {
-    console.log(list)
     // Empty the container
     this.countainerEl.innerHTML = "";
 
     // Populate the character list
     list.forEach((character, index) => {
-      this.countainerEl.innerHTML += `<button type="button" class="btn btn-lg btn-outline-dark m-2" data-index="${index}">${character}</button>`;
+      this.countainerEl.innerHTML += `<button type="button" class="btn btn-lg btn-outline-dark m-2" id="special-character-${index}" data-index="${index}">${character}</button>`;
     });
 
   }
@@ -58,6 +58,7 @@ class V_SpecialCharacters {
   disableModalButton() {
     this.modalButtonEl.classList.add('disable');
     this.modalButtonEl.removeAttribute("data-bs-toggle");
+    this.modalButtonTooltip.setContent({ '.tooltip-inner': 'There are no special characters for this question.'});
   }
 
   /**
@@ -66,6 +67,7 @@ class V_SpecialCharacters {
   enableModalButton() {
     this.modalButtonEl.classList.remove('disable');
     this.modalButtonEl.setAttribute("data-bs-toggle", "modal");
+    this.modalButtonTooltip.setContent({ '.tooltip-inner': 'Special characters, click or press Tab.'});
   }
 
 
@@ -84,7 +86,12 @@ class V_SpecialCharacters {
     this.modal.hide();
   }
 
-
+  /**
+   * Set focus on the first character
+   */
+  setFocusOnFirst() {
+    document.getElementById("special-character-0").focus();
+  }
 
 
   /**

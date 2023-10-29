@@ -55,18 +55,8 @@ export var metaData = {
 
 
   // Special characters for this test
-  specialCharacters: [
-    {
-      character: 'é',
-      name: "e accent aigu minuscule",
-      shortcut: ["`", "e"]
-    },
-    {
-      character: 'É',
-      name: "E accent aigu majuscule",
-      shortcut: ["`", "E"]
-    }
-  ]
+  specialCharacters: ['é', 'à', 'è', 'ê', 'ô', 'û', 'â', 'î', 'ü', 'ù', 'ë', 'œ', 'ç', 'ï', 'É', 'À', 'È', 'Ê', 'Ô', 'Û', 'Â', 'Î', 'Ü', 'Ù', 'Ë', 'Œ', 'Ç', 'Ï'],
+
 }
 
 

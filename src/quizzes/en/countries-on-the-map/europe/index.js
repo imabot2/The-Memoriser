@@ -55,8 +55,7 @@ flag: "/static/circle-flags/gb.svg",
   
 
   // Special characters for this test
-  specialCharacters: [
-  ]
+  specialCharacters: [],
 }
 
 

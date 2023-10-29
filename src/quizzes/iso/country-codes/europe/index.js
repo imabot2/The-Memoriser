@@ -54,8 +54,7 @@ export var metaData = {
   flag: "/static/circle-flags/iso.svg",
   
    // Special characters for this test
-  specialCharacters: [
-  ]
+  specialCharacters: [],
 }
 
 

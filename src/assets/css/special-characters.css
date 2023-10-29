@@ -9,8 +9,12 @@
   max-width: 600px;
 }
 
+#special-characters .container button {
+  min-width: 56px;
+}
 
-#special-characters-btn {
+
+#special-characters-btn>img {
   position: absolute;
   transform: translateY(-50%);
   left: 1.4vmin;
@@ -22,12 +26,12 @@
 }
 
 
-#special-characters-btn:not(.disable):hover {
+#special-characters-btn:not(.disable):hover >img {
   cursor: pointer;
-  transform: translate(0%, -50%) scale(1.1);
+  transform: translateY(-50%) scale(1.1);
   opacity: 1;
 }
 
-#special-characters-btn.disable {
+#special-characters-btn.disable >img {
   opacity: 0.5;
 }

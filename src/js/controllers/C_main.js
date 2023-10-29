@@ -53,11 +53,11 @@ let run = async () => {
         memoryTests = [
           //"/en/countries-on-the-map/europe/",
           //"/fr/pays-sur-la-carte/europe/",
-          "/de/lander-auf-der-karte/europa/",
+          //"/de/lander-auf-der-karte/europa/",
           //"/en/chess/stockfish-starting-position/",
           //"/iso/country-codes/europe/",
           //"/en/countries-on-the-map/africa/",
-          //"/en/chess/stockfish-starting-position/"
+          "/en/chess/stockfish-starting-position/"
         ];
       }
       break;

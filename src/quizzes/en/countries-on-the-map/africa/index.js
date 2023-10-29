@@ -69,8 +69,7 @@ export var metaData = {
 
 
   // Special characters for this test
-  specialCharacters: [
-  ]
+  specialCharacters: []
 }
 
 

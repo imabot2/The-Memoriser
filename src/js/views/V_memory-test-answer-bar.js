@@ -1,10 +1,19 @@
 import V_memoryTestCorrection from "Js/views/V_memory-test-correction.js";
+import specialCharacters from "Js/controllers/C_special-characters.js";
+
 
 /**
  * Manage the answer bar view (answer bar, submit button...)
  */
 export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
 
+
+  /**
+   * Constructor
+   * - Get element from DOM
+   * - Initialize modals
+   * - Set event listeners
+   */
   constructor() {
 
     super();
@@ -52,6 +61,13 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
         return false;
       }
 
+      // On Tab key, open the special characters modal 
+      if (event.key === "Tab") {
+        event.preventDefault();
+        specialCharacters.showModal(true);
+      }
+
+
       // If the user presses the "Enter" key on the keyboard
       if (event.key === "Enter") {
 
@@ -79,23 +95,31 @@ export default class V_MemoryTestAnswerBar extends V_memoryTestCorrection {
     })
   }
 
+
   /**
    * Insert a text at the caret
    * @param {string} text The text to insert
    */
   insertAtCaret(text) {
+    
+    // Set focus on the answer bar
     this.focus();
 
+    // Get and delete the current selection
     var sel, range;
     sel = window.getSelection();
     range = sel.getRangeAt(0);
     range.deleteContents();
 
+    // Insert the new text
     var textNode = document.createTextNode(text);
     range.insertNode(textNode);
     range.setStartAfter(textNode);
     sel.removeAllRanges();
     sel.addRange(range);
+
+    // Trigger the input event
+    this.onInputCallback(this.getAnswerText());
   }
 
 
