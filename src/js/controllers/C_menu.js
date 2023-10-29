@@ -40,7 +40,9 @@ class C_Menu {
    * @param {object} event The event properties
    */
   onMenuBtn(event) {
-    console.log(event);
+    
+    //console.log(event);
+    
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
 
@@ -124,23 +126,26 @@ class C_Menu {
 
     // Get the target 
     let menu = target.split('/');
-
+    
     // Populate the next menu
     switch (menu[0]) {
       case 'main':
         view.hideSelection();
         break;
 
-      case 'Settings':
+      case 'settings':
+        view.updateSettings();
         break;
 
       case 'languages':
         view.showSelection();
         break;
+
       case 'categories':
         view.populateCategories(menu[1]);
         view.showSelection();
         break;
+
       case 'list':
         view.populateList(menu[1], menu[2]);
         view.updateRadioCheckboxes(memoryTest.model().getPaths());

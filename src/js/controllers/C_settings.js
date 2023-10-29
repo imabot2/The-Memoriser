@@ -12,6 +12,7 @@ class C_Settings {
    * @returns The requested parameter
    */
   get(label) {
+    if (label === undefined) return model.data;
     return model.data[label];
   }
 

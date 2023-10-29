@@ -1,7 +1,7 @@
 import "Assets/css/menu.css";
 import * as bootstrap from 'bootstrap';
 import quizzes from "Js/models/M_quizzes-list.js";
-import memoryTest from "Js/models/M_memory-test.js";
+import settings from "Js/controllers/C_settings.js";
 
 
 
@@ -26,12 +26,12 @@ class V_menu {
     this.titleEl = this.modalEl.querySelector('.modal-title');
 
 
-
+/*
     setTimeout(() => {
       console.log("Show modal on statup");
       this.modal.show();
     }, 1000)
-
+*/
     // Set callback when the user click the back button
     this.onBackBtnCallback = () => { };
     this.backBtn = this.modalEl.querySelector(".back-btn");
@@ -182,6 +182,7 @@ class V_menu {
     }
   }
 
+
   /**
  * Check a radio in the modal
  * @param {string} id Id of the switch to check
@@ -263,6 +264,13 @@ class V_menu {
   }
 
 
+  updateSettings() {
+    const data = settings.get();
+    document.getElementById(`settings-duration-${data.timerValue}`).checked = true;
+    
+  }
+
+
 
   /**
    * Create and append a new button and append to the parent
@@ -340,7 +348,7 @@ class V_menu {
         e.checked = element.checked;
         e.id = element.id;
         break;
-        
+
       case 'settings':
         e.key = element.getAttribute('data-key');
         e.value = element.getAttribute('data-value');
