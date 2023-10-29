@@ -32,11 +32,13 @@
   transform: translate(-50%, -50%);
 }
 
+
 #flip-flag:has(#flip-flag-animation.animate) {
   animation: flipFlagOpacity 1.0s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
+
 
 @keyframes flipFlagOpacity {
   0% {
@@ -225,29 +227,8 @@
 }
 
 
-#characters-btn {
-  position: absolute;
-  transform: translateY(-50%);
-  left: 1.4vmin;
-  top: 50%;
-  height: clamp(38px, 8vmin, 8vmin);
-  border-radius: 50%;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  opacity: 0.9;
-}
 
 
-
-#characters-btn:not(.disable):hover {
-  cursor: pointer;
-  transform: translate(0%, -50%) scale(1.1);
-  opacity: 1;
-}
-
-#characters-btn.disable {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 
 #answer-submit-btn {
   position: absolute;

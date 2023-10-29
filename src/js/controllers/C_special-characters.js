@@ -30,15 +30,19 @@ class M_SpecialCharacters {
   set(list) {
 
     // If this is not a new list, do nothing
-    if (list == this.charactersList) return;
-    
+    if (list == this.charactersList) { return;}
+
     // Store the characters
     this.charactersList  = list;
+
+    // If there is no characters in the list, disable the button
+    if (list.length==0) { view.disableModalButton(); return;}
+    
+    // Populate the modal
     view.populate(list);
     
-
-    console.log ("Updated list");
-
+    // Enable the button
+    view.enableModalButton();
   }
 
 }

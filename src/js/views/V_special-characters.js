@@ -12,6 +12,10 @@ class V_SpecialCharacters {
     this.modalEl = document.getElementById("special-characters");
     this.modal = new bootstrap.Modal(this.modalEl);
 
+    // Get the button element that open the modal
+    this.modalButtonEl = document.getElementById("special-characters-btn");
+
+
     // Initialize the container with the buttons and add event listener to catch button click
     this.countainerEl = this.modalEl.querySelector('.list');
     this.countainerEl.addEventListener("click", (e) => { this.onButtonClick(e); });
@@ -24,19 +28,19 @@ class V_SpecialCharacters {
     this.modalEl.addEventListener('hidden.bs.modal', () => { this.onModalHiddenCallback(); });
 
     // Default callback for button clicked
-    this.onButtonClickedCallback = () => {};
+    this.onButtonClickedCallback = () => { };
 
     this.showModal();
   }
 
 
-  
+
   /**
    * Populate the special characters modal
    * @param {array} list Array of characters to populate
    */
   populate(list) {
-    console.log (list)
+    console.log(list)
     // Empty the container
     this.countainerEl.innerHTML = "";
 
@@ -46,6 +50,25 @@ class V_SpecialCharacters {
     });
 
   }
+
+
+  /**
+   * Disable the button that open the modal
+   */
+  disableModalButton() {
+    this.modalButtonEl.classList.add('disable');
+    this.modalButtonEl.removeAttribute("data-bs-toggle");
+  }
+
+  /**
+   * Enable the button that open the modal
+   */
+  enableModalButton() {
+    this.modalButtonEl.classList.remove('disable');
+    this.modalButtonEl.setAttribute("data-bs-toggle", "modal");
+  }
+
+
 
   /**
    * Show the modal
