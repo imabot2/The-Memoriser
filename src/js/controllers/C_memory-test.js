@@ -8,7 +8,6 @@ import auth from "Js/models/M_auth.js";
 import notifications from "Js/views/V_notifications";
 import { isMobile } from "Js/lib/client.js";
 import analytics from "Js/models/M_analytics.js";
-import loader from "Js/views/V_main.js";
 
 class C_MemoryTest {
 
@@ -64,6 +63,8 @@ class C_MemoryTest {
 
     // Clear and disable the input
     view.clearInput();
+    view.setCorrectionHTML("");
+    view.hideExpectedAnswer();
     view.disableInput();
 
     // Hide the timer
@@ -140,7 +141,7 @@ class C_MemoryTest {
     if (this.status === "ready") {
 
       this.status = "running";
-      analytics.log("Start memory test", model.getPaths());
+      analytics.log("Start memory test", Object.assign({}, model.getPaths()));
       timer.start();
       timer.show();
       this.questionTimer.init(0, "up");
@@ -212,7 +213,7 @@ class C_MemoryTest {
     if (this.status === "ready") {
 
       this.status = "running";
-      analytics.log("Start memory test", model.getPaths());
+      analytics.log("Start memory test", Object.assign({}, model.getPaths()));
       timer.start();
       timer.show();
       this.questionTimer.init(0, "up");
@@ -322,6 +323,7 @@ class C_MemoryTest {
   onTimeOver() {
 
     // Update status and disable input bar
+    analytics.log("Memory test over");
     this.status = "over";
 
     // Disable the input 

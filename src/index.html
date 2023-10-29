@@ -226,7 +226,7 @@
                 type="button">
                 <span class="luckiest">Select Memory Test</span>
               </button>
-              <button class="setting-btn btn btn-lg btn-primary disabled" type="button">
+              <button class="setting-btn btn btn-lg btn-primary menu-btn" data-type="navigation" data-target="settings" type="button">
                 <span class="luckiest">Settings</span>
               </button>
               <button class="about-btn btn btn-lg btn-primary disabled" type="button">
@@ -235,6 +235,35 @@
             </div>
           </div>
           <!--#endregion Main menu-->
+
+          <div class="collapse settings-menu">
+            <div class="d-flex align-items-center pb-2">
+                <div class="luckiest fs-4 pe-2 mt-2">Duration</div>
+                <div class="flex-grow-1 text-end">Select memory test duration</div>
+              </div>
+                <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
+
+                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-15" autocomplete="off" data-type="settings" data-key="duration" data-value="15">
+                  <label class="btn btn-outline-primary" for="settings-duration-15">15s</label>
+                
+                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-30" autocomplete="off" data-type="settings" data-key="duration" data-value="30">
+                  <label class="btn btn-outline-primary" for="settings-duration-30">30s</label>
+                
+                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-60" autocomplete="off" data-type="settings" data-key="duration" data-value="60">
+                  <label class="btn btn-outline-primary" for="settings-duration-60">60s</label>
+
+                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-120" autocomplete="off" data-type="settings" data-key="duration" data-value="120">
+                  <label class="btn btn-outline-primary" for="settings-duration-120">2min</label>
+
+                  <input type="radio" class="btn-check menu-btn" name="btnradio" id="settings-duration-300" autocomplete="off" data-type="settings" data-key="duration" data-value="300">
+                  <label class="btn btn-outline-primary" for="settings-duration-300">5min</label>
+                </div>
+
+              <hr>
+
+
+          </div>
+
 
 
           <div class="collapse languages-menu">

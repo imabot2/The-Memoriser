@@ -49,6 +49,9 @@ class V_menu {
     this.mainMenuEl = this.modalEl.querySelector(".main-menu");
     this.menuCollapse.main = new bootstrap.Collapse(this.mainMenuEl, { toggle: false, parent: parent });
 
+    this.settingsMenuEl = this.modalEl.querySelector(".settings-menu");
+    this.menuCollapse.settings = new bootstrap.Collapse(this.settingsMenuEl, { toggle: false, parent: parent });
+
     this.mainLanguagesEl = this.modalEl.querySelector(".languages-menu");
     this.menuCollapse.languages = new bootstrap.Collapse(this.mainLanguagesEl, { toggle: false, parent: parent });
 
@@ -61,11 +64,13 @@ class V_menu {
     this.footerEl = document.getElementById('menu-modal-footer');
     this.footerCollapse = new bootstrap.Collapse(this.footerEl, { toggle: false });
 
+
     this.titles = {};
     this.titles['main'] = 'Menu';
     this.titles['languages'] = 'Languages';
     this.titles['categories'] = 'Categories';
     this.titles['list'] = 'Memory Tests';
+    this.titles['settings'] = 'Settings';
 
   }
 
@@ -158,7 +163,7 @@ class V_menu {
    * @param {array} paths An array containing the path of the selected test
    */
   updateRadioCheckboxes(paths) {
-    console.log(paths);
+
     const buttons = this.modalEl.querySelectorAll('[data-type="add-remove-quiz"]');
     buttons.forEach((button) => {
       const path = button.getAttribute("data-target");
@@ -335,6 +340,12 @@ class V_menu {
         e.checked = element.checked;
         e.id = element.id;
         break;
+        
+      case 'settings':
+        e.key = element.getAttribute('data-key');
+        e.value = element.getAttribute('data-value');
+        e.id = element.id;
+        break;
     }
 
     // Run the callback with the event
@@ -357,6 +368,7 @@ class V_menu {
       {}
     );
   }
+
 
   /**
    * Populate the active selection list
@@ -410,17 +422,25 @@ class V_menu {
   }
 
 
+  /**
+   * Show the memory test selection
+   */
   showSelection() {
     setTimeout(() => {
       this.footerCollapse.show();
-    }, 500);    
+    }, 500);
   }
 
+
+  /**
+   * Hide the memory test selection
+   */
   hideSelection() {
     setTimeout(() => {
       this.footerCollapse.hide();
     }, 500);
   }
+
 
   /**
    * Set the callback function called when a button menu button is clicked

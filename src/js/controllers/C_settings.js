@@ -14,6 +14,24 @@ class C_Settings {
   get(label) {
     return model.data[label];
   }
+
+
+  /**
+   * Set a value for a given parameter
+   * @param {string} key The parameter to update
+   * @param {any} value The value to set
+   */
+  setParameter(key, value) {
+
+    switch (key) {
+      case 'duration':
+        model.data.timerDirection = "down";
+        model.data.timerValue = value;
+        break;
+
+    }
+
+  }
 }
 
 

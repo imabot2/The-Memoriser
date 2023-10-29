@@ -11,11 +11,17 @@ class M_Settings {
       // 10 = questions least well answered very frequently
       beta : 10,
 
-      // Timer mode [up | down]
-      timerMode: "down",
+      // Timer direction [up | down]
+      timerDirection: "down",
+
+      // Timer duration in seconds
       timerValue: 60,      
     }
   }
+
+
+
+
 
 
 }

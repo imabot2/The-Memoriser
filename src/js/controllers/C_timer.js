@@ -13,9 +13,10 @@ class C_Timer {
   constructor() {
 
     // Set default timer parameters
+    /*
     this.seconds = settings.get("timerValue");
     this.direction = settings.get("timerMode");
-   
+   */
 
     // Set the callback function to update the timer
     model.onUpdate((time) => this.onUpdate(time));
@@ -34,22 +35,23 @@ class C_Timer {
    * @param {integer} seconds Inital value of the timer in seconds
    * @param {string} direction Direction of the timer [ "up" | "down" ]
    */
-  init(seconds, direction) {
+  /*
+  init(seconds, direction = "down") {
 
     // Set the parameters
     this.seconds = seconds;
-    this.direction = direction ?? "down";    
+    this.direction = direction;    
 
     // Restart the timer
     this.reset();
   }
-
+*/
 
   /**
    * Reset the timer to the inital value
    */
   reset() {
-    model.init(this.seconds, this.direction);    
+    model.init(settings.get("timerValue"), settings.get("timerDirection"));    
     this.refresh();
   }
 

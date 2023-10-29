@@ -2,6 +2,8 @@ import view from "Js/views/V_menu.js"
 import memoryTest from "Js/controllers/C_memory-test.js";
 import notifications from "Js/views/V_notifications";
 import loader from "Js/views/V_main.js";
+import settings from "Js/controllers/C_settings.js";
+
 
 class C_Menu {
 
@@ -38,9 +40,10 @@ class C_Menu {
    * @param {object} event The event properties
    */
   onMenuBtn(event) {
-
+    console.log(event);
     switch (event.type) {
       case 'navigation': this.goToMenu(event.target); break;
+
       case 'add-remove-quiz':
 
         // The button is not checked => Remove quiz
@@ -79,7 +82,6 @@ class C_Menu {
 
         break;
 
-
       case 'select-quiz':
         if (event.checked) {
 
@@ -106,22 +108,32 @@ class C_Menu {
 
         break;
 
+      case 'settings':
+        settings.setParameter(event.key, event.value);
+        break;
+
     }
   }
 
 
-
+  /**
+   * Go to the requested menu
+   * @param {string} target The menu to show
+   */
   goToMenu(target) {
 
     // Get the target 
     let menu = target.split('/');
 
-    console.log(menu[0])
     // Populate the next menu
     switch (menu[0]) {
       case 'main':
         view.hideSelection();
         break;
+
+      case 'Settings':
+        break;
+
       case 'languages':
         view.showSelection();
         break;
@@ -154,6 +166,9 @@ class C_Menu {
         view.hideSelection();
         view.hideModal();
         return;
+      case 'settings':
+        this.currentMenu = 'main';
+        break;
       case 'languages':
         this.currentMenu = 'main';
         view.hideSelection();

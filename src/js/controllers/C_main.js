@@ -42,8 +42,8 @@ let run = async () => {
   let memoryTestId = view.newMessage("Loading memory tests");
   let memoryTests = [];
   switch (clientLanguage) {
-    
-    case "de":memoryTests = ["/de/lander-auf-der-karte/europa/"]; break;
+
+    case "de": memoryTests = ["/de/lander-auf-der-karte/europa/"]; break;
 
     case "fr":
       if (process.env.NODE_ENV == "production") {
@@ -100,8 +100,6 @@ let run = async () => {
         view.setError(imagesId);
       })
   })
-
-
 
 }
 
