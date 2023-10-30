@@ -21,6 +21,20 @@ import gambia from "Quizzes/en/countries-on-the-map/africa/img/gambia.png";
 import ghana from "Quizzes/en/countries-on-the-map/africa/img/ghana.png";
 import guinea from "Quizzes/en/countries-on-the-map/africa/img/guinea.png";
 import guineaBissau from "Quizzes/en/countries-on-the-map/africa/img/guinea-bissau.png";
+import ivoryCoast from "Quizzes/en/countries-on-the-map/africa/img/ivory-coast.png";
+import kenya from "Quizzes/en/countries-on-the-map/africa/img/kenya.png";
+import lesotho from "Quizzes/en/countries-on-the-map/africa/img/lesotho.png";
+import liberia from "Quizzes/en/countries-on-the-map/africa/img/liberia.png";
+import libya from "Quizzes/en/countries-on-the-map/africa/img/libya.png";
+import madagascar from "Quizzes/en/countries-on-the-map/africa/img/madagascar.png";
+import malawi from "Quizzes/en/countries-on-the-map/africa/img/malawi.png";
+import mali from "Quizzes/en/countries-on-the-map/africa/img/mali.png";
+import mauritania from "Quizzes/en/countries-on-the-map/africa/img/mauritania.png";
+import mauritius from "Quizzes/en/countries-on-the-map/africa/img/mauritius.png";
+import morocco from "Quizzes/en/countries-on-the-map/africa/img/morocco.png";
+import mozambique from "Quizzes/en/countries-on-the-map/africa/img/mozambique.png";
+import namibia from "Quizzes/en/countries-on-the-map/africa/img/namibia.png";
+
 
 import somalia from "Quizzes/en/countries-on-the-map/africa/img/somalia.png";
 import southAfrica from "Quizzes/en/countries-on-the-map/africa/img/south-africa.png";
@@ -44,19 +58,6 @@ import rwanda from "Quizzes/en/countries-on-the-map/africa/img/rwanda.png"
 import republicOfTheCongo from "Quizzes/en/countries-on-the-map/africa/img/republic-of-the-congo.png"
 import nigeria from "Quizzes/en/countries-on-the-map/africa/img/nigeria.png"
 import niger from "Quizzes/en/countries-on-the-map/africa/img/niger.png"
-import namibia from "Quizzes/en/countries-on-the-map/africa/img/namibia.png"
-import mozambique from "Quizzes/en/countries-on-the-map/africa/img/mozambique.png"
-import morocco from "Quizzes/en/countries-on-the-map/africa/img/morocco.png"
-import mauritius from "Quizzes/en/countries-on-the-map/africa/img/mauritius.png"
-import mauritania from "Quizzes/en/countries-on-the-map/africa/img/mauritania.png"
-import mali from "Quizzes/en/countries-on-the-map/africa/img/mali.png"
-import malawi from "Quizzes/en/countries-on-the-map/africa/img/malawi.png"
-import madagascar from "Quizzes/en/countries-on-the-map/africa/img/madagascar.png"
-import libya from "Quizzes/en/countries-on-the-map/africa/img/libya.png"
-import liberia from "Quizzes/en/countries-on-the-map/africa/img/liberia.png"
-import lesotho from "Quizzes/en/countries-on-the-map/africa/img/lesotho.png"
-import kenya from "Quizzes/en/countries-on-the-map/africa/img/kenya.png"
-import ivoryCoast from "Quizzes/en/countries-on-the-map/africa/img/ivory-coast.png"
 
 */
 
@@ -154,187 +155,92 @@ export var questions = [
     answer: "Djibouti"
   },
   {
-    uid: "so",
-    image: somalia,
+    uid: "ci",
+    image: ivoryCoast,
     prompt: "What country is this?",
-    answer: "Somalia"
+    answer: "Ivory Coast "
   },
   {
-    uid: "za",
-    image: southAfrica,
+    uid: "ke",
+    image: kenya,
     prompt: "What country is this?",
-    answer: "South AFrica"
+    answer: "Kenya "
   },
   {
-    uid: "ss",
-    image: southSudan,
+    uid: "ls",
+    image: lesotho,
     prompt: "What country is this?",
-    answer: "South Sudan"
+    answer: "Lesotho "
   },
   {
-    uid: "sd",
-    image: sudan,
+    uid: "lr",
+    image: liberia,
     prompt: "What country is this?",
-    answer: "Sudan"
+    answer: "Liberia "
   },
   {
-    uid: "tz",
-    image: tanzania,
+    uid: "ly",
+    image: libya,
     prompt: "What country is this?",
-    answer: "Tanzania"
+    answer: "Libya "
   },
   {
-    uid: "tg",
-    image: togo,
+    uid: "mg",
+    image: madagascar,
     prompt: "What country is this?",
-    answer: "Togo"
+    answer: "Madagascar "
   },
   {
-    uid: "tn",
-    image: tunisia,
+    uid: "mw",
+    image: malawi,
     prompt: "What country is this?",
-    answer: "Tunisia"
+    answer: "Malawi "
   },
   {
-    uid: "ug",
-    image: uganda,
+    uid: "ml",
+    image: mali,
     prompt: "What country is this?",
-    answer: "Uganda"
+    answer: "Mali "
   },
   {
-    uid: "zm",
-    image: zambia,
+    uid: "mr",
+    image: mauritania,
     prompt: "What country is this?",
-    answer: "Zambia"
+    answer: "Mauritania "
   },
   {
-    uid: "zw",
-    image: zimbabwe,
+    uid: "mu",
+    image: mauritius,
     prompt: "What country is this?",
-    answer: "Zimbabwe"
+    answer: "Mauritius "
   },
   {
-    uid: "eg",
-    image: egypt,
+    uid: "ma",
+    image: morocco,
     prompt: "What country is this?",
-    answer: "Egypt"
+    answer: "Morocco "
   },
   {
-    uid: "gq",
-    image: equatorialGuinea,
+    uid: "mz",
+    image: mozambique,
     prompt: "What country is this?",
-    answer: "Equatorial Guinea"
+    answer: "Mozambique "
   },
   {
-    uid: "er",
-    image: eritrea,
+    uid: "na",
+    image: namibia,
     prompt: "What country is this?",
-    answer: "Eritrea"
-  },
-  {
-    uid: "sz",
-    image: eswatini,
-    prompt: "What country is this?",
-    answer: "Eswatini"
-  },
-  {
-    uid: "et",
-    image: ethiopia,
-    prompt: "What country is this?",
-    answer: "Ethiopia"
-  },
-  {
-    uid: "ga",
-    image: gabon,
-    prompt: "What country is this?",
-    answer: "Gabon"
-  },
-  {
-    uid: "gm",
-    image: gambia,
-    prompt: "What country is this?",
-    answer: "Gambia"
-  },
-  {
-    uid: "gh",
-    image: ghana,
-    prompt: "What country is this?",
-    answer: "Ghana"
-  },
-  {
-    uid: "gn",
-    image: guinea,
-    prompt: "What country is this?",
-    answer: "Guinea"
-  },
-  {
-    uid: "gw",
-    image: guineaBissau,
-    prompt: "What country is this?",
-    answer: "Guinea-Bissau"
+    answer: "Namibia "
   },
 
+
+
+
+
+
+  
+
   /*
-      {
-        image: ivoryCoast,
-        text: "Ivory Coast ",
-        mask: "xxxxxxxxxxx "
-      },
-      {
-        image: kenya,
-        text: "Kenya ",
-        mask: "xxxxx "
-      },
-      {
-        image: lesotho,
-        text: "Lesotho ",
-        mask: "xxxxxxx "
-      },
-      {
-        image: liberia,
-        text: "Liberia ",
-        mask: "xxxxxxx "
-      },
-      {
-        image: libya,
-        text: "Libya ",
-        mask: "xxxxx "
-      },
-      {
-        image: madagascar,
-        text: "Madagascar ",
-        mask: "xxxxxxxxxx "
-      },
-      {
-        image: malawi,
-        text: "Malawi ",
-        mask: "xxxxxx "
-      },
-      {
-        image: mali,
-        text: "Mali ",
-        mask: "xxxx "
-      },
-      {
-        image: mauritania,
-        text: "Mauritania ",
-        mask: "xxxxxxxxxx "
-      },
-      {
-        image: mauritius,
-        text: "Mauritius ",
-        mask: "xxxxxxxxx "
-      },
-      {
-        image: morocco,
-        text: "Morocco ",
-        mask: "xxxxxxx "
-      },
-      {
-        image: mozambique,
-        text: "Mozambique ",
-        mask: "xxxxxxxxxx "
-      },
       {
         image: namibia,
         text: "Namibia ",
@@ -431,6 +337,129 @@ export var questions = [
         mask: "xxxxxxxx "
       },
       */
+
+
+
+      {
+        uid: "so",
+        image: somalia,
+        prompt: "What country is this?",
+        answer: "Somalia"
+      },
+      {
+        uid: "za",
+        image: southAfrica,
+        prompt: "What country is this?",
+        answer: "South AFrica"
+      },
+      {
+        uid: "ss",
+        image: southSudan,
+        prompt: "What country is this?",
+        answer: "South Sudan"
+      },
+      {
+        uid: "sd",
+        image: sudan,
+        prompt: "What country is this?",
+        answer: "Sudan"
+      },
+      {
+        uid: "tz",
+        image: tanzania,
+        prompt: "What country is this?",
+        answer: "Tanzania"
+      },
+      {
+        uid: "tg",
+        image: togo,
+        prompt: "What country is this?",
+        answer: "Togo"
+      },
+      {
+        uid: "tn",
+        image: tunisia,
+        prompt: "What country is this?",
+        answer: "Tunisia"
+      },
+      {
+        uid: "ug",
+        image: uganda,
+        prompt: "What country is this?",
+        answer: "Uganda"
+      },
+      {
+        uid: "zm",
+        image: zambia,
+        prompt: "What country is this?",
+        answer: "Zambia"
+      },
+      {
+        uid: "zw",
+        image: zimbabwe,
+        prompt: "What country is this?",
+        answer: "Zimbabwe"
+      },
+      {
+        uid: "eg",
+        image: egypt,
+        prompt: "What country is this?",
+        answer: "Egypt"
+      },
+      {
+        uid: "gq",
+        image: equatorialGuinea,
+        prompt: "What country is this?",
+        answer: "Equatorial Guinea"
+      },
+      {
+        uid: "er",
+        image: eritrea,
+        prompt: "What country is this?",
+        answer: "Eritrea"
+      },
+      {
+        uid: "sz",
+        image: eswatini,
+        prompt: "What country is this?",
+        answer: "Eswatini"
+      },
+      {
+        uid: "et",
+        image: ethiopia,
+        prompt: "What country is this?",
+        answer: "Ethiopia"
+      },
+      {
+        uid: "ga",
+        image: gabon,
+        prompt: "What country is this?",
+        answer: "Gabon"
+      },
+      {
+        uid: "gm",
+        image: gambia,
+        prompt: "What country is this?",
+        answer: "Gambia"
+      },
+      {
+        uid: "gh",
+        image: ghana,
+        prompt: "What country is this?",
+        answer: "Ghana"
+      },
+      {
+        uid: "gn",
+        image: guinea,
+        prompt: "What country is this?",
+        answer: "Guinea"
+      },
+      {
+        uid: "gw",
+        image: guineaBissau,
+        prompt: "What country is this?",
+        answer: "Guinea-Bissau"
+      },
 ]; // 54 countries
 
 // True if the carousel is diplayed in the text
